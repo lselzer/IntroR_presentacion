@@ -162,3 +162,202 @@ Para ejecutar un bloque de código:
 Si has modificado una parte del bloque que has ejecutado recién podés usar el botón a continuación, `Re-run the previous region`.
 
 
+# Introducción a R
+
+
+
+
+## La consola interactiva
+
+Read, Eval, Print
+
+## R como calculadora
+
+```{r c1-aritmetica-1, results='asis'}
+1 + 100
+```
+
+## Tip: Cancelando comandos {.tip}
+
+Si estás usando R desde la linea de comando en vez de dentro de RStudio,
+hay que presionar `Ctrl+C` en vez de  `Esc` para cancelar el comando. Esto
+también se aplica a usuarios de Mac también.
+
+Cancelar un comando no es útil solamente para anular comandos incompletos:
+también podés cancelar una computación que R está ejecutando (por ejemplo, 
+si está tomando demasiado tiempo), o para eliminar el código que estás
+escribiendo actualmente.
+
+## Orden de ejecución
+
+De mayor a menor precedencia:
+
+  + Paréntesis: `(`, `)`
+  + Exponentes: `^` o `**`
+  + División: `/`
+  + Multiplicación: `*`
+  + Adición: `+`
+  + Substracción: `-`
+  
+  
+## Orden de Ejecución
+
+
+```{r c1-parentesis-2, eval=FALSE}
+(3 + (5 * (2 ^ 2))) # difícil de leer
+3 + 5 * 2 ^ 2       # claro, si recordás las reglas
+3 + 5 * (2 ^ 2)     # si olvidás algunas reglas esto puede ayudar.
+```
+
+
+## Notación Cientifica
+
+
+Los números muy grandes o pequeños se imprimen en notación científica:
+
+```{r c1-science-notation}
+2/10000
+```
+
+que es una abreviatura de multiplicar por `10^XX`". Por lo que `2e-4`
+es una abreviatura de  `2 * 10^(-4)`.
+
+Uno mismo puede entrar números en notación científica:
+
+```{r c1-science-notation-self}
+5e3 #No hay menos aquí
+```
+
+
+## Funciones matemáticas
+
+R tiene muchas funciones matemáticas incorporadas. Para llamar una función
+simplemente escribimos su nombre, seguido por paréntesis de apertura y cierre.
+Cualquier cosa dentro de los paréntesis es llamado argumentos de la función:
+
+```{r c1-trigonometria}
+sin(1)  # funciones trigonométricas
+```
+
+
+## Ayuda Memoria
+
+No se preocupen por recordar todas las funciones en R. Se pueden buscar en
+Google, o si recuerdan como comienza el nombre de la función, pueden presionar
+la tecla `Tab` para usar la función de autocompletado de RStudio. 
+
+Escribiendo un signo de pregunta `?` antes del nombre la funcion abrirá la 
+página de ayuda de esa función.
+
+
+## Comparando cosas
+
+También podemos hacer comparaciones en R:
+
+```{r c1-igualdad}
+1 == 1 # igualdad (notar que son dos signos igual, se lee como "es igual a")
+```
+
+
+## Tip: Comparando números{.tip}
+
+Un advertencia acerca de la comparación de números: nunca usar `==` para
+comparar dos números a menos que sean integers (un tipo de data que se usa
+para representar números enteros específicamente). 
+
+Las computadoras solo pueden representar números decimales con un cierto grado
+de precisión. Por lo que dos números que cuando son impresos por R se ven
+iguales, pueden tener representaciones subyacentes diferentes y por lo tanto
+ser diferentes por un pequeño margen de error (llamado *Machine numeric tolerance*)
+
+En su lugar, deberías usar la función `all.equal`
+
+
+Para más información, leer: [http://floating-point-gui.de/](http://floating-point-gui.de)
+
+
+## Variables y asignación
+
+Podemos guardar los valores en variales usando el operador de asignación `<-`, 
+de esta forma:
+
+```{r c1-assign}
+x <- 1/40
+```
+
+La asignación de valores puede contener la variable que esta siendo asignada:
+
+```{r c1-reasigox-2}
+x <- x + 1 # notar como RStudio actualiza la descrición de x en la pestaña Environment
+```
+
+## Reglas para nombrar variables
+
+Los nombres de la variables pueden contener letras, números, guiones bajos y
+puntos. 
+
+No pueden empezar con un número o guión bajo ni pueden contener espacios. 
+
+Distintas personas usan distintas convenciones para nombrar variables con
+nombres largos, incluidos:
+
+   + puntos.entre.palabras
+   + guiones\_bajos_entre\_palabras
+   + camelCaseParaSepararPalabras
+
+Cual usar es una decisión individual (o del proyecto), pero hay que ser 
+**consistente**
+
+
+## Vectorización
+
+Una consideración final de lo que hay estar atento es que R está *vectorizado*,
+lo que significa que las variables y funciones pueden tener vectores como
+valores. Por ejemplo:
+
+```{r c1-vector}
+1:5
+```
+
+
+```{r c1-vector-exp}
+2^(1:5)
+```
+
+
+```{r c1-vector-asignacion}
+x <- 1:5
+2^x
+```
+
+
+## Manejando el entorno
+
+Hay algunas funciones muy útiles para interactuar con la sesión de R.
+
+`ls` listará todas los objetos (funciones y variables) almacenados en el entorno
+global (tu sesión de trabajo en R)
+
+## Tip: objetos ocultos{.tip}
+
+`ls` ocultará cualquier objeto cuyo nombre empiece con un punto "." por defecto.
+Para listar todos los objetos, hay que tipear `ls(all.names=TRUE)`.
+
+## Manejando el entorno
+
+Podés usar `rm` para eliminar objetos que no sean necesarios:
+
+```{r c1-rm}
+rm(x)
+```
+
+Si tenés muchos objetos en tu entorno y querés borrar todos ellos, podés
+pasar el resultado de `ls` como argumento de la función `rm`:
+
+```{r c1-rmls}
+rm(list = ls())
+```
+
+En este caso hemos especificado que el resultado de `ls` sea usado por el 
+argumento `list` en `rm`. Cuando asignamos valores a argumentos por nombre,
+¡**hay que** usar el operardor `=`!
