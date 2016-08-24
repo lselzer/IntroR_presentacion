@@ -33,6 +33,11 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.reveal code{
-  background-color: #E3E33B;
+.reveal code, pre {
+    border: 1px solid #9d9d9d;
+    border-radius: 4px;
+    font-family: monaco, monospace;
+    color: #000;
+    font-style: normal;
+    background: #f1f1f1;
 }
