@@ -1,0 +1,43 @@
+# Presentaciones del Curso Introducción A R
+## Universidad Nacional de Tierra del Fuego
+## Dr. Luciano Javier Selzer
+
+### Agosto 2016
+
+### Programa
+
++	Introducción a la interfaz de R y editores de código. 
++	Utilidades extras en R. Obtención e instalación de paquetes. 
++	Uso de la ayuda: 
+	- Interpretación de la ayuda
+  - Documentación de las funciones, 
+  - Listas de correo y ayudas en Internet. Como pedir ayuda en internet y obtener respuestas. 
++	Introducción de datos
+  -	Manual
+  -	Desde archivo: texto, csv, Excel, otros.
++	Objetos en R:
+  -	Vectores: númericos (enteros, decimales, etc)
+  -	Matrices,
+  -	data.frames
+  -	Listas 
++	Accediendo a los datos: 
+  -	Variables
+  -	Estructura
+  -	el uso del signo `$`
+  -	funciones attach, detach, with, transform, 
++	Recodificando variables nominales
+  -	factor
+  -	recode
+  -	cut
++ Seleccionado datos: operadores booleanos
+  -	and, or, not, xor
++	Ordenando datos: 
+  -	sort, order. rank
+  -	Combinando datos:
+  - uso de merge y join. 
++	Exportando datos: 
+  -	uso de la funciones write.table, cat y write.xlsx. 
++ Usando funciones simples para realizar operaciones simples sobre los datos: 
+  la familia de funciones *apply, summary, table. 
++	Herramientas para realizar graficos básicos: plot, lines, points, loess.
++ Anova y regresión simple
