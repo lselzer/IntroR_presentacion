@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 _site/
+presentation/libs
+presentation/*.html
