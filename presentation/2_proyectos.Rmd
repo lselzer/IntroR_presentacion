@@ -1,0 +1,65 @@
+---
+title: "Proyectos"
+author: "Luciano Selzer"
+date: "23 de agosto de 2016"
+---
+
+```{r setup, include=FALSE}
+source("_chunk_opts.R")
+```
+
+# Manejo de Proyectos con RStudio 
+
+## Introducción
+
+> Managing your projects in a reproducible fashion doesn't just make your 
+> science reproducible, it makes your life easier
+--Vince Buffalo (@vsbuffalo)
+
+---
+
+La mayoría de la gente organiza sus proyectos así:
+
+![](../img/bad_layout.png)
+
+---
+
+Hay muchas razones por las cuales *SIEMPRE* deberían evitar esto:
+
+1. Es muy dificil cual es la versión original de tus datos y cual es la
+modificada;
+2. Se vuelve un lío porque mezcla archivos de varias extensiones juntos;
+3. Probablemente te tomará mucho tiempo encontrar el archivo que realmente buscas,
+y ver cuales son las figuras correctas y cual es el código que las genera
+
+---
+
+
+Un buen diseño de proyecto va a ser tu vida más fácil:
+
+  + Te va a ayudar a mantener la integridad de tus datos;
+  + Va a ser que sea más sencillo compartir tu código con alguien más 
+  (Un compañero de laboratorio, colaborador, o supervisor);
+  + Te permite subir fácilmente código con tu propuesta de manuscrito;
+  + Hace que sea más fácil volver a un proyecto luego de dejarlo por un tiempo.
+
+## Una posible solución
+
+Afortunadamente, hay herramientas y paquetes que pueden ayudarte a manejar
+el trabajo de forma efectiva.
+
+Una de los aspectos más poderosos y útiles de RStudio es el manejo de proyectos.
+Hoy vamos a usarlo para crear un proyecto auto-contenido y reproducible.
+
+
+## Desafio: Crear un proyecto autocontenido{.challenge}
+
+Vamos a crear un proyecto auto-contenido en RStudio:
+
+1. Hacer clic en "File" en el menú, y luego en "New Project"
+2. Click en "New Directory"
+3. Click en "Empty Project"
+4. Escribir el nombre de la carpeta donde se guardará el proyecto, e.g.
+"mi_proyecto"
+5. Asegurarse de que la casilla "Create a git repository" esté seleccionada.
+6. Click en el botón "Create Project"
