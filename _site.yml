@@ -1,0 +1,12 @@
+name: "my-website"
+navbar:
+  title: "Introducción a R"
+  left:
+    - text: "Inicio"
+      href: index.html
+      icon: fa-home
+    - text: "Presentaciones"
+      icon: fa-television
+      menu:
+      - text: "Día 1: Introducción"
+        href: presentation/1_presentacion.html
