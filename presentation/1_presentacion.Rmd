@@ -403,3 +403,48 @@ Añaden funciones que no están presentes en R.
   + Para actualizar los paquetes instalados, tipear `update.packages()`
   + Para eliminar un paquete tipear `remove.packages("packagename")`
   + Para usar un paquete en la sesión actual tipear `library(packagename)`
+  
+  
+# Ejercicios
+
+## Ejercicio 1
+
+¿Cuál de los siguientes nombres son válidos como nombre de variable?
+
+```{r, eval=FALSE}
+min_height
+max.height
+_age
+.mass
+MaxLength
+min-length
+2widths
+celsius2kelvin
+```
+
+## Ejercicio 2
+
+¿Cuál será el valor de cada variable luego cada 
+comando en el siguiente código?
+
+```{r, eval=FALSE}
+mass <- 47.5
+age <- 122
+mass <- mass * 2.3
+age <- age - 20
+```
+
+
+## Ejercicio 3
+
+Ejectuta el código anterior y escribe un código para comparar 
+mass y age ¿Es mass más grande que age?
+
+## Ejercicio 4
+
+Limpia el entorno eliminando las variables mass y age.
+
+## Ejercicio 5
+
+Instala los paquetes: `ggplot2`, `plyr`, `gapminder`
+
