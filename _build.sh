@@ -1,3 +1,3 @@
 #!/bin/sh
 
-Rscript -e "_build.R"
+Rscript -e "build.R"
