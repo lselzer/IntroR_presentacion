@@ -49,3 +49,7 @@
 .reveal pre{
     font-size: 36px ;
 }
+
+.reveal .bigger{
+  font-size: 60px ;
+}
