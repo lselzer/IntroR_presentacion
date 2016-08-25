@@ -294,6 +294,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>/<span class="dv">10000</span></code></pre></div>
 <pre><code>[1] 2e-04</code></pre>
 <p>que es una abreviatura de multiplicar por <code>10^XX</code>“. Por lo que <code>2e-4</code> es una abreviatura de <code>2 * 10^(-4)</code>.</p>
+</section><section class="slide level2">
+
 <p>Uno mismo puede entrar números en notación científica:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="fl">5e3</span> <span class="co">#No hay menos aquí</span></code></pre></div>
 <pre><code>[1] 5000</code></pre>
@@ -311,6 +313,44 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>También podemos hacer comparaciones en R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> ==<span class="st"> </span><span class="dv">1</span> <span class="co"># igualdad (notar que son dos signos igual, se lee como &quot;es igual a&quot;)</span></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
+</section><section class="slide level2">
+
+<div class="bigger">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Operador</strong></th>
+<th style="text-align: left;"><strong>Comparación</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">==</td>
+<td style="text-align: left;">igual</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">!=</td>
+<td style="text-align: left;">distinto,</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt;</td>
+<td style="text-align: left;">mayor</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&lt;</td>
+<td style="text-align: left;">menor</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt;=</td>
+<td style="text-align: left;">mayor o igual</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&lt;=</td>
+<td style="text-align: left;">menor o igual</td>
+</tr>
+</tbody>
+</table>
+</div>
 </section><section id="tip-comparando-numeros" class="slide level2 tip">
 <h1>Tip: Comparando números</h1>
 <p>Un advertencia acerca de la comparación de números: nunca usar <code>==</code> para comparar dos números a menos que sean integers (un tipo de data que se usa para representar números enteros específicamente).</p>
@@ -341,6 +381,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>[1] 1 2 3 4 5</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>^(<span class="dv">1</span>:<span class="dv">5</span>)</code></pre></div>
 <pre><code>[1]  2  4  8 16 32</code></pre>
+</section><section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">5</span>
 <span class="dv">2</span>^x</code></pre></div>
 <pre><code>[1]  2  4  8 16 32</code></pre>
@@ -355,9 +397,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>Manejando el entorno</h1>
 <p>Podés usar <code>rm</code> para eliminar objetos que no sean necesarios:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(x)</code></pre></div>
+</section><section class="slide level2">
+
 <p>Si tenés muchos objetos en tu entorno y querés borrar todos ellos, podés pasar el resultado de <code>ls</code> como argumento de la función <code>rm</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
 <p>En este caso hemos especificado que el resultado de <code>ls</code> sea usado por el argumento <code>list</code> en <code>rm</code>. Cuando asignamos valores a argumentos por nombre, ¡<strong>hay que</strong> usar el operardor <code>=</code>!</p>
+</section><section id="tip-warnings-vs-errors" class="slide level2 tip">
+<h1>Tip: Warnings vs Errors</h1>
+<p>¡Presten atención cuando R hace algo inesperado! R tira errores, como el de arriba, cuando no puede proceder con un cálculo. Los <em>Warnings</em> (advertencias) por otro lado generalmente significa que la función se ejecutó, pero que probablemente no ha funcionado como se esperaba.</p>
+<p>En ambos casos, el mensaje que imprime R generalmente contiene pista de como arreglar el problema. Aunque a veces pueden ser algo crípticos y requieran cierta experiencia saber que es lo que está pasando.</p>
+</section><section id="paquetes-r" class="slide level2">
+<h1>Paquetes R</h1>
+<p>Los paquetes de R son colecciones de funciones o a veces datos, que son justamente empaquetadas.<br />
+Añaden funciones que no están presentes en R.</p>
+</section><section class="slide level2">
+
+<ul>
+<li>Para ver que paquetes están instalados tipear: <code>installed.packages()</code></li>
+<li>Para instalar paquetes tipear <code>install.packages(&quot;packagename&quot;)</code>, donde <code>packagename</code> es el nombre del paquete, entre comillas.</li>
+<li>Para actualizar los paquetes instalados, tipear <code>update.packages()</code></li>
+<li>Para eliminar un paquete tipear <code>remove.packages(&quot;packagename&quot;)</code></li>
+<li>Para usar un paquete en la sesión actual tipear <code>library(packagename)</code></li>
+</ul>
 </section></section>
     </div>
   </div>

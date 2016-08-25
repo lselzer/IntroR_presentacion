@@ -222,6 +222,8 @@ Los números muy grandes o pequeños se imprimen en notación científica:
 que es una abreviatura de multiplicar por `10^XX`". Por lo que `2e-4`
 es una abreviatura de  `2 * 10^(-4)`.
 
+---
+
 Uno mismo puede entrar números en notación científica:
 
 ```{r c1-science-notation-self}
@@ -258,7 +260,18 @@ También podemos hacer comparaciones en R:
 1 == 1 # igualdad (notar que son dos signos igual, se lee como "es igual a")
 ```
 
+---
 
+<div class="bigger">
+**Operador** |**Comparación**
+-------------|------------
+ ==          | igual
+ !=          | distinto, 
+ \>          | mayor
+ <           | menor
+ >=          | mayor o igual
+ <=          | menor o igual
+</div>
 ## Tip: Comparando números{.tip}
 
 Un advertencia acerca de la comparación de números: nunca usar `==` para
@@ -324,6 +337,7 @@ valores. Por ejemplo:
 2^(1:5)
 ```
 
+---
 
 ```{r c1-vector-asignacion}
 x <- 1:5
@@ -351,6 +365,8 @@ Podés usar `rm` para eliminar objetos que no sean necesarios:
 rm(x)
 ```
 
+---
+
 Si tenés muchos objetos en tu entorno y querés borrar todos ellos, podés
 pasar el resultado de `ls` como argumento de la función `rm`:
 
@@ -359,5 +375,31 @@ rm(list = ls())
 ```
 
 En este caso hemos especificado que el resultado de `ls` sea usado por el 
-argumento `list` en `rm`. Cuando asignamos valores a argumentos por nombre,
-¡**hay que** usar el operardor `=`!
+argumento `list` en `rm`. 
+Cuando asignamos valores a argumentos por nombre, ¡**hay que** usar el operardor `=`!
+
+## Tip: Warnings vs Errors{.tip}
+
+¡Presten atención cuando R hace algo inesperado! R tira errores, como el de arriba,
+cuando no puede proceder con un cálculo. Los *Warnings* (advertencias) por otro
+lado generalmente significa que la función se ejecutó, pero que probablemente
+no ha funcionado como se esperaba.
+
+En ambos casos, el mensaje que imprime R generalmente contiene pista de como
+arreglar el problema. Aunque a veces pueden ser algo crípticos y requieran
+cierta experiencia saber que es lo que está pasando.
+
+## Paquetes R
+
+Los paquetes de R son colecciones de funciones o a veces datos, que son
+justamente empaquetadas.  
+Añaden funciones que no están presentes en R. 
+
+---
+
+  + Para ver que paquetes están instalados tipear: `installed.packages()`
+  + Para instalar paquetes tipear `install.packages("packagename")`, donde
+  `packagename` es el nombre del paquete, entre comillas.
+  + Para actualizar los paquetes instalados, tipear `update.packages()`
+  + Para eliminar un paquete tipear `remove.packages("packagename")`
+  + Para usar un paquete en la sesión actual tipear `library(packagename)`
