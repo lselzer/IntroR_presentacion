@@ -3,7 +3,7 @@ output: html_document
 ---
 
 
-# Presentaciones del Curso Introducci髇 A R
+# Presentaciones del Curso Introducci贸n A R
 ## Universidad Nacional de Tierra del Fuego
 ## Dr. Luciano Javier Selzer
 
@@ -11,17 +11,17 @@ output: html_document
 
 ### Programa
 
-+	Introducci髇 a la interfaz de R y editores de c骴igo. 
-+	Utilidades extras en R. Obtenci髇 e instalaci髇 de paquetes. 
++	Introducci贸n a la interfaz de R y editores de c贸digo. 
++	Utilidades extras en R. Obtenci贸n e instalaci贸n de paquetes. 
 +	Uso de la ayuda: 
-	- Interpretaci髇 de la ayuda
-  - Documentaci髇 de las funciones, 
+	- Interpretaci贸n de la ayuda
+  - Documentaci贸n de las funciones, 
   - Listas de correo y ayudas en Internet. Como pedir ayuda en internet y obtener respuestas. 
-+	Introducci髇 de datos
++	Introducci贸n de datos
   -	Manual
   -	Desde archivo: texto, csv, Excel, otros.
 +	Objetos en R:
-  -	Vectores: n鷐ericos (enteros, decimales, etc)
+  -	Vectores: n煤mericos (enteros, decimales, etc)
   -	Matrices,
   -	data.frames
   -	Listas 
@@ -44,5 +44,5 @@ output: html_document
   -	uso de la funciones write.table, cat y write.xlsx. 
 + Usando funciones simples para realizar operaciones simples sobre los datos: 
   la familia de funciones *apply, summary, table. 
-+	Herramientas para realizar graficos b醩icos: plot, lines, points, loess.
-+ Anova y regresi髇 simple
++	Herramientas para realizar graficos b谩sicos: plot, lines, points, loess.
++ Anova y regresi贸n simple
