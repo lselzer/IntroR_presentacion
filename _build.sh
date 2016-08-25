@@ -1,3 +1,3 @@
 #!/bin/sh
 
-Rscript -e "rmarkdown::render_site()"
+Rscript -e _build.R
