@@ -1,0 +1,159 @@
+---
+title: "¿Cómo obtener ayuda?"
+author: "Luciano Selzer"
+date: "23 de agosto de 2016"
+---
+
+```{r setup, include=FALSE}
+source("_chunk_opts.R")
+```
+
+## Archivos de ayuda
+
+Toda función de R tiene su página de ayuda. Hay varias formas de llegar a ellas.
+Dos de ellas consiste en escribir el signo de pregunta (?) seguido del nombre
+completo de la función. La otra en escribir `help()` y el nombre de la función
+
+```{r, eval=FALSE}
+?function_name
+help(function_name)
+```
+
+---
+
+
+ + Título: una breve descripción de la función
+ + Description: Una descripción un poco más amplia de lo que hace la función.
+ + Usage: muestra los argumentos que acepta la función.
+ + Arguments: listado de los argumentos, que significa cada unos y que tipo de
+ valores acepta
+ + Details: detalles importantes de los que hay que tener en cuenta. 
+ + Value: que tipo de datos devuelve la función.
+ + See also: otras funciones relacionadas que quizá sean útiles para el trabajo
+ que estamos realizando.
+ + Examples: ejemplos de uso de la función.
+ 
+## Tip: Leer la ayuda{.tip}
+
+Uno de los aspectos más impresionantes de R es el gran número de funciones. Por
+lo que es imposible acordarse de todas y como se usan. Por suerte, el tener
+páginas de ayuda tan detalladas significa que ¡no hace falta recordar todo!
+ 
+## Operadores Especiales
+
+Para obtener ayuda para operadores especiales hay que usarlos entre comillas.
+
+```{r, eval=FALSE}
+?"+"
+```
+
+
+## Ayuda de paquetes
+
+Muchos paquetes vienen con "vignettes": son tutoriales o documentación de 
+ejemplo extendida. 
+
++ `vignette()` listará todas las
+vignettes de todos los paquetes instalados
++ `vignette(package="package-name")`, nos dará un listado de la vignettes
+disponibles para `package-name`,
++ `vignette("vignette-name")` abrirá la
+vignette especificada.
+
+
+## Si solo recordas una parte de la función
+
+Si no estás seguro en que paquete está la función, o como se escribe
+podés hacer una búsqueda difusa:
+
+
+```{r, eval=FALSE}
+??function_name
+```
+
+## Si no tenés idea donde empezar
+
+Si no sabés que función o paquete usar 
+[CRAN Task Views](http://cran.at.r-project.org/web/views)
+es una lista de paquetes agrupados en distintos campos de aplicación. Puede ser
+un buen punto de comienzo.
+
+## Cuando tu código no funciona: obtener ayuda de tus pares
+
+El 90% de tus preguntas ya han sido respondidas:
+
++ [Stack Overflow](http://stackoverflow.com/).
+Podés buscar usando el tag `[r]`. 
+
+También podés buscar en la lista de 
+correo:
+
++ [R-Help-es](https://stat.ethz.ch/mailman/listinfo/r-help-es)
++ [R-Help](https://stat.ethz.ch/mailman/listinfo/r-help)
++ [R-SIG-mixed-effects](https://stat.ethz.ch/mailman/listinfo/r-sig-mixed-models)
++ [R-SIG-Eco](https://stat.ethz.ch/mailman/listinfo/r-sig-ecology)
++ [R-SIG-Finance](https://stat.ethz.ch/mailman/listinfo/r-sig-finance)
+
+https://www.r-project.org/mail.html
+
+## Si nadie ha tenido tu problema
+
+Incluir *ejemplo reproducible* de nuestro problema. 
+Para incluir datos, la forma más sencilla (si los datos no son demasiados) es 
+usar la función `dput`:
+
+```{r, eval=FALSE}
+?dput
+```
+
+
++ Otro punto importante a incluir es el código de lo que hemos intentado hacer.
++ Al menos incluir las respuestas relacionadas a nuestra
+pregunta y porque no nos sirven.
+
+---
+
+```{r}
+sessionInfo()
+```
+
+
+Imprime en la consola la versión actual de R y también los paquetes que hemos 
+cargado. Esto puede ser muy útil para ayudar a reproducir y solucionar nuestros
+problemas.
+
+
+## Ejercicio 1{.challenge}
+
+Lee la ayuda para la función `c()` ¿Qué clase de vector esperas crear si
+ejecutas los siguientes comandos?:
+
+```{r, eval=FALSE}
+c(1, 2, 3)
+c('d', 'e', 'f')
+c(1, 2, 'f')`
+```
+
+
+## Ejercicio 2 {.challenge}
+
+Examina la página de ayuda de `paste()`. Vas a usarla más adelante. ¿Cuál es
+la diferencia entre los argumentos `sep`y `collapse`?
+
+
+## Ejercicio 3 {.challenge}
+
+Usa la ayuda para encontrar una función (y sus argumentos) con la cual
+podrías cargar datos de un archivo csv en el cual las columnas están delimitadas
+con "\t" (tabulación) y el punto decimal es un "." (punto). Esta comprobación
+del punto decimal es importante, porque en otros paises se usa la coma como
+separador decimal.  
+Pista: usa `??csv` para buscar funciones relacionadas con csv.
+
+
+
+## Otras fuentes de ayuda
+
+* [Quick R](http://www.statmethods.net/)
+* [RStudio cheat sheets](http://www.rstudio.com/resources/cheatsheets/)
+* [Cookbook for R](http://www.cookbook-r.com/)

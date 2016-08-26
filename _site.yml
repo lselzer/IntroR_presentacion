@@ -8,6 +8,10 @@ navbar:
     - text: "Presentaciones"
       icon: fa-television
       menu:
-      - text: "Día 1: Introducción"
+      - text: "Introducción"
         href: presentation/1_presentacion.html
-        target: "_blank"
+      - text: "Introducción"
+        href: presentation/2_proyectos.html
+      - text: "Introducción"
+        href: presentation/3_help.html
+        
