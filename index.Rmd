@@ -3,7 +3,7 @@ output: html_document
 ---
 
 
-# Presentaciones del Curso Introducción A R
+# Presentaciones del Curso Introducción a R
 ## Universidad Nacional de Tierra del Fuego
 ## Dr. Luciano Javier Selzer
 

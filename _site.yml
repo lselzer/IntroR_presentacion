@@ -10,8 +10,8 @@ navbar:
       menu:
       - text: "Introducción"
         href: presentation/1_presentacion.html
-      - text: "Introducción"
+      - text: "Proyectos"
         href: presentation/2_proyectos.html
-      - text: "Introducción"
+      - text: "Ayuda en R"
         href: presentation/3_help.html
         
