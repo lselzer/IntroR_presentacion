@@ -22,16 +22,16 @@ help(function_name)
 ---
 
 
- + Título: una breve descripción de la función
- + Description: Una descripción un poco más amplia de lo que hace la función.
- + Usage: muestra los argumentos que acepta la función.
- + Arguments: listado de los argumentos, que significa cada unos y que tipo de
+ + **Título**: una breve descripción de la función
+ + **Description**: Una descripción un poco más amplia de lo que hace la función.
+ + **Usage**: muestra los argumentos que acepta la función.
+ + **Arguments**: listado de los argumentos, que significa cada unos y que tipo de
  valores acepta
- + Details: detalles importantes de los que hay que tener en cuenta. 
- + Value: que tipo de datos devuelve la función.
- + See also: otras funciones relacionadas que quizá sean útiles para el trabajo
+ + **Details**: detalles importantes de los que hay que tener en cuenta. 
+ + **Value**: que tipo de datos devuelve la función.
+ + **See also**: otras funciones relacionadas que quizá sean útiles para el trabajo
  que estamos realizando.
- + Examples: ejemplos de uso de la función.
+ + **Examples**: ejemplos de uso de la función.
  
 ## Tip: Leer la ayuda{.tip}
 
