@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Luciano Selzer" />
+  <title>Estructura de datos</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Estructura de datos</h1>
+    <h2 class="author">Luciano Selzer</h2>
+    <h3 class="date">23 de agosto de 2016</h3>
+</section>
+
+<section id="datos-tabulares" class="slide level2">
+<h1>Datos Tabulares</h1>
+<p>Una de las características más poderosa de R es la habilidad de leer datos tabulares – como la que podrías tener en una hoja de cállculo o CSV. Empecemos por hacer un set datos de prueba en la carpeta <code>data/</code>, llamada <code>datos-felinos.csv</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pelaje,peso,gusta_ovillo
+atigrado,<span class="fl">2.1</span>,<span class="dv">1</span>
+negro,<span class="fl">5.0</span>,<span class="dv">0</span>
+bicolor,<span class="fl">3.2</span>,<span class="dv">1</span></code></pre></div>
+</section>
+<section id="tip-editando-archivos-de-texto-en-r" class="slide level2 tip">
+<h1>Tip: Editando archivos de texto en R</h1>
+<p>Alternativamente, podés crear <code>data/datos-felinos.csv</code> usando un editor de texto (Bloc de Notas, Nano) o con RStudio usando la opción <strong>File -&gt; New File -&gt; Text File</strong>.</p>
+</section>
+<section class="slide level2">
+
+<p>Podemos cargarlo en R usando la siguiente función:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/datos-felinos.csv&quot;</span>)
+gatos</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo
+1 atigrado  2.1         TRUE
+2    negro  5.0        FALSE
+3  bicolor  3.2         TRUE</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Podemos empezar a exploar nuestro set de datos enseguida, seleccionando columnas con el operador <code>$</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos$peso</code></pre></div>
+<pre><code>[1] 2.1 5.0 3.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos$pelaje</code></pre></div>
+<pre><code>[1] atigrado negro    bicolor 
+Levels: atigrado bicolor negro</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Se pueden hacer otras operaciones con las columnas:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Digamos que descubrimos que los pesos tienen un kilo de menos:
+gatos$peso +<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>[1] 3.1 6.0 4.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;Mi gato es&quot;</span>, gatos$pelaje)</code></pre></div>
+<pre><code>[1] &quot;Mi gato es atigrado&quot; &quot;Mi gato es negro&quot;    &quot;Mi gato es bicolor&quot; </code></pre>
+</section>
+<section class="slide level2">
+
+<p>Pero que pasa si hacemos esto:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos$peso +<span class="st"> </span>gatos$pelaje</code></pre></div>
+<pre><code>Warning in Ops.factor(gatos$peso, gatos$pelaje): &#39;+&#39; not meaningful for
+factors</code></pre>
+<pre><code>[1] NA NA NA</code></pre>
+<p>Entender los tipos básicos de datos es fundamental para entender como funciona R.</p>
+</section>
+<section id="tipos-de-datos" class="slide level2">
+<h1>Tipos de datos</h1>
+<p>Podemos ver que tipo de dato es cierto objeto con:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(gatos$peso)</code></pre></div>
+<pre><code>[1] &quot;double&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Hay 5 tipos básicos de dato:</p>
+<ul>
+<li><code>double</code></li>
+<li><code>integer</code></li>
+<li><code>complex</code></li>
+<li><code>logical</code></li>
+<li><code>character</code>.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="fl">3.14</span>)</code></pre></div>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(1L)</code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="dv">1</span> +<span class="st"> </span>1i)</code></pre></div>
+<pre><code>[1] &quot;complex&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(<span class="st">&#39;banana&#39;</span>)</code></pre></div>
+<pre><code>[1] &quot;character&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Otro usuario a añadido datos de otro gato. La información está en el archivo <code>data/feline-data_v2.csv</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">file.show</span>(<span class="st">&quot;data/datos_felinos_v2.csv&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pelaje,peso,gusta_ovillo
+atigrado,<span class="fl">2.1</span>,<span class="ot">TRUE</span>
+negro,<span class="fl">5.0</span>,<span class="ot">FALSE</span>
+bicolor,<span class="fl">3.2</span>,<span class="ot">TRUE</span>
+bicolor,<span class="fl">2.3</span> o <span class="fl">2.4</span>,<span class="ot">TRUE</span></code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Cargamos de nuevo los datos como antes, y chequeamos que tipo de dato encontramos en la columna <code>peso</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/datos_felinos_v2.csv&quot;</span>)
+<span class="kw">typeof</span>(gatos$peso)</code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<p>Ahora nuestros pesos ya no son de tipo doble.</p>
+</section>
+<section class="slide level2">
+
+<p>Si intentamos hacer la misma operación matemática que antes vamos a tener problemas:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos$peso +<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>Warning in Ops.factor(gatos$peso, 1): &#39;+&#39; not meaningful for factors</code></pre>
+<pre><code>[1] NA NA NA NA</code></pre>
+</section>
+<section class="slide level2">
+
+<p>¿Qué ha sucedido?</p>
+<ul>
+<li class="fragment">Cuando R lee un archivo, insiste en que todo en una columna tiene que ser del msimo tipo básico. Si no puede entender que <em>todo</em> en la columna es tipo doble, entonces <em>nadie</em> en la columna tiene tipo doble. La tabla cargada en nuestro ejemplo de datos es llamada <em>data.frame</em> y es nuestro primer ejemplo de algo llamado <em>estructura de datos</em> - que significa, una estrucutura que R sabe construir a partir de tipos de datos básicos.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Podemos ver que es una <em>data.frame</em> llamando la función <code>class</code> en el objecto:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(gatos)</code></pre></div>
+<pre><code>[1] &quot;data.frame&quot;</code></pre>
+<p>Para usar existosamente nuestros datos en R, primero necesitamos entender que son los tipos básicos de estructuras y como se comportan. Por ahora quitemos la última linea de nuestros gatos y recarguemos el archivo, mientras investigamos más este comportamiento.</p>
+</section>
+<section class="slide level2">
+
+<p>datos-felinos.csv:</p>
+<pre><code>pelaje,peso,gusta_ovillo
+atigrado,2.1,1
+negro,5.0,0
+bicolor,3.2,1</code></pre>
+<p>Y devuelta en RStudio</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file=</span><span class="st">&quot;data/datos-felinos.csv&quot;</span>)</code></pre></div>
+</section>
+<section id="vectores-y-coercion-de-tipo" class="slide level2">
+<h1>Vectores y Coerción de Tipo</h1>
+<p>Para entender mejor este comportamiento, conozcamos otro tipo de estructura de datos: el <em>vector</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mi_vector &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">length =</span> <span class="dv">3</span>)
+mi_vector</code></pre></div>
+<pre><code>[1] FALSE FALSE FALSE</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Un vector es:</p>
+<ul>
+<li>lista ordenada de cosas</li>
+<li><em>Todo en el vector deber ser del mismo tipo básico</em>.</li>
+<li>Por defecto selecciona <code>logical</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otro_vector &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode =</span> <span class="st">&#39;character&#39;</span>, <span class="dt">length =</span> <span class="dv">3</span>)
+otro_vector</code></pre></div>
+<pre><code>[1] &quot;&quot; &quot;&quot; &quot;&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Podés ver si un objecto es un vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(otro_vector)</code></pre></div>
+<pre><code> chr [1:3] &quot;&quot; &quot;&quot; &quot;&quot;</code></pre>
+<p>La salida algo críptica de este comando indica el tipo básico de dato en este vector - en este caso <code>chr</code>, caracter; un indicador del númer de cosas en ese vector, en este caso <code>[1:3]</code>; y unos ejemplos de que hay en el vector - en este caso una cadena de caracteres vacia.</p>
+</section>
+<section class="slide level2">
+
+<p>De forma similar si hacemos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gatos$peso)</code></pre></div>
+<pre><code> Factor w/ 4 levels &quot;2.1&quot;,&quot;2.3 o 2.4&quot;,..: 1 4 3 2</code></pre>
+<p>Vemos que también es un vector - <em>las columnas de datos que cargamos en el data.frame de R son todos vectores</em>, y es por eso que R fuerza toda la columna en ser de un mismo tipo básico de dato.</p>
+</section>
+<section id="discusion-1" class="slide level2 discuss">
+<h1>Discusión 1</h1>
+<p>¿Por qué R es tán dogmático sobre lo que ponemos en nuestras columnas de datos? ¿Cómo esto nos ayuda?</p>
+<ul>
+<li class="fragment">Al tener todos los datos de la columna como un solo tipo nos permite hacer algunas suposiciones simples sobre ellos; si podes interpretar una entrada como un número, entonces podés interpetar <em>todas</em> las entradas como números, entonces no tenemos que comprobar cada una. Esta consistencia, como la consistencia de usar el mismo separador en nuestros archivos, es lo que se refiere a <em>datos limpios</em>. A la larga, esa consistencia estricta nos facilita mucho nuestro trabajo con R.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>También podes hacer vectores con contenidos explicitos usando la función de concatenación</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">concat_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">3</span>)
+concat_vector</code></pre></div>
+<pre><code>[1] 2 6 3</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Dado lo que ya hemos aprendido ¿Qué tipo de vector piensa que va a proudcir lo siguiente?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quiz_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="st">&#39;3&#39;</span>)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Esto es algo llamado <em>coerción de tipo</em>, y es la fuente de muchas sorpresas y la razón por la que tenemos que estar atentos de los tipos básicos de datos y como R va a interpretarlos. Cuando R encuentra un mezcla de tipos (númericos y caracter en este ejemplo) para ser combinados en un solo vector, va a forzar todos al mismo tipo. Considera lo siguiente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">coercion_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="ot">TRUE</span>)
+coercion_vector</code></pre></div>
+<pre><code>[1] &quot;a&quot;    &quot;TRUE&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otro_coercion_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="ot">TRUE</span>)
+otro_coercion_vector</code></pre></div>
+<pre><code>[1] 0 1</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Los reglas de coerción son: <code>logical</code> -&gt; <code>integer</code> -&gt; <code>numeric</code> -&gt; <code>complex</code> -&gt; <code>character</code>, donde -&gt; es leido como es *transofrmado en Podes intertar forzar la coerción contra este flujo usando las funciones <code>as.</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">character_vector_ejemplo &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;0&#39;</span>,<span class="st">&#39;2&#39;</span>,<span class="st">&#39;4&#39;</span>)
+character_vector_ejemplo</code></pre></div>
+<pre><code>[1] &quot;0&quot; &quot;2&quot; &quot;4&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">character_coerced_to_numeric &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(character_vector_ejemplo)
+character_coerced_to_numeric</code></pre></div>
+<pre><code>[1] 0 2 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numeric_coerced_to_logical &lt;-<span class="st"> </span><span class="kw">as.logical</span>(character_coerced_to_numeric)
+numeric_coerced_to_logical</code></pre></div>
+<pre><code>[1] FALSE  TRUE  TRUE</code></pre>
+<p>Si tus datos no se ven como se deben ver probablemente sea debido a la coerción de tipos</p>
+</section>
+<section class="slide level2">
+
+<p>Pero la coerción de tipos también puede ser ¡muy útil! Por ejemplo, en nuestros ejemplo de <code>gatos</code> los datos de <code>gusta_ovillo</code> es númerico, pero sabemos que los ceros y unos representan <code>FALSE</code> y <code>TRUE</code> (una forma común de representarlos). Deberiamos usar el tipo <code>logical</code> aquí, el cual tiene dos estados: <code>TRUE</code> o <code>FALSE</code>, que es exactamente lo que nuestros datos representa. Podemos coercionar esa columna a <code>logical</code> usando la función <code>as.logical</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos$gusta_ovillo</code></pre></div>
+<pre><code>[1]  TRUE FALSE  TRUE  TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos$gusta_ovillo &lt;-<span class="st"> </span><span class="kw">as.logical</span>(gatos$gusta_ovillo)
+gatos$gusta_ovillo</code></pre></div>
+<pre><code>[1]  TRUE FALSE  TRUE  TRUE</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Concatenear también puede adjuntar cosas a un vector existente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ab_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>)
+ab_vector</code></pre></div>
+<pre><code>[1] &quot;a&quot; &quot;b&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">concat_example &lt;-<span class="st"> </span><span class="kw">c</span>(ab_vector, <span class="st">&#39;SWC&#39;</span>)
+concat_example</code></pre></div>
+<pre><code>[1] &quot;a&quot;   &quot;b&quot;   &quot;SWC&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>También se pueden hacer series de números</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mySeries &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">10</span>
+mySeries</code></pre></div>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">10</span>)</code></pre></div>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">10</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</code></pre></div>
+<pre><code> [1]  1.0  1.1  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3
+[15]  2.4  2.5  2.6  2.7  2.8  2.9  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7
+[29]  3.8  3.9  4.0  4.1  4.2  4.3  4.4  4.5  4.6  4.7  4.8  4.9  5.0  5.1
+[43]  5.2  5.3  5.4  5.5  5.6  5.7  5.8  5.9  6.0  6.1  6.2  6.3  6.4  6.5
+[57]  6.6  6.7  6.8  6.9  7.0  7.1  7.2  7.3  7.4  7.5  7.6  7.7  7.8  7.9
+[71]  8.0  8.1  8.2  8.3  8.4  8.5  8.6  8.7  8.8  8.9  9.0  9.1  9.2  9.3
+[85]  9.4  9.5  9.6  9.7  9.8  9.9 10.0</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Podemos ver otras cosas sobre los vectores</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sequence_example &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">10</span>)
+<span class="kw">head</span>(sequence_example, <span class="dt">n =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>[1] 1 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(sequence_example, <span class="dt">n =</span> <span class="dv">4</span>)</code></pre></div>
+<pre><code>[1]  7  8  9 10</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(sequence_example)</code></pre></div>
+<pre><code>[1] 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(sequence_example)</code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(sequence_example)</code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Finalmente, podes darle nombres a los elementos de vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">names_example &lt;-<span class="st"> </span><span class="dv">5</span>:<span class="dv">8</span>
+<span class="kw">names</span>(names_example) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>)
+names_example</code></pre></div>
+<pre><code>a b c d 
+5 6 7 8 </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(names_example)</code></pre></div>
+<pre><code>[1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</code></pre>
+</section>
+<section id="ejercicio-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>Empieza haciendo un vector de 1 hasta 26. Multiplica el vector por 2, y dale al vector resultante nombres desde de la A hasta la Z (pista: hay un vector incluido llamado <code>LETTERS</code>).</p>
+</section>
+<section id="data-frames" class="slide level2">
+<h1>Data Frames</h1>
+<p>Dijimos que las columnas en el data.frame son vectores:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gatos$peso)</code></pre></div>
+<pre><code> Factor w/ 4 levels &quot;2.1&quot;,&quot;2.3 o 2.4&quot;,..: 1 4 3 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gatos$gusta_ovillo)</code></pre></div>
+<pre><code> logi [1:4] TRUE FALSE TRUE TRUE</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Tiene sentido, pero que hay de:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gatos$pelaje)</code></pre></div>
+<pre><code> Factor w/ 3 levels &quot;atigrado&quot;,&quot;bicolor&quot;,..: 1 3 2 2</code></pre>
+</section>
+<section id="factores" class="slide level2">
+<h1>Factores</h1>
+<p>Otra estructura de datos importante son los llamados <em>factores</em>.</p>
+<p>Los factores generalmente se ven como datos tipo caracter, pero son usado tipicamente para representar información categórica.</p>
+<p>Por ejemplo, hagamos un vector de cadena nombrando los colores de los gatos para todos los gatos en el estudio:</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pelajes &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;atigrado&#39;</span>, <span class="st">&#39;carey&#39;</span>, <span class="st">&#39;carey&#39;</span>, <span class="st">&#39;negro&#39;</span>, <span class="st">&#39;atigrado&#39;</span>)
+pelajes</code></pre></div>
+<pre><code>[1] &quot;atigrado&quot; &quot;carey&quot;    &quot;carey&quot;    &quot;negro&quot;    &quot;atigrado&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(pelajes)</code></pre></div>
+<pre><code> chr [1:5] &quot;atigrado&quot; &quot;carey&quot; &quot;carey&quot; &quot;negro&quot; &quot;atigrado&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Podemos convertir nuestro vector en factor así:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Categorias &lt;-<span class="st"> </span><span class="kw">factor</span>(pelajes)
+<span class="kw">class</span>(Categorias)</code></pre></div>
+<pre><code>[1] &quot;factor&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(Categorias)</code></pre></div>
+<pre><code> Factor w/ 3 levels &quot;atigrado&quot;,&quot;carey&quot;,..: 1 2 2 3 1</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Ahora R se ha dado cuenta que hay tres posibles categorias en nuestros datos - pero también hizo algo sorprendente; en vez de imprimir las cadenas que le dimos, obtuvimos un montón de números. R ha reemplazado nuestra categorias facilmente interpretables por nosotros con indices númericos debajo del capot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(pelajes)</code></pre></div>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(Categorias)</code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+</section>
+<section id="ejercicio-2" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>¿Hay algún factor en nuestro data.frame <code>gatos</code>?¿Cuál es su nombre? Intenta usar <code>?read.csv</code> para averiguar como mantener el texto como vector caracter en vez de factores; luego escribe un comando o dos para mostrar que el factor en <code>gatos</code> es en verdad un vector caracter cuando es cargo de estas forma.</p>
+</section>
+<section class="slide level2">
+
+<p>En las funciones modeladoras, es importante saber cuales son los niveles de base. Se asume que es el primer factor, pero por defecto los factores son etiquetados en orden alfabético. Podes cambiar esto especificando los niveles:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mydata &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;case&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;case&quot;</span>)
+factor_ordering_example &lt;-<span class="st"> </span><span class="kw">factor</span>(mydata, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;control&quot;</span>, <span class="st">&quot;case&quot;</span>))
+<span class="kw">str</span>(factor_ordering_example)</code></pre></div>
+<pre><code> Factor w/ 2 levels &quot;control&quot;,&quot;case&quot;: 2 1 1 2</code></pre>
+<p>En este caso, le hemos explicitado a R que “control” debería ser representado por 1, y “case” por 2. Esta designación es muy importante al interpretar los resultados de los modelos estadísticos.</p>
+</section>
+<section id="listas" class="slide level2">
+<h1>Listas</h1>
+<p>Otra estructura de datos que querrás en tu manga será la <code>list</code> (lista). Una lista tiene menos restricciones que otras estructuras, porque podés poner cualquier cosa en ella:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">list_example &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span>, <span class="st">&quot;a&quot;</span>, <span class="ot">TRUE</span>, <span class="dv">1</span> +<span class="st"> </span>4i)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">list_example</code></pre></div>
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] &quot;a&quot;
+
+[[3]]
+[1] TRUE
+
+[[4]]
+[1] 1+4i</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">another_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">title =</span> <span class="st">&quot;Research Bazaar&quot;</span>, <span class="dt">numbers =</span> <span class="dv">1</span>:<span class="dv">10</span>, <span class="dt">data =</span> <span class="ot">TRUE</span> )
+another_list</code></pre></div>
+<pre><code>$title
+[1] &quot;Research Bazaar&quot;
+
+$numbers
+ [1]  1  2  3  4  5  6  7  8  9 10
+
+$data
+[1] TRUE</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Ahora podemos entender algo sorprendente de nuestra data.frame; ¿que sucede si ejecutamos?:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(gatos)</code></pre></div>
+<pre><code>[1] &quot;list&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>En nuestro ejemplo <code>gatos</code>, tenemos una variable <em>integer</em>, una <em>double</em> y una <em>logical</em>. Como hemos visto ya, cada columna del data.frame es un vector</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos$pelaje</code></pre></div>
+<pre><code>[1] atigrado negro    bicolor  bicolor 
+Levels: atigrado bicolor negro</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos[,<span class="dv">1</span>]</code></pre></div>
+<pre><code>[1] atigrado negro    bicolor  bicolor 
+Levels: atigrado bicolor negro</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(gatos[,<span class="dv">1</span>])</code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gatos[,<span class="dv">1</span>])</code></pre></div>
+<pre><code> Factor w/ 3 levels &quot;atigrado&quot;,&quot;bicolor&quot;,..: 1 3 2 2</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Cada columna es una <em>observación</em> de cada tipo de variable, por si misma una data.frame, y por lo tanto puede estar compuesta de elementos de diferentes tipos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos[<span class="dv">1</span>,]</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo
+1 atigrado  2.1         TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(gatos[<span class="dv">1</span>,])</code></pre></div>
+<pre><code>[1] &quot;list&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gatos[<span class="dv">1</span>,])</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   1 obs. of  3 variables:
+ $ pelaje      : Factor w/ 3 levels &quot;atigrado&quot;,&quot;bicolor&quot;,..: 1
+ $ peso        : Factor w/ 4 levels &quot;2.1&quot;,&quot;2.3 o 2.4&quot;,..: 1
+ $ gusta_ovillo: logi TRUE</code></pre>
+</section>
+<section id="desafio-3" class="slide level2">
+<h1>Desafio 3</h1>
+<p>Hay varios formas sutilmente diferentes para llamar a las variables:</p>
+<ul>
+<li><code>gatos[1]</code></li>
+<li><code>gatos[[1]]</code></li>
+<li><code>gatos$pelaje</code></li>
+<li><code>gatos[&quot;pelaje&quot;]</code></li>
+<li><code>gatos[1, 1]</code></li>
+<li><code>gatos[, 1]</code></li>
+<li><code>gatos[1, ]</code></li>
+</ul>
+<p><em>Pista</em> : Usa la función <code>typeof()</code> para examinar que se devuelve en cada caso.</p>
+</section>
+<section class="slide level2">
+
+<p>Podemos pensar que la data.frame es una lista de vectores. Un corchete simple <code>[1]</code> devuelve la primer rebanda de la lista de vectores, como otra lista. En este caso la primera columna del data.frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos[[<span class="dv">1</span>]]</code></pre></div>
+<pre><code>[1] atigrado negro    bicolor  bicolor 
+Levels: atigrado bicolor negro</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Los corchetes dobles <code>[[1]]</code> devuelven el contenido del item de la lista. En este caso los contenidos de la primera columna, un <em>vector</em> de tipo <em>factor</em>.</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos$pelaje</code></pre></div>
+<pre><code>[1] atigrado negro    bicolor  bicolor 
+Levels: atigrado bicolor negro</code></pre>
+<p>Este ejemplo usa el signo <code>$</code> para llamar a los items por su nombre. <em>pelaje</em> es la primera columna de la data.frame, un <em>vector</em> de tipo <em>factor</em>.</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos[<span class="st">&quot;pelaje&quot;</span>]</code></pre></div>
+<pre><code>    pelaje
+1 atigrado
+2    negro
+3  bicolor
+4  bicolor</code></pre>
+<p>Aquí usamos el corchete simple <code>[&quot;pelaje&quot;]</code> reemplazando el número de indice con el nombre de la columna. Como en el primer ejemplo, el objeto que devuelve es una lista <em>list</em></p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos[<span class="dv">1</span>, <span class="dv">1</span>]</code></pre></div>
+<pre><code>[1] atigrado
+Levels: atigrado bicolor negro</code></pre>
+<p>Este ejemplo usa un corchete simple, pero esta vez damos el valor de fila y columna. El objeto que se devuelve es el valor de la fila 1 y columna. El objeto es <em>integer</em> porque es parte de un <em>vector</em> de tipo <em>factor</em>, R muestra la etiqueta “atigrado”</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos[, <span class="dv">1</span>]</code></pre></div>
+<pre><code>[1] atigrado negro    bicolor  bicolor 
+Levels: atigrado bicolor negro</code></pre>
+<p>Como en el ejemplo anterior usamos corchetes simples y proveemos las coordenadas de fila y columna. La fila no está especificada, R interpreta este valor ausente como todo los valores del este <em>vector</em> <em>columna</em>.</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos[<span class="dv">1</span>, ]</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo
+1 atigrado  2.1         TRUE</code></pre>
+<p>De nuevo usamos el corchete simple con las coordenadas de fila y columa. La columna no está especificada. Se devuelve una <em>lista</em> que contiene todos los valores de la primer columna.</p>
+</section>
+<section id="matrices" class="slide level2">
+<h1>Matrices</h1>
+<p>Último pero no menos está la matriz. Podemos declarar una matriz llena de ceros:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">matrix_example &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">ncol =</span> <span class="dv">6</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)
+matrix_example</code></pre></div>
+<pre><code>     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    0    0    0    0    0    0
+[2,]    0    0    0    0    0    0
+[3,]    0    0    0    0    0    0</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Y como en otras estructuras de datos, podemos preguntar cosas sobre nuestra matriz:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(matrix_example)</code></pre></div>
+<pre><code>[1] &quot;matrix&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(matrix_example)</code></pre></div>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(matrix_example)</code></pre></div>
+<pre><code> num [1:3, 1:6] 0 0 0 0 0 0 0 0 0 0 ...</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(matrix_example)</code></pre></div>
+<pre><code>[1] 3 6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(matrix_example)</code></pre></div>
+<pre><code>[1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(matrix_example)</code></pre></div>
+<pre><code>[1] 6</code></pre>
+</section>
+<section id="desafio-4" class="slide level2">
+<h1>Desafio 4</h1>
+<p>¿Cual crees que será el resultado de <code>length(matrix_example)</code>? Prueba el código.<br />
+¿Estabas en lo correcto?¿Por qué?</p>
+</section>
+<section id="desafio-5" class="slide level2">
+<h1>Desafio 5</h1>
+<p>Crea otra matriz, esta vez que contenga los numeros de 1 a 50, con 5 columnas y 10 filas.<br />
+¿Cómo lleno la función <code>matrix</code> la matriz? ¿Por columnas o por filas? ¿Cuál es su opción por defecto? Fijate si podés averiguar como cambiar esto (pista: lee la documentación de <code>matrix</code>).</p>
+</section>
+<section id="desafio-6" class="slide level2">
+<h1>Desafio 6</h1>
+<p>Crea una lista de longitud 2 que contenga un vector caracter para cada parte de lo que hemos visto</p>
+<ul>
+<li>Data types</li>
+<li>Data structures</li>
+</ul>
+<p>Llena cada vector con los nombres de los tipos de datos y las estructuras de datos que hemos visto hasta ahora.</p>
+</section>
+<section id="desafio-7" class="slide level2">
+<h1>Desafio 7</h1>
+<p>Considera la salida de R de la siguiente matriz: [,1] [,2] [1,] 4 1 [2,] 9 5 [3,] 10 7</p>
+<p>¿Cual fue el comando que se uso para crearla? Examina cada comando e intenta pensar cual es el correcto antes de tipearlos. Piensa en que tipo de matriz producirá cada uno.</p>
+<ol type="1">
+<li><code>matrix(c(4, 1, 9, 5, 10, 7), nrow = 3)</code></li>
+<li><code>matrix(c(4, 9, 10, 1, 5, 7), ncol = 2, byrow = TRUE)</code></li>
+<li><code>matrix(c(4, 9, 10, 1, 5, 7), nrow = 2)</code></li>
+<li><code>matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)</code></li>
+</ol>
+</section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
