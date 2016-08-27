@@ -85,6 +85,11 @@ left: 3.5em;
   font-size: 36px ;
 }
 
+.reveal .sourceCode  code{
+  font-size: 36px ;
+  background: #C2C2C2;
+}
+
 .reveal pre{
     font-size: 36px ;
 }
