@@ -14,4 +14,5 @@ navbar:
         href: presentation/2_proyectos.html
       - text: "Ayuda en R"
         href: presentation/3_help.html
-        
+      - text: "Estructura de Datos"
+        href: presentation/4_datos.html  
