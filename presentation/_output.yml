@@ -7,3 +7,4 @@ revealjs::revealjs_presentation:
     slideNumber: true
     previewLinks: true
     highlight: pygments
+    center: true
