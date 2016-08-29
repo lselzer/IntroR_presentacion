@@ -6,7 +6,7 @@ navbar:
       href: index.html
       icon: fa-home
     - text: "Prerequisitos"
-      href: prerquisitos.html
+      href: prerequisitos.html
     - text: "Presentaciones"
       icon: fa-television
       menu:
