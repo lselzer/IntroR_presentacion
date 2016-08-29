@@ -1,0 +1,198 @@
+---
+title: "Creando Selecciones de Datos"
+author: "Luciano Selzer"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+source("_chunk_opts.R")
+# Silently load in the data so the rest of the lesson works
+gapminder <- read.csv("data/gapminder-FiveYearData.csv", header=TRUE)
+```
+
+## Subconjuntos
+
+R tiene muchas herramientas para crear subconjuntos, y dominarlos te va a
+permitir realizar tareas complejas de manera sencilla.
+
+Hay seis formas distintas en la que podemos realizar subconjuntos de 
+cualquier objeto y tres diferentes operadores de subconjuntos para las
+distintas estructuras de datos.
+
+---
+
+Empecemos con el caballo de batalla de R: los vectores atómicos.
+
+```{r}
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+x
+```
+
+Ahora que hemos creado un vector de ejemplo para experimentar, como 
+obtenemos sus contenidos.
+
+
+## Accediendo a los elementos por sus índices
+
+Podemos extraer los elementos de un vector usando el indice correpondiente, empezando por 1:
+
+```{r}
+x[1]
+```
+
+```{r}
+x[4]
+```
+El corchete es una función.  
+Para matrices y vectores, significa "dame el elemento n°"
+
+---
+
+Podemos pedir varios elementos a la vez:
+
+```{r}
+x[c(1, 3)]
+```
+
+
+---
+
+O rebanadas de un vector
+
+Or slices of the vector:
+
+```{r}
+x[1:4]
+```
+
+¿Qué hace `1:4`?
+
+---
+
+El operador `:` crea una secuencia de número desde el número a la 
+izquierda hasta el número a la derecha.
+
+```{r}
+1:4
+c(1, 2, 3, 4)
+```
+
+
+---
+
+Podemos pedir el mismo elemento muchas veces:
+
+```{r}
+x[c(1,1,3)]
+```
+
+
+---
+
+
+Si le pedimos un número por fuera del indice, R devuelve un valor perdido:
+
+
+```{r}
+x[6]
+```
+
+Si le pedimos el elemento 0, nos devuelve un vector vacío:
+
+```{r}
+x[0]
+```
+
+> ##La numeración de los vectores empieza en 1
+>
+> En muchos lenguajes de programación (C, Python) el primer elemento
+> del vector tiene indice 0. En R, el primer elemento es 1.
+
+
+## Eliminando elementos
+
+Si usamos un número negativo como indice del vector, R va a devolver
+todos los elementos **excepto** el especificado.
+
+```{r}
+x[-2]
+```
+
+
+Podemos eliminar varios elementos:
+
+```{r}
+x[c(-1, -5)]  # o x[-c(1,5)]
+```
+
+---
+
+Para eliminar los elementos de un vector, tenemos que asignar los 
+resultados de nuevo a la variable:
+
+```{r}
+x <- x[-4]
+x
+```
+
+## Ejercicio 1 {.challenge}
+
+Dado el siguiente código: 
+
+```{r}
+ x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+ names(x) <- c('a', 'b', 'c', 'd', 'e')
+ print(x)
+```
+
+
+1. Crea tres comandos diferentes que produzcan la siguiente salida:
+
+ ```{r, echo=FALSE}
+ x[2:4]
+ ```
+2. Compara con tu compañero ¿Usaron estrategias diferentes?
+ 
+##Subconjuntos por nombre
+
+Podemos extrar los elementos usando su nombre, en vez de un índice:
+
+```{r}
+x[c("a", "c")]
+```
+
+En general es mucho más confiable, el número se puede referir a otro
+elemento pero el nombre es raro que cambie.
+
+---
+
+Pero es más complicado usarlo para eliminar elementos: 
+
+```{r}
+x[-which(names(x) == "a")]
+```
+
+
+---
+
+Para eliminar muchos elementos por nombre hay que usar otro operador
+ 
+```{r}
+x[-which(names(x) %in% c("a", "c"))]
+```
+
+## Ejercicio 2 {.challenge}
+
+Ejecuta el siguiente código para definir el vector
+`x` como arriba:
+
+```{r}
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+print(x)
+```
+
+
+Dado el vector `x` ¿Qué esperas que haga el siguiente 
+código?
