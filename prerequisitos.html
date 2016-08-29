@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>Tutorial de instalación</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -225,61 +225,48 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">Tutorial de instalación</h1>
 
 </div>
 
 
-<div id="presentaciones-del-curso-introduccion-a-r" class="section level1">
-<h1>Presentaciones del Curso Introducción A R</h1>
-<div id="universidad-nacional-de-tierra-del-fuego" class="section level2">
-<h2>Universidad Nacional de Tierra del Fuego</h2>
+<div id="prerrequisitos" class="section level1">
+<h1>Prerrequisitos</h1>
+<div id="r" class="section level2">
+<h2>R</h2>
+<p>Para este curso son necesarios una serie de programas. Primero, necesitamos R. Para bajarlo ir a <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>, hay varias opciones según el sistema operativo (Linux, Mac OS X, Windows). Elegir la opción correspondiente. Si eligen Windows, a continuación deben elegir <code>base</code> y luego <em>Download R 3.3.1 for Windows</em> que es la versión actual al momento de escribir estas palabras. Luego de que termine de bajar instalarlo.</p>
 </div>
-<div id="dr.luciano-javier-selzer" class="section level2">
-<h2>Dr. Luciano Javier Selzer</h2>
-<div id="agosto-2016" class="section level3">
-<h3>Agosto 2016</h3>
+<div id="git" class="section level2">
+<h2>GIT</h2>
+<p>Por otro lado, necesitaremos Git. Git es un sistema de control de versión. En el próximo capítulo veremos como se usa. Los sistemas de control de versión sirven para mantener un control de los cambios en el código, respaldo, y facilitan la colaboración entre pares. Para descargarlo ir <a href="https://git-scm.com/" class="uri">https://git-scm.com/</a>. Abajo a la derecha aparecerá una imagen de un monitor con un botón donde aparece la versión para nuestro sistema operativo. Hacer click ahí, descargar e instalar.</p>
 </div>
-<div id="programa" class="section level3">
-<h3>Programa</h3>
-<ul>
-<li>Introducción a la interfaz de R y editores de código.</li>
-<li>Utilidades extras en R. Obtención e instalación de paquetes.</li>
-<li>Uso de la ayuda:
-<ul>
-<li>Interpretación de la ayuda</li>
-</ul></li>
-<li>Documentación de las funciones,</li>
-<li>Listas de correo y ayudas en Internet. Como pedir ayuda en internet y obtener respuestas.</li>
-<li>Introducción de datos</li>
-<li>Manual</li>
-<li>Desde archivo: texto, csv, Excel, otros.</li>
-<li>Objetos en R:</li>
-<li>Vectores: númericos (enteros, decimales, etc)</li>
-<li>Matrices,</li>
-<li>data.frames</li>
-<li>Listas</li>
-<li>Accediendo a los datos:</li>
-<li>Variables</li>
-<li>Estructura</li>
-<li>el uso del signo <code>$</code></li>
-<li>funciones attach, detach, with, transform,</li>
-<li>Recodificando variables nominales</li>
-<li>factor</li>
-<li>recode</li>
-<li>cut</li>
-<li>Seleccionado datos: operadores booleanos</li>
-<li>and, or, not, xor</li>
-<li>Ordenando datos:</li>
-<li>sort, order. rank</li>
-<li>Combinando datos:</li>
-<li>uso de merge y join.</li>
-<li>Exportando datos:</li>
-<li>uso de la funciones write.table, cat y write.xlsx.</li>
-<li>Usando funciones simples para realizar operaciones simples sobre los datos: la familia de funciones *apply, summary, table.</li>
-<li>Herramientas para realizar graficos básicos: plot, lines, points, loess.</li>
-<li>Anova y regresión simple</li>
-</ul>
+<div id="rstudio" class="section level2">
+<h2>RStudio</h2>
+<p>A continuación debemos instalar RStudio. Para esto, debemos navegar hasta <a href="https://www.rstudio.com/products/rstudio/download2/" class="uri">https://www.rstudio.com/products/rstudio/download2/</a> y descargar el la versión gratuita de escritorio (<em>RStudio Desktop</em>). Instalarla.</p>
+<div id="configurando-todo" class="section level3">
+<h3>Configurando todo</h3>
+<p>Una vez que RStudio está instalado solo falta configurar Git. Solo hace falta decirle la ruta del ejecutable. Para esto hay que abrir RStudio e ir al menú <code>Tools\Global Options</code> y luego ir a <code>Git\SVN</code>, el anteúltimo icono. Si utilizaron la instalación por defecto de Git la ruta es <code>C:\Program Files\Git\bin</code> si tienen Windows 32 bits o <code>C:\Program Files (x86)\Git\bin</code> si tienen Windows 64 bits. La carpeta <code>Program Files</code> puede llamarse <code>Archivos de Programa</code> si tienen Windows en español. Presionar <code>Ok</code>.</p>
 </div>
+</div>
+<div id="github" class="section level2">
+<h2>Github</h2>
+<p>Finalmente, pueden crear un usuario en GitHub. Es un servicion gratuito. Ir a <a href="https://github.com/" class="uri">https://github.com/</a> y completar el formulario con usuario, correo electrónico y contraseña. Presionar <em>Sign Up for GitHub</em>. Si no están en una computadora compartida, también será conveniente crear un par de claves pública y privada para no tener que autenticarse cada vez que quieran subir sus cambios a GitHub. En Rstudio:</p>
+<ol style="list-style-type: decimal">
+<li>Vayan a <code>Tools\Global Options...</code>, luego a la pestaña de <code>Git\SVN</code>.</li>
+<li>Ahí deben hacer click en <code>create RSA key</code>. Pueden poner una <code>Passphase</code> que es como una contraseña, no es obligatoria pero hará que las claves sean más seguras.</li>
+<li>Presionan <code>Create</code>, les va a aparecer un cartel y ponen <code>Ok</code>.</li>
+<li>Luego, presionan en <code>View public key</code>. Copian la clave.</li>
+</ol>
+<p>En el sitio web de <a href="https://www.github.com">Github</a>:</p>
+<ol style="list-style-type: decimal">
+<li>En la esquina superior derecha hay un icono que es su foto de usuario. Hacen click ahí y luego en <code>Settings</code>.</li>
+<li>Van la pestaña <code>SSH and GPG keys</code>.</li>
+<li>Luego, presionan en <code>New SHH Key</code>.</li>
+<li>En <em>Title</em> ponen el nombre del programa que lo va a usar. <strong>RStudio</strong> en nuestro caso.</li>
+<li>En <em>Key</em> pegan lo que han copiado de RStudio.</li>
+<li>Finalmente, presionan <code>Add SSH Key</code></li>
+</ol>
+<p>Con todo esto ya instalado y configurado ¡ya están listos para empezar!</p>
 </div>
 </div>
 
