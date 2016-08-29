@@ -1,0 +1,71 @@
+---
+title: "Tutorial de instalación"
+output: html_document
+---
+
+
+# Prerrequisitos
+
+## R
+
+Para este curso son necesarios una serie de programas. Primero, necesitamos
+R. Para bajarlo ir a [https://cran.r-project.org/](https://cran.r-project.org/),
+hay varias opciones según el sistema operativo (Linux, Mac OS X, Windows). 
+Elegir la opción correspondiente. Si eligen Windows, a continuación deben elegir
+`base` y luego *Download R 3.3.1 for Windows* que es la versión actual al 
+momento de escribir estas palabras. Luego de que termine de bajar instalarlo.
+
+## GIT
+
+Por otro lado, necesitaremos Git. Git es un sistema de control de versión. En 
+el próximo capítulo veremos como se usa. Los sistemas de control de versión 
+sirven para mantener un control de los cambios en el código, respaldo, y 
+facilitan la colaboración entre pares. Para descargarlo ir 
+[https://git-scm.com/](https://git-scm.com/). Abajo a la derecha aparecerá una
+imagen de un monitor con un botón donde aparece la versión para nuestro sistema
+operativo. Hacer click ahí, descargar e instalar. 
+
+## RStudio
+
+A continuación debemos instalar RStudio. Para esto, debemos navegar hasta
+https://www.rstudio.com/products/rstudio/download2/ y descargar el la
+versión gratuita de escritorio (*RStudio Desktop*). Instalarla. 
+
+### Configurando todo
+
+Una vez que RStudio está instalado solo falta configurar Git. Solo hace falta
+decirle la ruta del ejecutable. Para esto hay que abrir RStudio e ir al menú
+`Tools\Global Options` y luego ir a `Git\SVN`, el anteúltimo icono.
+Si utilizaron la instalación por defecto de Git la ruta es
+`C:\Program Files\Git\bin` si tienen Windows 32 bits o 
+`C:\Program Files (x86)\Git\bin` si tienen Windows 64 bits. La carpeta 
+`Program Files` puede llamarse `Archivos de Programa` si tienen Windows en 
+español. Presionar `Ok`.
+
+## Github
+Finalmente, pueden crear un usuario en GitHub. Es un servicion gratuito. 
+Ir a https://github.com/ y  completar el formulario con usuario, correo 
+electrónico y contraseña. Presionar *Sign Up for GitHub*.
+Si no están en una computadora compartida, también será conveniente crear un par
+de claves pública y privada para no tener que autenticarse cada vez que quieran
+subir sus cambios a GitHub. En Rstudio: 
+
+1. Vayan a `Tools\Global Options...`, luego
+a la pestaña de `Git\SVN`. 
+2. Ahí deben hacer click en `create RSA key`. Pueden
+poner una `Passphase` que es como una contraseña, no es obligatoria pero hará
+que las claves sean más seguras. 
+3. Presionan `Create`, les va a aparecer un cartel y ponen `Ok`.
+4. Luego, presionan en `View public key`. Copian la clave.
+
+En el sitio web de [Github](https://www.github.com):
+
+1. En la esquina superior derecha hay un icono que es su foto de usuario. Hacen
+click ahí y luego en `Settings`.
+2. Van la pestaña `SSH and GPG keys`.
+3. Luego, presionan en `New SHH Key`.
+4. En *Title* ponen el nombre del programa que lo va a usar. **RStudio** en nuestro caso.
+5. En *Key* pegan lo que han copiado de RStudio.
+6. Finalmente, presionan `Add SSH Key`
+
+Con todo esto ya instalado y configurado ¡ya están listos para empezar!
