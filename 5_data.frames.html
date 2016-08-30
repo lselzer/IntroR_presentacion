@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Luciano Selzer" />
+  <title>Explorando Data Frames</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Explorando Data Frames</h1>
+    <h2 class="author">Luciano Selzer</h2>
+    <h3 class="date">30 August, 2016</h3>
+</section>
+
+<section id="como-manipular-data.frames" class="slide level2">
+<h1>¿Cómo manipular <code>data.frames</code>?</h1>
+</section>
+<section id="anadir-una-nueva-columna" class="slide level2">
+<h1>Añadir una nueva columna</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">edad &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">12</span>)
+gatos</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo
+1 atigrado  2.1         TRUE
+2    negro  5.0        FALSE
+3  bicolor  3.2         TRUE</code></pre>
+<p>Podemos añadir la columna nueva con <code>cbind</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos &lt;-<span class="st"> </span><span class="kw">cbind</span>(gatos, edad)</code></pre></div>
+<pre><code>Error in data.frame(..., check.names = FALSE): arguments imply differing number of rows: 3, 4</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo
+1 atigrado  2.1         TRUE
+2    negro  5.0        FALSE
+3  bicolor  3.2         TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">edad &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">8</span>)
+gatos &lt;-<span class="st"> </span><span class="kw">cbind</span>(gatos, edad)
+gatos</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo edad
+1 atigrado  2.1         TRUE    4
+2    negro  5.0        FALSE    5
+3  bicolor  3.2         TRUE    8</code></pre>
+</section>
+<section id="anadir-una-nueva-fila" class="slide level2">
+<h1>Añadir una nueva fila</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nuevaFila &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;carey&quot;</span>, <span class="fl">3.3</span>, <span class="ot">TRUE</span>, <span class="dv">9</span>)
+gatos &lt;-<span class="st"> </span><span class="kw">rbind</span>(gatos, nuevaFila)</code></pre></div>
+<pre><code>Warning in `[&lt;-.factor`(`*tmp*`, ri, value = &quot;carey&quot;): invalid factor
+level, NA generated</code></pre>
+<p>No es posible añadir nuevo nivel al factor dinámicamente.</p>
+</section>
+<section class="slide level2">
+
+<p>Hay que añadir el nuevo nivel de forma explicita y después añadir la nueva fila.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(gatos$pelaje)</code></pre></div>
+<pre><code>[1] &quot;atigrado&quot; &quot;bicolor&quot;  &quot;negro&quot;   </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(gatos$pelaje) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">levels</span>(gatos$pelaje), <span class="st">&#39;carey&#39;</span>)
+gatos &lt;-<span class="st"> </span><span class="kw">rbind</span>(gatos, <span class="kw">list</span>(<span class="st">&quot;tortoiseshell&quot;</span>, <span class="fl">3.3</span>, <span class="ot">TRUE</span>, <span class="dv">9</span>))</code></pre></div>
+<pre><code>Warning in `[&lt;-.factor`(`*tmp*`, ri, value = &quot;tortoiseshell&quot;): invalid
+factor level, NA generated</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Otra forma de trabajar con esto es cambiar la columna a <code>character</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gatos)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   5 obs. of  4 variables:
+ $ pelaje      : Factor w/ 4 levels &quot;atigrado&quot;,&quot;bicolor&quot;,..: 1 3 2 NA NA
+ $ peso        : num  2.1 5 3.2 3.3 3.3
+ $ gusta_ovillo: logi  TRUE FALSE TRUE TRUE TRUE
+ $ edad        : num  4 5 8 9 9</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos$pelaje &lt;-<span class="st"> </span><span class="kw">as.character</span>(gatos$pelaje)
+<span class="kw">str</span>(gatos)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   5 obs. of  4 variables:
+ $ pelaje      : chr  &quot;atigrado&quot; &quot;negro&quot; &quot;bicolor&quot; NA ...
+ $ peso        : num  2.1 5 3.2 3.3 3.3
+ $ gusta_ovillo: logi  TRUE FALSE TRUE TRUE TRUE
+ $ edad        : num  4 5 8 9 9</code></pre>
+</section>
+<section id="quitando-cosas" class="slide level2">
+<h1>Quitando cosas</h1>
+<p>Mientras estuvimos trabajando con la data.frame, añadimos una fila que no corresponde:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo edad
+1 atigrado  2.1         TRUE    4
+2    negro  5.0        FALSE    5
+3  bicolor  3.2         TRUE    8
+4     &lt;NA&gt;  3.3         TRUE    9
+5     &lt;NA&gt;  3.3         TRUE    9</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Podemos eliminarla usando el signo menos</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos[-<span class="dv">4</span>,]</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo edad
+1 atigrado  2.1         TRUE    4
+2    negro  5.0        FALSE    5
+3  bicolor  3.2         TRUE    8
+5     &lt;NA&gt;  3.3         TRUE    9</code></pre>
+<p>¿Cómo eliminar varias filas a la vez?</p>
+</section>
+<section class="slide level2">
+
+<p>También podemos eliminar las filas que tienen <code>NA</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">na.omit</span>(gatos)</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo edad
+1 atigrado  2.1         TRUE    4
+2    negro  5.0        FALSE    5
+3  bicolor  3.2         TRUE    8</code></pre>
+<p>Reasignemos la salida de <code>na.omit</code> así hacemos permanentes los cambios.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos &lt;-<span class="st"> </span><span class="kw">na.omit</span>(gatos)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>La clave para añadir datos a data.frames es recordar que:</p>
+<ul>
+<li>Las columnas son vectores</li>
+<li>Las filas son listas</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>También podemos pegar dos data.frames con <code>rbind</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gatos &lt;-<span class="st"> </span><span class="kw">rbind</span>(gatos, gatos)
+gatos</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo edad
+1 atigrado  2.1         TRUE    4
+2    negro  5.0        FALSE    5
+3  bicolor  3.2         TRUE    8
+4 atigrado  2.1         TRUE    4
+5    negro  5.0        FALSE    5
+6  bicolor  3.2         TRUE    8</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Pero ahora los <code>rownames</code> (nombres de las filas) son innecesariamente complicados. Podemos quitar los <code>rownames</code> y R va a renombrarlos automáticamente.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(gatos) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+gatos</code></pre></div>
+<pre><code>    pelaje peso gusta_ovillo edad
+1 atigrado  2.1         TRUE    4
+2    negro  5.0        FALSE    5
+3  bicolor  3.2         TRUE    8
+4 atigrado  2.1         TRUE    4
+5    negro  5.0        FALSE    5
+6  bicolor  3.2         TRUE    8</code></pre>
+</section>
+<section id="ejercicio-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>Ahora podes crear una nueva data.frame directamente en R con el la siguiente sintaxis:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">id =</span> <span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>),
+                 <span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">3</span>, <span class="dt">y =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>), 
+                 <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Haz un data.frame que tenga la siguiente información sobre vos:</p>
+<ul>
+<li>nombre</li>
+<li>apellido</li>
+<li>número de la suerte</li>
+</ul>
+</section>
+<section id="ejercicio-1-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>Luego usa <code>rbind</code> para añadir una entrada para la gente que tenés al lado.</p>
+<p>Y finalmente, usa <code>cbind</code> para añadir una columna para la respuesta de cada persona a la pregunta ¿Es momento para un recreo?</p>
+</section>
+<section class="slide level2">
+
+<p>Hasta ahora hemos visto lo más básico para manipular data.frames.</p>
+<p>Ahora vamos a ver un dataset más realista. Vamos a leer los datos de gapminder que hemos descargado previamente.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/gapminder-FiveYearData.csv&quot;</span>)</code></pre></div>
+</section>
+<section id="tip" class="slide level2 tip">
+<h1>Tip</h1>
+<ul>
+<li>Se pueden leer archivos separados por tabulaciones con <code>read.delim</code></li>
+<li>También se pueden leer archivos directamente desde Internet</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> gapminder &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://swcarpentry.github.io/r-novice-gapminder/data/gapminder-FiveYearData.csv&quot;</span>)</code></pre></div>
+<ul>
+<li>O directamente desde Excel sin convertirlo a csv con el paquete <a href="https://cran.r-project.org/web/packages/readxl/index.html"><code>readxl</code></a></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Investiguemos el nuevo dataset. Lo primero que hay que hacer es usar <code>str</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gapminder)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   1704 obs. of  6 variables:
+ $ country  : Factor w/ 142 levels &quot;Afghanistan&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ year     : int  1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
+ $ pop      : num  8425333 9240934 10267083 11537966 13079460 ...
+ $ continent: Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ lifeExp  : num  28.8 30.3 32 34 36.1 ...
+ $ gdpPercap: num  779 821 853 836 740 ...</code></pre>
+</section>
+<section class="slide level2">
+
+<p>También podemos investigar columnas individuales de nuestro dataset con la función <code>typeof</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(gapminder$year)</code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(gapminder$lifeExp)</code></pre></div>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(gapminder$country)</code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gapminder$country)</code></pre></div>
+<pre><code> Factor w/ 142 levels &quot;Afghanistan&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Además podemos ver sus dimensiones. <code>str</code> dice que tiene 1706 obervaciones y 6 variables. ¿Qué creen que devolverá <code>length</code>?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(gapminder)</code></pre></div>
+<pre><code>[1] 6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(gapminder)</code></pre></div>
+<pre><code>[1] &quot;list&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Para obtener el número de filas y columnas de nuestro dataset, intenta</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(gapminder)</code></pre></div>
+<pre><code>[1] 1704</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(gapminder)</code></pre></div>
+<pre><code>[1] 6</code></pre>
+<p>O ambos a la vez</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(gapminder)</code></pre></div>
+<pre><code>[1] 1704    6</code></pre>
+</section>
+<section class="slide level2">
+
+<p>También podriamos querer saber cuales son los nombres de las columnas</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(gapminder)</code></pre></div>
+<pre><code>[1] &quot;country&quot;   &quot;year&quot;      &quot;pop&quot;       &quot;continent&quot; &quot;lifeExp&quot;   &quot;gdpPercap&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>En este punto es importante preguntarse si la estructura que nos está dando R es razonable y si coincide con nuestras espectativas.</p>
+<p>¿Los tipos básicos de cada columna tienen sentido?</p>
+</section>
+<section class="slide level2">
+
+<p>Una vez que estamos conformes con nuestros tipos de datos y estructuras es tiempo de empezar a investigar en nuestros datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gapminder)</code></pre></div>
+<pre><code>      country year      pop continent lifeExp gdpPercap
+1 Afghanistan 1952  8425333      Asia  28.801  779.4453
+2 Afghanistan 1957  9240934      Asia  30.332  820.8530
+3 Afghanistan 1962 10267083      Asia  31.997  853.1007
+4 Afghanistan 1967 11537966      Asia  34.020  836.1971
+5 Afghanistan 1972 13079460      Asia  36.088  739.9811
+6 Afghanistan 1977 14880372      Asia  38.438  786.1134</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Para asegurarnos que nuestro análisis es reproducible, deberiamos poner todo el código en un archivo de script para que podamos volver a él más tarde.</p>
+</section>
+<section id="ejercicio-2" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>Ve a File -&gt; New File -&gt; R Script, y escribe un script para cargar los datos de gapminder. Guardalo en la carpeta <code>scripts/</code> y añadelo al control de versión.</p>
+<p>Ejecuta el archivo usando la función <code>source</code>, usando la ruta al archivo como argumento (o presionando el botón “source” en RStudio).</p>
+</section>
+<section id="ejercicio-3" class="slide level2 challenge">
+<h1>Ejercicio 3</h1>
+<p>Lee la salida de <code>str(gapminder)</code>de nuevo; esta vez, usa lo aprendido sobre factores, listas y vectores así como la salida de funciones como <code>colnames</code> y <code>dim</code> para explicar todo lo que imprime <code>str</code> sobre gapminder.<br />
+Si hay partes que no compredes discútelo con tus compañeros.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

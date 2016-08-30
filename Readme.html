@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="presentaciones-del-curso-introduccion-a-r" class="titleslide slide level1"><h1>Presentaciones del Curso Introducción A R</h1></section><section id="universidad-nacional-de-tierra-del-fuego" class="slide level2">
+<h1>Universidad Nacional de Tierra del Fuego</h1>
+</section><section id="dr.luciano-javier-selzer" class="slide level2">
+<h1>Dr. Luciano Javier Selzer</h1>
+<h3 id="agosto-2016">Agosto 2016</h3>
+<h3 id="programa">Programa</h3>
+<ul>
+<li>Introducción a la interfaz de R y editores de código.</li>
+<li>Utilidades extras en R. Obtención e instalación de paquetes.</li>
+<li>Uso de la ayuda:
+<ul>
+<li>Interpretación de la ayuda</li>
+</ul></li>
+<li>Documentación de las funciones,</li>
+<li>Listas de correo y ayudas en Internet. Como pedir ayuda en internet y obtener respuestas.</li>
+<li>Introducción de datos</li>
+<li>Manual</li>
+<li>Desde archivo: texto, csv, Excel, otros.</li>
+<li>Objetos en R:</li>
+<li>Vectores: númericos (enteros, decimales, etc)</li>
+<li>Matrices,</li>
+<li>data.frames</li>
+<li>Listas</li>
+<li>Accediendo a los datos:</li>
+<li>Variables</li>
+<li>Estructura</li>
+<li>el uso del signo <code>$</code></li>
+<li>funciones attach, detach, with, transform,</li>
+<li>Recodificando variables nominales</li>
+<li>factor</li>
+<li>recode</li>
+<li>cut</li>
+<li>Seleccionado datos: operadores booleanos</li>
+<li>and, or, not, xor</li>
+<li>Ordenando datos:</li>
+<li>sort, order. rank</li>
+<li>Combinando datos:</li>
+<li>uso de merge y join.</li>
+<li>Exportando datos:</li>
+<li>uso de la funciones write.table, cat y write.xlsx.</li>
+<li>Usando funciones simples para realizar operaciones simples sobre los datos: la familia de funciones *apply, summary, table.</li>
+<li>Herramientas para realizar graficos básicos: plot, lines, points, loess.</li>
+<li>Anova y regresión simple</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
