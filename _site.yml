@@ -19,4 +19,6 @@ navbar:
       - text: "Estructura de Datos"
         href: presentation/4_datos.html
       - text: "Explorando Data Frames"
-        href: presentation/5_dato.frames.html 
+        href: presentation/5_dato.frames.html
+      - text: "Subconjuntos de Datos"
+        href: presentation/6_subsetting.html
