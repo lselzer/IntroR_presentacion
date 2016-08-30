@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-for file in presentation/*.Rmd
+for file in *.Rmd
 do
     Rscript -e "rmarkdown::render(\"$file\")"
 done
