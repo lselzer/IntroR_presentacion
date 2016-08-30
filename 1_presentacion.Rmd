@@ -44,11 +44,11 @@ source("_chunk_opts.R")
 
 ---
 
-![interactive widget](../img/interactive-1-htmlwidget.png)
+![interactive widget](img/interactive-1-htmlwidget.png)
 
 ---
 
-![interactive widget](../img/interactive-2-shiny.png)
+![interactive widget](img/interactive-2-shiny.png)
 
 # Prerrequisitos
 
