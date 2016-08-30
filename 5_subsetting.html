@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Luciano Selzer" />
+  <title>Creando Selecciones de Datos</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'libs/reveal.js-3.3.0/css/print/pdf.css' : 'libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Creando Selecciones de Datos</h1>
+    <h2 class="author">Luciano Selzer</h2>
+    <h3 class="date">30 Agosto, 2016</h3>
+</section>
+
+<section id="subconjuntos" class="slide level2">
+<h1>Subconjuntos</h1>
+<p>R tiene muchas herramientas para crear subconjuntos, y dominarlos te va a permitir realizar tareas complejas de manera sencilla.</p>
+<p>Hay seis formas distintas en la que podemos realizar subconjuntos de cualquier objeto y tres diferentes operadores de subconjuntos para las distintas estructuras de datos.</p>
+</section>
+<section class="slide level2">
+
+<p>Empecemos con el caballo de batalla de R: los vectores atómicos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">5.4</span>, <span class="fl">6.2</span>, <span class="fl">7.1</span>, <span class="fl">4.8</span>, <span class="fl">7.5</span>)
+<span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)
+x</code></pre></div>
+<pre><code>  a   b   c   d   e 
+5.4 6.2 7.1 4.8 7.5 </code></pre>
+<p>Ahora que hemos creado un vector de ejemplo para experimentar, como obtenemos sus contenidos.</p>
+</section>
+<section id="accediendo-a-los-elementos-por-sus-indices" class="slide level2">
+<h1>Accediendo a los elementos por sus índices</h1>
+<p>Podemos extraer los elementos de un vector usando el indice correpondiente, empezando por 1:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span>]</code></pre></div>
+<pre><code>  a 
+5.4 </code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">4</span>]</code></pre></div>
+<pre><code>  d 
+4.8 </code></pre>
+<p>El corchete es una función.<br />
+Para matrices y vectores, significa “dame el elemento n°”</p>
+</section>
+<section class="slide level2">
+
+<p>Podemos pedir varios elementos a la vez:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</code></pre></div>
+<pre><code>  a   c 
+5.4 7.1 </code></pre>
+</section>
+<section class="slide level2">
+
+<p>O rebanadas de un vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span>:<span class="dv">4</span>]</code></pre></div>
+<pre><code>  a   b   c   d 
+5.4 6.2 7.1 4.8 </code></pre>
+<p>¿Qué hace <code>1:4</code>?</p>
+</section>
+<section class="slide level2">
+
+<p>El operador <code>:</code> crea una secuencia de número desde el número a la izquierda hasta el número a la derecha.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span>:<span class="dv">4</span></code></pre></div>
+<pre><code>[1] 1 2 3 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</code></pre></div>
+<pre><code>[1] 1 2 3 4</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Podemos pedir el mismo elemento muchas veces:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>)]</code></pre></div>
+<pre><code>  a   a   c 
+5.4 5.4 7.1 </code></pre>
+</section>
+<section class="slide level2">
+
+<p>Si le pedimos un número por fuera del indice, R devuelve un valor perdido:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">6</span>]</code></pre></div>
+<pre><code>&lt;NA&gt; 
+  NA </code></pre>
+<p>Si le pedimos el elemento 0, nos devuelve un vector vacío:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">0</span>]</code></pre></div>
+<pre><code>named numeric(0)</code></pre>
+</section>
+<section id="la-numeracion-de-los-vectores-empieza-en-1" class="slide level2">
+<h1>La numeración de los vectores empieza en 1</h1>
+<blockquote>
+<p>En muchos lenguajes de programación (C, Python) el primer elemento del vector tiene indice 0. En R, el primer elemento es 1.</p>
+</blockquote>
+</section>
+<section id="eliminando-elementos" class="slide level2">
+<h1>Eliminando elementos</h1>
+<p>Si usamos un número negativo como indice del vector, R va a devolver todos los elementos <strong>excepto</strong> el especificado.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[-<span class="dv">2</span>]</code></pre></div>
+<pre><code>  a   c   d   e 
+5.4 7.1 4.8 7.5 </code></pre>
+<p>Podemos eliminar varios elementos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(-<span class="dv">1</span>, -<span class="dv">5</span>)]  <span class="co"># o x[-c(1,5)]</span></code></pre></div>
+<pre><code>  b   c   d 
+6.2 7.1 4.8 </code></pre>
+</section>
+<section class="slide level2">
+
+<p>Para eliminar los elementos de un vector, tenemos que asignar los resultados de nuevo a la variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>x[-<span class="dv">4</span>]
+x</code></pre></div>
+<pre><code>  a   b   c   e 
+5.4 6.2 7.1 7.5 </code></pre>
+</section>
+<section id="ejercicio-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>Dado el siguiente código:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">5.4</span>, <span class="fl">6.2</span>, <span class="fl">7.1</span>, <span class="fl">4.8</span>, <span class="fl">7.5</span>)
+ <span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)
+ <span class="kw">print</span>(x)</code></pre></div>
+<pre><code>  a   b   c   d   e 
+5.4 6.2 7.1 4.8 7.5 </code></pre>
+<ol type="1">
+<li>Crea tres comandos diferentes que produzcan la siguiente salida:</li>
+</ol>
+<p><code>b   c   d   6.2 7.1 4.8</code> 2. Compara con tu compañero ¿Usaron estrategias diferentes?</p>
+</section>
+<section id="subconjuntos-por-nombre" class="slide level2">
+<h1>Subconjuntos por nombre</h1>
+<p>Podemos extrar los elementos usando su nombre, en vez de un índice:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>)]</code></pre></div>
+<pre><code>  a   c 
+5.4 7.1 </code></pre>
+<p>En general es mucho más confiable, el número se puede referir a otro elemento pero el nombre es raro que cambie.</p>
+</section>
+<section class="slide level2">
+
+<p>Pero es más complicado usarlo para eliminar elementos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[-<span class="kw">which</span>(<span class="kw">names</span>(x) ==<span class="st"> &quot;a&quot;</span>)]</code></pre></div>
+<pre><code>  b   c   d   e 
+6.2 7.1 4.8 7.5 </code></pre>
+</section>
+<section class="slide level2">
+
+<p>Para eliminar muchos elementos por nombre hay que usar otro operador</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[-<span class="kw">which</span>(<span class="kw">names</span>(x) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>))]</code></pre></div>
+<pre><code>  b   d   e 
+6.2 4.8 7.5 </code></pre>
+</section>
+<section id="ejercicio-2" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>Ejecuta el siguiente código para definir el vector <code>x</code> como arriba:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">5.4</span>, <span class="fl">6.2</span>, <span class="fl">7.1</span>, <span class="fl">4.8</span>, <span class="fl">7.5</span>)
+<span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)
+<span class="kw">print</span>(x)</code></pre></div>
+<pre><code>  a   b   c   d   e 
+5.4 6.2 7.1 4.8 7.5 </code></pre>
+<p>Dado el vector <code>x</code> ¿Qué esperas que haga el siguiente código?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[-<span class="kw">which</span>(<span class="kw">names</span>(x) ==<span class="st"> &quot;g&quot;</span>)]</code></pre></div>
+</section>
+<section id="ejercicio-2-1" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>Prueba el comando para ver que obtenés ¿Se comprobaron tus espectativas?</p>
+<p>¿Por qué obtuviste este resultado? (Tip: prueba este comando por partes - está es una buena estrategia de debugging)</p>
+<p>¿Cuál de las siguientes opciones son verdad?</p>
+<ol type="A">
+<li>Si no hay ningún valor <code>TRUE</code> pasado a <code>which</code>, devuelve un vector vacío.</li>
+<li>Si no hay ningún valor <code>TRUE</code> pasado a <code>which</code>, muestra un mensaje de error. C)<code>integer()</code> es un vector vacío.</li>
+<li>Al hacer un vector negativo vacío se produce un vector de “todo”.</li>
+<li><code>x[]</code> da el mismo resultado que <code>x[integer()]</code></li>
+</ol>
+</section>
+<section id="tip-nombres-no-unicos" class="slide level2 tip">
+<h1>Tip: Nombres no únicos</h1>
+<p>Es posible que multiples elementos de un vector pueden tener el mismo nombre. Para data.frames, las columnas pueden tener el mismo nombre pero los <code>row.names</code> deben ser únicos.</p>
+</section>
+<section id="tip-nombres-no-unicos-1" class="slide level2 tip">
+<h1>Tip: Nombres no únicos</h1>
+<p>Considera estos ejemplos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3</span>
+x</code></pre></div>
+<pre><code>[1] 1 2 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;a&#39;</span>, <span class="st">&#39;a&#39;</span>)
+x</code></pre></div>
+<pre><code>a a a 
+1 2 3 </code></pre>
+</section>
+<section id="tip-nombres-no-unicos-2" class="slide level2 tip">
+<h1>Tip: Nombres no únicos</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="st">&#39;a&#39;</span>]  <span class="co"># only returns first value</span></code></pre></div>
+<pre><code>a 
+1 </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">which</span>(<span class="kw">names</span>(x) ==<span class="st"> &#39;a&#39;</span>)]  <span class="co"># returns all three values</span></code></pre></div>
+<pre><code>a a a 
+1 2 3 </code></pre>
+</section>
+<section id="tip-obteniendo-ayudo-sobre-operadores" class="slide level2 tip">
+<h1>Tip: Obteniendo ayudo sobre operadores</h1>
+<p>Recuerda que puedes buscar ayuda sobre operadores envolviendolos en comillas:<br />
+<code>help(&quot;%in%&quot;)</code> o <code>?&quot;%in%&quot;</code></p>
+</section>
+<section class="slide level2">
+
+<p>Entonces ¿Por qué no podemos usar el operador <code>==</code> como antes?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(x) ==<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;c&#39;</span>)</code></pre></div>
+<pre><code>Warning in names(x) == c(&quot;a&quot;, &quot;c&quot;): longitud de objeto mayor no es múltiplo
+de la longitud de uno menor</code></pre>
+<pre><code>[1]  TRUE FALSE  TRUE</code></pre>
+<p><code>==</code> funciona de manera ligeramente diferente que <code>%in%</code>. Va a comparar cada elemento de su izquierda con el correspodiente a la derecha.</p>
+</section>
+<section class="slide level2">
+
+<p>Aquí hay una ilustración:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;e&quot;</span>)  <span class="co"># names of x</span>
+   |<span class="st">    </span><span class="er">|</span><span class="st">    </span><span class="er">|</span><span class="st">    </span><span class="er">|</span><span class="st">    </span><span class="co"># The elements == is comparing</span>
+<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>)</code></pre></div>
+<p>Cuando uno de los argumentos es más corto que el otro, el más corto es <em>reciclado</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;e&quot;</span>)  <span class="co"># names of x</span>
+   |<span class="st">    </span><span class="er">|</span><span class="st">    </span><span class="er">|</span><span class="st">    </span><span class="er">|</span><span class="st">    </span><span class="co"># The elements == is comparing</span>
+<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>)</code></pre></div>
+<p>Si la longitud del vector más corto no es múltiplo del mayor entonces se produce un mensaje de aviso (<em>warning</em>)<br />
+¡La diferencia entre <code>==</code> e <code>%in%</code> es importante!</p>
+</section>
+<section id="subconjuntos-mediantes-otras-operaciones-logicas" class="slide level2">
+<h1>Subconjuntos mediantes otras operaciones lógicas</h1>
+<p>También se puede hacer otros subconjuntos usando vectores lógicos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)]</code></pre></div>
+<pre><code>a a 
+1 2 </code></pre>
+</section>
+<section class="slide level2">
+
+<p>Las reglas de reciclaje aplican</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</code></pre></div>
+<pre><code>a a 
+1 3 </code></pre>
+<p>Dado que las operaciones de comparacion devuelven vectores lógicos se pueden usar.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &gt;<span class="st"> </span><span class="dv">7</span>]</code></pre></div>
+<pre><code>named integer(0)</code></pre>
+</section>
+<section id="combinando-condiciones-logicas" class="slide level2">
+<h1>Combinando condiciones lógicas</h1>
+<p>Muchas veces es necesario combinar varias condiciones lógicas. Por ejemplo:<br />
+Países de Asia <strong>o</strong> Europa <strong>y</strong> que tengan expectativas de vida dentro de cierto rango.</p>
+<ul>
+<li><code>&amp;</code>, operador “Y lógico”: devuelve <code>TRUE</code> si ambos son <code>TRUE</code></li>
+<li><code>|</code>, operador “O lógico”: devuelve <code>TRUE</code> si al menos uno es <code>TRUE</code></li>
+</ul>
+<p>Las reglas de reciclado aplican para estos operadores</p>
+<p><code>&amp;&amp;</code> y <code>||</code> son similares pero solo operan en el primer elemento.</p>
+</section>
+<section class="slide level2">
+
+<ul>
+<li><code>!</code>, operador “NO lógico”: convierte <code>TRUE</code> en <code>FALSE</code> y viceversa</li>
+</ul>
+<p>Adicionalmente:</p>
+<ul>
+<li><code>all</code> devuelve <code>TRUE</code> cuando todos los valores son <code>TRUE</code></li>
+<li><code>any</code> devuelve <code>TRUE</code> si alguno de los valores es <code>TRUE</code></li>
+</ul>
+</section>
+<section id="ejercicio-3" class="slide level2 challenge">
+<h1>Ejercicio 3</h1>
+<p>Dado el siguiente código:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">5.4</span>, <span class="fl">6.2</span>, <span class="fl">7.1</span>, <span class="fl">4.8</span>, <span class="fl">7.5</span>)
+<span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)
+<span class="kw">print</span>(x)</code></pre></div>
+<pre><code>  a   b   c   d   e 
+5.4 6.2 7.1 4.8 7.5 </code></pre>
+<ol type="1">
+<li>Escribe un comando que cree un subconjunto de todos los valores que sean mayores que 4 y menores que 7.</li>
+</ol>
+</section>
+<section id="manejando-valores-especiales" class="slide level2">
+<h1>Manejando valores especiales</h1>
+<p>En algún momento vas a encontrar con funciones que no pueden manejar valor perdidos, infinitos o no definidos.</p>
+<ul>
+<li><code>is.na</code> devuelve un vector lógico donde hay <code>NA</code>.</li>
+<li><code>is.nan</code>, e <code>is.infinite</code> hacen lo mismo con valores <code>NaN</code> e <code>Inf</code>.</li>
+<li><code>is.finite</code> devuelve todas las posiciones en un vector que no contienen <code>NA</code>, <code>NaN</code> o <code>Inf</code>.</li>
+<li><code>na.omit</code> filtra todos los valores perdidos de un vector.</li>
+</ul>
+</section>
+<section id="subconjuntos-de-factores" class="slide level2">
+<h1>Subconjuntos de Factores</h1>
+<p>Funciona igual que con vectores:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>))
+f[f ==<span class="st"> &quot;a&quot;</span>]</code></pre></div>
+<pre><code>[1] a a
+Levels: a b c d</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f[f %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)]</code></pre></div>
+<pre><code>[1] b c c
+Levels: a b c d</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f[<span class="dv">1</span>:<span class="dv">3</span>]</code></pre></div>
+<pre><code>[1] a a b
+Levels: a b c d</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Pero no elimina los niveles:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f[-<span class="dv">3</span>]</code></pre></div>
+<pre><code>[1] a a c c d
+Levels: a b c d</code></pre>
+</section>
+<section id="subconjuntos-de-matrices" class="slide level2">
+<h1>Subconjuntos de matrices</h1>
+<p>Con la matrices también se usa la función <code>[</code>. Pero se necesitan dos argumentos, el primero es la fila y el segundo la columna:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
+m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">rnorm</span>( <span class="dv">6</span> *<span class="st"> </span><span class="dv">4</span>), <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">nrow =</span> <span class="dv">6</span>)
+m[<span class="dv">3</span>:<span class="dv">4</span>, <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>)]</code></pre></div>
+<pre><code>            [,1]       [,2]
+[1,]  1.12493092 -0.8356286
+[2,] -0.04493361  1.5952808</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Podemos dejar alguno de los argumentos en blanco para otener todas las filas o columnas respectivamente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[, <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)]</code></pre></div>
+<pre><code>            [,1]        [,2]
+[1,] -0.62124058  0.82122120
+[2,] -2.21469989  0.59390132
+[3,]  1.12493092  0.91897737
+[4,] -0.04493361  0.78213630
+[5,] -0.01619026  0.07456498
+[6,]  0.94383621 -1.98935170</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Si solo accedemos a una fila o una columna, R la convierte automaticamente a un vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[<span class="dv">3</span>,]</code></pre></div>
+<pre><code>[1] -0.8356286  0.5757814  1.1249309  0.9189774</code></pre>
+<p>Para evitarlo hay que usar el argumento <code>drop = FALSE</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[<span class="dv">3</span>, , drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></div>
+<pre><code>           [,1]      [,2]     [,3]      [,4]
+[1,] -0.8356286 0.5757814 1.124931 0.9189774</code></pre>
+</section>
+<section class="slide level2">
+
+<p>A diferencia de los vectores, da un error si se trata de acceder a un elemento inexistente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[, <span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">6</span>)]</code></pre></div>
+<pre><code>Error in m[, c(3, 6)]: subíndice fuera de  los límites</code></pre>
+</section>
+<section id="tip-arreglos-multidimensionales" class="slide level2 tip">
+<h1>Tip: Arreglos multidimensionales</h1>
+<p>Cuando trabajamos con arreglos multidimensionales, cada argumento de <code>[</code> corresponde a una dimensión. Por ejemplo, en un arreglo 3D, los primeros 3 argumentos corresponden a las filas, columnas, y profundidad.</p>
+</section>
+<section class="slide level2">
+
+<p>Como las matrices son vectores, podemos hacer subconjuntos usando solo un argumento.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m[<span class="dv">5</span>]</code></pre></div>
+<pre><code>[1] 0.3295078</code></pre>
+<p>Es confuso y poco útil en general. Pero es útil notar que las matrices están construidas usando un <em>formato columnar</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">6</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</code></pre></div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Si deseas poblar la matriz por filas, usa el argumento <code>byrow = TRUE</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">6</span>, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6</code></pre>
+<p>También es posibles usar nombres para realizar subconjuntos de matrices.</p>
+</section>
+<section id="ejercicio-4" class="slide level2 challenge">
+<h1>Ejercicio 4</h1>
+<p>Dado el siguiente código:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">18</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">6</span>)
+<span class="kw">print</span>(m)</code></pre></div>
+<pre><code>     [,1] [,2] [,3] [,4] [,5] [,6]
+[1,]    1    4    7   10   13   16
+[2,]    2    5    8   11   14   17
+[3,]    3    6    9   12   15   18</code></pre>
+<ol type="1">
+<li>¿Cuál de los siguientes comandos va a extraer los valores 11 y 14?</li>
+</ol>
+<p>A. <code>m[2,4,2,5]</code> B. <code>m[2:5]</code> C. <code>m[4:5,2]</code> D. <code>m[2,c(4,5)]</code></p>
+</section>
+<section id="subconjuntos-de-listas" class="slide level2">
+<h1>Subconjuntos de Listas</h1>
+<p>Hay tres operadores para realizar subconjuntos de listas.<br />
+<code>[</code> que ya vimos y <code>[[</code> y <code>$</code></p>
+<p><code>[</code> siempre devuelve una lista.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="st">&quot;UNTDF&quot;</span>, <span class="dt">b =</span> <span class="dv">1</span>:<span class="dv">10</span>, <span class="dt">data =</span> <span class="kw">head</span>(iris))
+xlist[<span class="dv">1</span>]</code></pre></div>
+<pre><code>$a
+[1] &quot;UNTDF&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Se puede usar de igual forma que con vectores pero las comparaciones no funcionan.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist[<span class="dv">1</span>:<span class="dv">2</span>]</code></pre></div>
+<pre><code>$a
+[1] &quot;UNTDF&quot;
+
+$b
+ [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Para extraer elementos individuales de una lista hay que usar <code>[[</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist[[<span class="dv">1</span>]]</code></pre></div>
+<pre><code>[1] &quot;UNTDF&quot;</code></pre>
+<p>El resultado es un vector no una lista</p>
+<p>Pero no se puede extraer más de un elemento por vez.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist[[<span class="dv">1</span>:<span class="dv">2</span>]]</code></pre></div>
+<pre><code>Error in xlist[[1:2]]: subíndice fuera de  los límites</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Ni usarlo para eliminar elementos</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist[[-<span class="dv">1</span>]]</code></pre></div>
+<pre><code>Error in xlist[[-1]]: attempt to select more than one element in get1index &lt;real&gt;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Pero se pueden usar los nombres para hacer subconjuntos y extraer elementos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist[[<span class="st">&quot;a&quot;</span>]]</code></pre></div>
+<pre><code>[1] &quot;UNTDF&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>La función <code>$</code> es un atajo para extraer elementos por nombre.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist$data</code></pre></div>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<p>Hay que tener cuidado con la concordancia parcial y no da error si el elemento no existe.</p>
+</section>
+<section id="ejercicio-5" class="slide level2 challenge">
+<h1>Ejercicio 5</h1>
+<p>Dada la siguiente lista</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="st">&quot;UNTDF&quot;</span>, <span class="dt">b =</span> <span class="dv">1</span>:<span class="dv">10</span>, <span class="dt">data =</span> <span class="kw">head</span>(iris))
+xlist[<span class="dv">1</span>]</code></pre></div>
+<pre><code>$a
+[1] &quot;UNTDF&quot;</code></pre>
+<p>Usa el conocimiento de subconjuntos de listas y vectores para extraer el número 2 de <code>xlist</code>.</p>
+</section>
+<section id="ejercicio-6" class="slide level2 challenge">
+<h1>Ejercicio 6</h1>
+<p>Dado el siguiente modelo lineal:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">aov</span>(pop ~<span class="st"> </span>lifeExp, <span class="dt">data=</span>gapminder)</code></pre></div>
+<p>Extrae los grados de libertad residuales (<em>residual degrees of freedom</em>) (pista: <code>attributes()</code> te va a ayudar)</p>
+</section>
+<section id="data-frames" class="slide level2">
+<h1>Data frames</h1>
+<p>Las data.frames son listas disfrazadas, por lo que las mismas reglas de las listas se aplican. Pero también son objectos bidimensioanales.</p>
+<p>Con un argumento <code>[</code> se comporta como en una lista y devuelve una columna. El resultado es un data.frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gapminder[<span class="dv">3</span>], <span class="dv">5</span>)</code></pre></div>
+<pre><code>       pop
+1  8425333
+2  9240934
+3 10267083
+4 11537966
+5 13079460</code></pre>
+</section>
+<section class="slide level2">
+
+<p>De igual manera, <code>[[</code> va a actuar para extraer una <em>columna individual</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gapminder[[<span class="st">&quot;lifeExp&quot;</span>]])</code></pre></div>
+<pre><code>[1] 28.801 30.332 31.997 34.020 36.088 38.438</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Y <code>$</code> provee una forma conveniente de extraer una columna por nombre:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gapminder$year)</code></pre></div>
+<pre><code>[1] 1952 1957 1962 1967 1972 1977</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Y con dos argumentos, <code>[</code> se comporta como si fuese una matriz.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder[<span class="dv">1</span>:<span class="dv">3</span>,]</code></pre></div>
+<pre><code>      country year      pop continent lifeExp gdpPercap
+1 Afghanistan 1952  8425333      Asia  28.801  779.4453
+2 Afghanistan 1957  9240934      Asia  30.332  820.8530
+3 Afghanistan 1962 10267083      Asia  31.997  853.1007</code></pre>
+<p>Si solo elegimos una fila el resultado es un data.frame:</p>
+<p>Pero para una columna devuelve una vector a menos que especifiquemos <code>drop = FALSE</code></p>
+</section>
+<section id="ejercicio-7" class="slide level2 challenge">
+<h1>Ejercicio 7</h1>
+<p>Arregla cada uno de los siguientes errores comunes de subconjuntos de data.frames.</p>
+<ol type="1">
+<li>Extrae todas las observaciones del año 1957</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder[gapminder$year =<span class="st"> </span><span class="dv">1957</span>,]</code></pre></div>
+<ol start="2" type="1">
+<li>Extrae todas las columnas excepto desde la 1 a la 4</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder[,-<span class="dv">1</span>:<span class="dv">4</span>]</code></pre></div>
+</section>
+<section id="ejercicio-7-1" class="slide level2 challenge">
+<h1>Ejercicio 7</h1>
+<ol start="3" type="1">
+<li>Extrae todas las filas donde la expectativa de vida es mayor de 80 años.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder[gapminder$lifeExp <span class="dv">80</span>]</code></pre></div>
+<ol start="4" type="1">
+<li>Extrae la primer fila, y la cuarta y quinta columna (<code>lifeExp</code> y <code>gdpPercap</code>).</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder[<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>]</code></pre></div>
+<ol start="5" type="1">
+<li>Avanzado: extrae las filas que contienen informacion de los años 2002 y 2007.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder[gapminder$year ==<span class="st"> </span><span class="dv">2002</span> |<span class="st"> </span><span class="dv">2007</span>,]</code></pre></div>
+</section>
+<section id="ejercicio-8" class="slide level2 challenge">
+<h1>Ejercicio 8</h1>
+<ol type="1">
+<li><p>¿Por qué <code>gapminder[1:20]</code> devuelve un error? ¿Cómo difiere de <code>gapminder[1:20, ]</code>?</p></li>
+<li><p>Crea un nuevo <code>data.frame</code> llamado <code>gapminder_small</code> que solo contenga las filas 1 a 9 y 19 a 23. Puedes hacerlo en uno o dos pasos.</p></li>
+</ol>
+</section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

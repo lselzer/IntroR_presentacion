@@ -1,7 +1,6 @@
 revealjs::revealjs_presentation:
   self_contained: false
   lib_dir: libs
-  logo: "../img/logo_untdf_small.png"
   css: style.css
   reveal_options:
     slideNumber: true

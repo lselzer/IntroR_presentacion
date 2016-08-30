@@ -11,14 +11,14 @@ navbar:
       icon: fa-television
       menu:
       - text: "Introducción"
-        href: presentation/1_presentacion.html
+        href: 1_presentacion.html
       - text: "Proyectos"
-        href: presentation/2_proyectos.html
+        href: 2_proyectos.html
       - text: "Ayuda en R"
-        href: presentation/3_help.html
+        href: 3_help.html
       - text: "Estructura de Datos"
-        href: presentation/4_datos.html
+        href: 4_datos.html
       - text: "Explorando Data Frames"
-        href: presentation/5_dato.frames.html
+        href: 5_dato.frames.html
       - text: "Subconjuntos de Datos"
-        href: presentation/6_subsetting.html
+        href: 6_subsetting.html
