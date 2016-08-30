@@ -28,4 +28,5 @@ knitr_fig_path <- function(prefix) {
 ## `fig.process` option.
 
 opts_chunk$set(tidy = FALSE, results = "markup", comment = NA,
-               fig.align = "center", fig.path = "fig/rmd-")
+               fig.align = "center", fig.path = "fig/rmd-",
+               base.url = "https://lselzer.github.io/IntroR_presentacion/")
