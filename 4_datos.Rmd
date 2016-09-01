@@ -582,7 +582,7 @@ typeof(gatos[1,])
 str(gatos[1,])
 ```
 
-## Desafio 3
+## Ejercicio 3{.challenge}
 
 Hay varios formas sutilmente diferentes para llamar a las variables:
 
@@ -691,18 +691,14 @@ ncol(matrix_example)
 ```
 
 
-## Desafio 4
+## Ejercicio 4{.challenge}
 
 ¿Cual crees que será el resultado de `length(matrix_example)`?
 Prueba el código.  
 ¿Estabas en lo correcto?¿Por qué?
 
 
-
-
-
-
-## Desafio 5
+## Ejercicio 5{.challenge}
 Crea otra matriz, esta vez que contenga los numeros de 1 a 50, con
 5 columnas y 10 filas.  
 ¿Cómo lleno la función `matrix` la matriz? ¿Por columnas o por filas?
@@ -711,7 +707,7 @@ Fijate si podés averiguar como cambiar esto (pista: lee la documentación de
 `matrix`).
 
 
-## Desafio 6
+## Ejercicio 6{.challenge}
 
 Crea una lista de longitud 2 que contenga un vector caracter para cada parte de
 lo que hemos visto
@@ -726,7 +722,7 @@ datos que hemos visto hasta ahora.
 
 
 
-## Desafio 7
+## Ejercicio 7{.challenge}
 Considera la salida de R de la siguiente matriz:
      [,1] [,2]
 [1,]    4    1
