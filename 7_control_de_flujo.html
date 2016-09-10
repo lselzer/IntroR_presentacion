@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Luciano Selzer" />
+  <title>Control de Flujo</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Control de Flujo</h1>
+    <h2 class="author">Luciano Selzer</h2>
+    <h3 class="date">10 September, 2016</h3>
+</section>
+
+<section id="que-es-el-control-de-flujo" class="slide level2">
+<h1>¿Qué es el control de flujo?</h1>
+<p>Durante nuestros análisis vamos a querer que la tomar decisiones automáticamente bajo ciertas reglas dispuestas de antemano:</p>
+<ul>
+<li>Si una condición se cumple realiza una acción.</li>
+<li>Si una condición no se cumple realizar otra acción.</li>
+<li>O tal vez, repetir muchas veces la misma acción un número determinado de veces</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if</span>
+if (condicion es verdadera) {
+  realizar acción
+}
+
+<span class="co"># if ... else</span>
+if (condicion es verdadera) {
+  realizar acción
+} else {  <span class="co"># esto es, la condición de if es falsa</span>
+  realizar acción alternativa
+}</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Por ejemplo, queremos que R imprima un mensaje si la variable <code>x</code> tiene un valor determinado:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Muestra un número de una distribución Poisson</span>
+<span class="co"># con media (lambda) 8</span>
+x &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1</span>, <span class="dt">lambda =</span> <span class="dv">8</span>)
+if (x &gt;=<span class="st"> </span><span class="dv">10</span>) {
+  <span class="kw">print</span>(<span class="st">&quot;x es más grande o igual que 10&quot;</span>)
+}
+x</code></pre></div>
+<pre><code>[1] 8</code></pre>
+<p>Puede que no obtengan el mismo número que su compañero porque son número aleatorios o mejor dicho, pseudo-aleatorios</p>
+</section>
+<section class="slide level2">
+
+<p>Seteando una semilla todos van a generar los mismos números pseudo-aleatorisos</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1</span>, <span class="dt">lambda=</span><span class="dv">8</span>)
+
+if (x &gt;=<span class="st"> </span><span class="dv">10</span>) {
+  <span class="kw">print</span>(<span class="st">&quot;x es más grande o igual que 10&quot;</span>)
+} else if (x &gt;<span class="st"> </span><span class="dv">5</span>) {
+  <span class="kw">print</span>(<span class="st">&quot;x es mayor que 5&quot;</span>)
+} else {
+  <span class="kw">print</span>(<span class="st">&quot;x es menor que 5&quot;</span>)
+}</code></pre></div>
+<pre><code>[1] &quot;x es mayor que 5&quot;</code></pre>
+</section>
+<section id="tip-numeros-pseudo-aleatorios" class="slide level2 tip">
+<h1>Tip: Números pseudo-aleatorios</h1>
+<p>La función <code>rpois()</code> genera números aleatorios que siguen una distribución de Poisson con media lambda, en el caso anterior 8. La función <code>set.seed()</code> garantiza que todas las máquinas van a generar exactamente el mismo número pseudo-aleatorio (<a href="https://es.wikipedia.org/wiki/Generador_de_números_pseudoaleatorios">más sobre números pseudo-aleatorios</a>). Entonces si ponemos <code>set.seed(10)</code>, deberíamos obtener que <code>x</code> vale 8.</p>
+</section>
+<section id="ejercicio-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>Usa una declaración <code>if()</code> para imprimir un mensaje que diga si hay algún registro del año 2002 en el dataset <code>gapminder</code>. Haz lo mismo para 2012</p>
+</section>
+<section class="slide level2">
+
+<p>¿Alguien obtuvo un mensaje de advertencia?</p>
+<pre><code>Warning in if (gapminder$year == 2012) {: the condition has length &gt; 1 and
+only the first element will be used</code></pre>
+<p>Si tu condición evalua un vector con más de un elemento, <code>if()</code> va a funcionar igual, pero solo evaluará la condición del primer elemento. Necesitas asegurarte que la condición es de longitud 1.</p>
+</section>
+<section id="tip-any-y-all" class="slide level2 tip">
+<h1>Tip: any() y all()</h1>
+<p>La función <code>any()</code> es como un <em>o lógico</em> que opera sobre un vector. Con que haya al menos un valor <code>TRUE</code> la función devuelve <code>TRUE</code> y <code>FALSE</code> en otro caso. La función <code>all()</code> es un <em>y lógico</em> que opera sobre un vector y devuelve <code>TRUE</code> solo si todos los valores son <code>TRUE</code></p>
+</section>
+<section id="repitiendo-operaciones" class="slide level2">
+<h1>Repitiendo operaciones</h1>
+<p>Para itererar sobre un conjunto de valores, cuando el orden cada operación es importante usamos un loop <code>for()</code>.</p>
+<p>Es el método más flexible para realizar iteraciones y por eso el más complicado de usar.</p>
+<p>Evita usar <code>for()</code> a menos que el orden da la iteración sea importante: por ejemplo el cálculo de la iteración depende de la anterior.</p>
+</section>
+<section class="slide level2">
+
+<p>La estructura básica de un bucle <code>for()</code> es:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for(iterador in conjunto de valores){
+  hacer algo
+}</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Por ejemplo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for(i in <span class="dv">1</span>:<span class="dv">10</span>){
+  <span class="kw">print</span>(i)
+}</code></pre></div>
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10</code></pre>
+<p>La parte de <code>1:10</code> crea un vector al vuelo; es posible iterrar sobre cualquier otro vector.</p>
+</section>
+<section class="slide level2">
+
+<p>Podemos usar un bucle <code>for()</code> anidado dentro otro bucle <code>for()</code> para iterar sobre dos cosas a la vez.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for(i in <span class="dv">1</span>:<span class="dv">5</span>){
+  for(j in <span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)){
+    <span class="kw">print</span>(<span class="kw">paste</span>(i,j))
+  }
+}</code></pre></div>
+<pre><code>[1] &quot;1 a&quot;
+[1] &quot;1 b&quot;
+[1] &quot;1 c&quot;
+[1] &quot;1 d&quot;
+[1] &quot;1 e&quot;
+[1] &quot;2 a&quot;
+[1] &quot;2 b&quot;
+[1] &quot;2 c&quot;
+[1] &quot;2 d&quot;
+[1] &quot;2 e&quot;
+[1] &quot;3 a&quot;
+[1] &quot;3 b&quot;
+[1] &quot;3 c&quot;
+[1] &quot;3 d&quot;
+[1] &quot;3 e&quot;
+[1] &quot;4 a&quot;
+[1] &quot;4 b&quot;
+[1] &quot;4 c&quot;
+[1] &quot;4 d&quot;
+[1] &quot;4 e&quot;
+[1] &quot;5 a&quot;
+[1] &quot;5 b&quot;
+[1] &quot;5 c&quot;
+[1] &quot;5 d&quot;
+[1] &quot;5 e&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>En vez de imprimir los resultados, los podemos escribir a un objeto.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vector_salida &lt;-<span class="st"> </span><span class="kw">c</span>()
+for (i in <span class="dv">1</span>:<span class="dv">5</span>){
+  for (j in <span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)){
+    salida_temporal &lt;-<span class="st"> </span><span class="kw">paste</span>(i, j)
+    vector_salida &lt;-<span class="st"> </span><span class="kw">c</span>(vector_salida, salida_temporal)
+  }
+}</code></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vector_salida</code></pre></div>
+<pre><code> [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot;
+[12] &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot;
+[23] &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
+<p>Esta forma puede ser útil, pero ‘hacer crecer los objetos’ (construirlos de manera incremental) es ineficiente computacionalmente, por eso hay que evitarlo cuando iteras muchos valores.</p>
+</section>
+<section id="tip-no-hagas-crecer-tus-resultados" class="slide level2 tip">
+<h1>Tip: no hagas crecer tus resultados</h1>
+<p>Es muy lento hacer crecer los objectos durante un loop porque R tiene que copiar el objeto viejo, sumarle los nuevos datos y volver a escribirlo.<br />
+En vez de eso es mejor determinar el tamaño que tendrá la salida, y crear un objeto vacío de esa longitud. Y luego guardar los resultados en el lugar correcto.</p>
+</section>
+<section class="slide level2">
+
+<p>Una mejor manera es definir un objeto vacío para que contenga los resultados. En este ejemplo, se ve más complicado, pero es más eficiente.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">matrix_salida &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">5</span>, <span class="dt">ncol =</span> <span class="dv">5</span>)
+vector_j &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)
+for (i in <span class="dv">1</span>:<span class="dv">5</span>) {
+  for (j in <span class="dv">1</span>:<span class="dv">5</span>) {
+    valor_j_temp &lt;-<span class="st"> </span>vector_j[j]
+    salida_temp &lt;-<span class="st"> </span><span class="kw">paste</span>(i, valor_j_temp)
+    matrix_salida[i, j] &lt;-<span class="st"> </span>salida_temp
+  }
+}
+vector_salida2 &lt;-<span class="st"> </span><span class="kw">as.vector</span>(matrix_salida)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vector_salida2</code></pre></div>
+<pre><code> [1] &quot;1 a&quot; &quot;2 a&quot; &quot;3 a&quot; &quot;4 a&quot; &quot;5 a&quot; &quot;1 b&quot; &quot;2 b&quot; &quot;3 b&quot; &quot;4 b&quot; &quot;5 b&quot; &quot;1 c&quot;
+[12] &quot;2 c&quot; &quot;3 c&quot; &quot;4 c&quot; &quot;5 c&quot; &quot;1 d&quot; &quot;2 d&quot; &quot;3 d&quot; &quot;4 d&quot; &quot;5 d&quot; &quot;1 e&quot; &quot;2 e&quot;
+[23] &quot;3 e&quot; &quot;4 e&quot; &quot;5 e&quot;</code></pre>
+</section>
+<section id="tip-bucles-while" class="slide level2 tip">
+<h1>Tip: Bucles while</h1>
+<p>A veces vas a encontrar que necesitas repetir una operación hasta que se cumpla cierta condición. Podes hacer esto con un bucle <code>while()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">while (esta condición sea verdad){
+  haz algo
+}</code></pre></div>
+</section>
+<section id="tip-bucles-while-1" class="slide level2 tip">
+<h1>Tip: Bucles while</h1>
+<p>Como ejemplo, acá hay un bucle <code>while()</code> que genera números aleatorios de distribución uniforme (la función <code>runif()</code>) entre 0 y 1 hasta que obtiene uno menor a 0.1.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">z &lt;-<span class="st"> </span><span class="dv">1</span>
+while (z &gt;<span class="st"> </span><span class="fl">0.1</span>){
+  z &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)
+  <span class="kw">print</span>(z)
+}</code></pre></div>
+<p>Los bucles <code>while()</code> pueden no ser apropiados siempre. Hay que ser muy cuidadoso de que no termines un bucle infinto porque tu condición nunca será falsa.</p>
+</section>
+<section id="ejercicio-2" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>Compara los objetos vector_salida y el vector_salida2 ¿Son iguales? Si no lo son ¿Por qué? ¿Como podés cambiar el último bloque de código para que la vector_salida2 sea igual a vector_salida?</p>
+</section>
+<section id="ejercicio-3" class="slide level2 challenge">
+<h1>Ejercicio 3</h1>
+<p>Escribe un script que itere sobre los datos de <code>gapminder</code> por continente e imprima si la expectativa de vida promedio es menor o mayor a 50 años.</p>
+</section>
+<section id="ejercicio-4" class="slide level2 challenge">
+<h1>Ejercicio 4</h1>
+<p>Modifica el script del ejercicio anterior para que también itere sobre cada pais. Esta vez debe imprimir si la expectativa de vida es menor que 50, entre 50 y 70 o mayor que 70.</p>
+</section>
+<section id="ejercicio-5---avanzado" class="slide level2 challenge">
+<h1>Ejercicio 5 - Avanzado</h1>
+<p>Escribe un script que itere sobre cada país del set de datos <code>gapminder</code> y pruebe si el nombre del país empieza con ‘B’ y grafique la expectativa de vida versus el tiempo como una gráfico de lineas si la media de la expectativa de vida es menor a 50 años.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
