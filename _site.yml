@@ -23,6 +23,6 @@ navbar:
       - text: "Subconjuntos de Datos"
         href: 6_subsetting.html
       - text: "Control de Flujos"
-        href: 7_control_de_flujo.hmtl
+        href: 7_control_de_flujo.html
       - text: "Gráficos con buena calidad"
         href: 8_graficos.html
