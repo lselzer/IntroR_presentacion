@@ -16,7 +16,7 @@ library(knitr)
 # I therefore hacked together a GIF animation hook for knitr.
 
 library(animation)
-ani.options(autobrowse = FALSE, interval = 0.1, convert = "C:\\Program Files\\ImageMagick-7.0.3-Q16\\convert.exe")
+ani.options(autobrowse = FALSE, interval = 0.1)
 
 opts_knit$set(animation.fun = function(x, options, format = "gif") {
   x = c(knitr:::sans_ext(x), knitr:::file_ext(x))
@@ -303,7 +303,7 @@ knitr::include_graphics("fig/rmd-figura-1-final-1.png")
 Hay muchas más cosas que se pueden hacer con ggplot.
 
 
-```{r, echo=FALSE, fig.show='animate', message=FALSE, results='hide', fig.height=5}
+```{r, echo=FALSE, fig.show='animate', message=FALSE, results='hide', fig.height=5, cache=TRUE}
 library(gganimate)
 library(tweenr)
 library(dplyr)
