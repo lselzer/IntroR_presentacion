@@ -303,7 +303,7 @@ knitr::include_graphics("fig/rmd-figura-1-final-1.png")
 Hay muchas más cosas que se pueden hacer con ggplot.
 
 
-```{r, echo=FALSE, fig.show='animate', message=FALSE, results='hide'}
+```{r, echo=FALSE, fig.show='animate', message=FALSE, results='hide', fig.height=5}
 library(gganimate)
 library(tweenr)
 library(dplyr)
