@@ -22,3 +22,7 @@ navbar:
         href: 5_data.frames.html
       - text: "Subconjuntos de Datos"
         href: 6_subsetting.html
+      - text: "Control de Flujos"
+        href: 7_control_de_flujo.hmtl
+      - text: "Gráficos con buena calidad"
+        href: 8_graficos.html
