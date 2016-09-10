@@ -107,9 +107,8 @@ x[0]
 ---
 
 ##La numeración de los vectores empieza en 1
->
-En muchos lenguajes de programación (C, Python) el primer elemento
-del vector tiene indice 0. En R, el primer elemento es 1.
+> En muchos lenguajes de programación (C, Python) el primer elemento
+> del vector tiene indice 0. En R, el primer elemento es 1.
 
 
 ## Eliminando elementos
@@ -154,6 +153,7 @@ Dado el siguiente código:
  ```{r, echo=FALSE}
  x[2:4]
  ```
+  
 2. Compara con tu compañero ¿Usaron estrategias diferentes?
  
 ##Subconjuntos por nombre
