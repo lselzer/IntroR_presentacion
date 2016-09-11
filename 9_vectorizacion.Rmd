@@ -1,0 +1,158 @@
+---
+title: "Vectorización"
+author: "Luciano Selzer"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+source("_chunk_opts.R")
+# Silently load in the data so the rest of the lesson works
+gapminder <- read.csv("data/gapminder-FiveYearData.csv", header=TRUE)
+
+```
+
+## R está vectorizado
+
+La mayoría de las funciones están vectorizadas.
+
+No hace falta hacer un bucle para operar sobre cada elemento.
+
++ Es más legible
++ Es más conciso
++ Menor posiblidad de errores
+
+```{r}
+x <- 1:4
+x * 2
+```
+
+La multiplicación ocurre sobre todo el vector
+
+---
+
+Podemos hacer adiciones
+```{r}
+y <- 6:9
+x + y
+```
+
+```{r, eval=FALSE}
+x:  1  2  3  4
+    +  +  +  +
+y:  6  7  8  9
+---------------
+    7  9 11 13
+```
+
+## Ejercicio 1{.challenge}
+
+Intenta hacer esto en la columna `pop` en el dataset  `gapminder`.
+
+Haz una nueva columna en el data.frame `gapminder` que
+contenga la población en millones. Revisa el principio y el 
+final del data.frame para asegurarte de que ha funcionado.
+
+
+## Ejercicio 2{.challenge}
+
+En un solo gráfico grafica la población, en millones, versus
+el año, para todos los paises. No te preocupes por
+identificar cada país
+
+Repite el ejercicio, esta vez graficando solo China, India e
+Indonesia. Devuelta, no importa cual es cual.
+
+
+---
+
+Las operaciones de comparación, operadores lógidocs y muchas
+otras funciones también están vectorizadas.
+
+**Operadores de comparación**
+
+```{r}
+x > 2
+```
+
+**Operadores lógicos**
+```{r}
+a <- x > 3  # o, por claridad, a <- (x > 3)
+a
+```
+
+---
+
+
+La mayoría de las funciones operan sobre los elementos del
+vector.
+
+**Funciones**
+```{r}
+x <- 1:4
+log(x)
+```
+
+---
+
+Las operaciones vectorizadas trabajan en los elementos de
+las matrices:
+
+
+```{r}
+m <- matrix(1:12, nrow = 3, ncol = 4)
+m * -1
+```
+
+## Tip: multiplicación por elementos vs matricial{.tip}
+
+Muy importante: el operador `*` da la multiplicación por
+¡elementos!  
+Para hacer la multiplicación matricial, necesitamos usar el 
+operador `%*%`: 
+
+```{r}
+m %*% matrix(1, nrow = 4, ncol = 1)
+```
+
+## Tip: multiplicación por elementos vs matricial{.tip}
+
+```{r}
+matrix(1:4, nrow = 1) %*% matrix(1:4, ncol = 1)
+```
+
+
+Para mas información sobre algebra matricial puedan ver 
+la [guía de referencia de Quick-R](http://www.statmethods.net/advstats/matrix.html)
+
+## Ejercicio 3{.challenge}
+
+Dada la siguiente matriz: 
+
+```{r}
+m <- matrix(1:12, nrow = 3, ncol = 4)
+m
+```
+
+## Ejercicio 3{.challenge}
+
+Escribe que crees que va a suceder cuando corras:
+
+1. `m ^ -1`
+2. `m * c(1, 0, -1)`
+3. `m > c(0, 20)`
+4. `m * c(1, 0, -1, 2)`
+
+¿Dio la salida que esperabas? Si no fue así, pregunta.
+
+## Ejercicio 4{.challenge}
+
+Estamos interesados en ver la suma de una secuencia de 
+fracciones
+
+```{r, eval=FALSE}
+ x = 1/(1^2) + 1/(2^2) + 1/(3^2) + ... + 1/(n^2)
+```
+
+Esto sería tedioso de tipear e imposible de hacer para n 
+grandes. Usa la vectorización para computar x cuando n=100 
+¿Cuál es la suma cuando n=10000?
