@@ -114,6 +114,7 @@ operador `%*%`:
 m %*% matrix(1, nrow = 4, ncol = 1)
 ```
 
+
 ## Tip: multiplicación por elementos vs matricial{.tip}
 
 ```{r}
