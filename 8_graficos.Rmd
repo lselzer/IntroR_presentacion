@@ -305,12 +305,12 @@ Hay muchas más cosas que se pueden hacer con ggplot.
 
 ```{r, echo=FALSE, fig.show='animate', message=FALSE, results='hide', fig.height=5, cache=TRUE}
   # Cargar paquetes
-if(!require(gganimate) {
+if(!require(gganimate)) {
   if(!require(devtools)) install.packages("devtools")  
   devtools::install_github("dgrtwo/gganimate")
 }
 library(gganimate)
-if(!require(tweenr) {
+if(!require(tweenr)) {
   if(!require(devtools)) install.packages("devtools")  
   devtools::install_github("thomasp85/tweenr")
 }
