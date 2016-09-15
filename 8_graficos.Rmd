@@ -353,6 +353,7 @@ p <- ggplot(gapminder_tw,
 
 
 gg_animate(p, title_frame = FALSE)
+```
 ---
 
 + Hay documentación detallada en el sitio web: http://docs.ggplot2.org/current/
