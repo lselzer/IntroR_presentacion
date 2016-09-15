@@ -304,45 +304,55 @@ Hay muchas más cosas que se pueden hacer con ggplot.
 
 
 ```{r, echo=FALSE, fig.show='animate', message=FALSE, results='hide', fig.height=5, cache=TRUE}
+  # Cargar paquetes
+if(!require(gganimate) {
+  if(!require(devtools)) install.packages("devtools")  
+  devtools::install_github("dgrtwo/gganimate")
+}
 library(gganimate)
+if(!require(tweenr) {
+  if(!require(devtools)) install.packages("devtools")  
+  devtools::install_github("thomasp85/tweenr")
+}
 library(tweenr)
 library(dplyr)
 
+# Agregar una columna con la forma de ease es como es la velocidad de la interpolación
+# Y tranformar el factor en númerico por un bug en tweenr
 gapminder_2 <- gapminder %>% 
   transform(ease = rep("cubic-in-out", nrow(gapminder)),
             continent = as.numeric(continent))
 
+#Interpolar elementos entre años por país
 gapminder_tw <- tween_elements(gapminder_2,
                                 time = "year", 
                                 group = "country", 
                                 ease = "ease",
                                 nframes = 120)
+
+# Volver continente a factor
 gapminder_tw <- transform(gapminder_tw, 
                           continent = factor(continent,
                                              labels = levels(gapminder$continent))
 )
+#Solo elegir un año por frame para graficar como "titulo"
 year <- gapminder_tw[!duplicated(gapminder_tw$year), c("year", ".frame")] %>% transform(year = round(year))
 
 p <- ggplot(gapminder_tw, 
             aes(gdpPercap, lifeExp, frame = .frame)) +
   geom_point(aes(size = pop,
-                color = continent)) +
-  geom_text(data = year, aes(x = mean(gapminder$gdpPercap), 
-           y = max(gapminder$lifeExp) + 1, label = year), size = 12) +
+                color = continent)) + # punto con tamaño como población y color como continente
+  geom_text(data = year, aes(x = mean(gapminder$gdpPercap), # agregar el texto del año en la mitad del gdp
+           y = max(gapminder$lifeExp) + 1, label = year), size = 12) + # y el máximo de lifeExp +1 para no tapar nada
   scale_x_log10() +
   xlab("PBI per capita") +
   scale_y_continuous("Expectativa de vida") +
   scale_color_discrete("Continente") +
   scale_size_continuous("Población") +
   theme_light(20)
-  
-
 
 
 gg_animate(p, title_frame = FALSE)
-
-```
-
 ---
 
 + Hay documentación detallada en el sitio web: http://docs.ggplot2.org/current/
