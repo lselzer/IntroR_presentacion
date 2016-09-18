@@ -1,9 +1,313 @@
 ---
-title: "Introducción a R"
+title: "Funciones"
 author: "Luciano Selzer"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
 
 ```{r setup, include=FALSE}
 source("_chunk_opts.R")
+gapminder <- read.csv("data/gapminder-FiveYearData.csv")
 ```
+
+## ¿Por qué hacer funciones?
+
+Si nuestros datos fuesen estáticos no haría falta volver a correr nuestro 
+análisis nunca.  
+Pero en general no suele ser así:
+  
+  + A veces agregamos datos.
+  + Encontramos errores.
+  + O tenemos que repetir nuestro análisis porque cada cierto período de
+  tiempo tenemos otro set de datos.
+  
+Por ejemplo, **gapminder** es actualizado regularmente.
+
+
+---
+
+Las funciones nos permiten reunir operaciones en una unidad. Nos da:
+
+  + Un nombre que podemos recordar y llamar.
+  + Nos evita tener que recordar las operaciones individuales.
+  + Un conjunto de argumentos de entrada y un valor de salida.
+  + Conexiones más ricas con el resto del ambiente de programación.
+  
+---
+
+Son el bloque básico de construcción. 
+
+![lego](https://media.giphy.com/media/103TZqgLqRJq0M/giphy.gif)
+
+Y si ya has creado una función podes considerarte programador.
+
+## ¿Cómo definimos una función en R?
+
+Creemos una nueva carpeta llamada `functions`  
+Y dentro un archivo `funciones-leccion.R`
+
+```{r}
+mi_suma <- function(a, b) {
+  suma <- a + b
+  return(suma)
+}
+```
+
+---
+
+Definamos una función para convertir grados Kelvin en Fahrenheit
+
+```{r}
+kelvin_a_fahr <- function(temp) {
+  fahr <- (temp - 273.15) * (9/5) + 32
+  return(fahr)
+}
+```
+
+Partes de una función:
+
+  + Nombre
+  + Argumentos
+  + Cuerpo
+  
+---
+
+En R no es necesario explicitar el `return`.  
+Automáticamente devuelve el último comando ejecutado.
+Solo puede devolver **un solo** objeto.
+
+---
+
+Usemos nuestra función.
+
+```{r}
+# El punto de congelación del agua
+kelvin_a_fahr(273.15)
+
+# El punto de hervor
+kelvin_a_fahr(373.15)
+```
+
+## Ejercicio 1{.challenge}
+
+Creen una función que convierta los grados Celsius a Kelvin
+
+
+## Combinando funciones
+
+El verdadero poder de la funciones surge cuando son combinadas.
+
+![lego machine](http://eggshell-robotics.node3000.com/pictures/hanoi_solving_lego.gif)
+
+---
+
+Definamos dos funciones:
+
+```{r}
+kelvin_a_fahr <- function(temp) {
+  fahr <- (temp - 273.15) * (9/5) + 32
+  return(fahr)
+}
+
+celsius_a_kelvin <- function(temp){
+  kelvin <- temp + 273.15
+  return(kelvin)
+}
+
+```
+
+
+## Ejercicio 2{.challenge}
+
+Creen una función que convierta los grados Celsius en Fahrenheit usando
+las dos funciones anteriores.
+
+
+---
+
+Vamos a crear una función para calcular el producto bruto interno:
+
+```{r}
+# Toma el set de datos y multiplica la columna 
+# población por PBI per capita
+calcPBI <- function(dat) {
+  pbi <- dat$pop * dat$gdpPercap
+  pbi
+}
+```
+
+---
+
+Usemos nuestra función
+
+```{r}
+calcPBI(head(gapminder))
+```
+
+Nos es muy informativa la salida.
+
+---
+
+Vamos a añadir argumentos para poder seleccionar el país y el año:
+
+```{r}
+# Toma el set de datos y multiplica la columna 
+# población por PBI per capita
+calcPBI <- function(dat, year=NULL, country=NULL) {
+  if(!is.null(year)) {
+    dat <- dat[dat$year %in% year, ]
+  }
+  if (!is.null(country)) {
+    dat <- dat[dat$country %in% country,]
+  }
+  gdp <- dat$pop * dat$gdpPercap
+
+  new <- cbind(dat, gdp = gdp)
+  return(new)
+}
+```
+
+---
+
+Ahora podemos ver los datos de PBI para un año específico:
+
+```{r}
+head(calcPBI(gapminder, year = 2007))
+```
+
+---
+
+Un país específico:
+
+```{r}
+head(calcPBI(gapminder, country = "Argentina"))
+```
+
+---
+
+O un país y un año específico:
+
+```{r}
+head(calcPBI(gapminder, country = "Argentina", year = 2007))
+```
+
+---
+
+Veamos que hemos hecho:
+
+```{r, eval=FALSE}
+calcPBI <- function(dat,
+                    year = NULL,
+                    country = NULL)
+```
+
+Nombramos la función como `calcPBI`.  
+Y tiene tres argumentos:
+
+ + `dat` que ya lo teníamos
+ + `year` y `country` cuyos valores por defecto son `NULL`
+ 
+---
+
+```{r, eval=FALSE}
+if(!is.null(year)) {
+    dat <- dat[dat$year %in% year, ]
+  }
+  if (!is.null(country)) {
+    dat <- dat[dat$country %in% country,]
+  }
+```
+
+Comprobamos si los argumentos son nulos, en caso que no lo sean solo 
+seleccionamos los años o países que están en esos argumentos.
+
+
+##Tip: paso por valor{.tip}
+
+En R los argumentos de las funciones pasan como valor. R hace copias de los
+argumentos que son los que operamos dentro de la función. Cuando modificamos
+gapminder dentro de nuestra función modificamos una copia que solo existe 
+dentro de la función.
+
+Es mucho más seguro escribir código de esta forma porque asegura que los
+objectos fuera de la función permanecen inalterados.
+
+##Tip: ámbito de la función{.tip}
+
+Otro concepto importante es el ámbito (_scope_) de la función. Todas las 
+variables creadas en el cuerpo de la función solo existen dentro de su 
+ámbito. Incluso si tenemos objetos con el mismo nombre en nuestro
+espacio de trabajo, estos no van a entrar en conflicto ni van a ser modificados
+por las variables creadas en nuestra función.
+
+---
+
+```{r, eval=FALSE}
+  gdp <- dat$pop * dat$gdpPercap
+  new <- cbind(dat, gdp=gdp)
+  return(new)
+}
+```
+
+Finalmente, calculamos el PBI y lo unimos a nuestros datos.
+
+##Ejercicio 3{.challenge}
+
+Prueba nuestra función PBI calculando el PBI de Nueva Zelanda en 1987 ¿Cómo 
+difiere del PBI de Nueva Zelanda en 1952?
+
+##Ejercicio 4{.challenge}
+
+La función `paste()` puede ser usada para combinar texto.
+
+```{r}
+mejores_practicas <- c("Escribe", "programas", "para", "personas", 
+                       "no", "para", "computadoras")
+paste(mejores_practicas, collapse = " ")
+```
+
+##Ejercicio 4{.challenge}
+
+Escribe una función llamada `vallar`, con dos argumentos `texto` y  `envoltura`,
+e imprime el `texto` envuelto con la `envoltura`.
+
+```{r, eval=FALSE}
+vallar(texto = mejores_practicas, envoltura = "***")
+```
+
+Nota: la función `paste` tiene un argumento `sep`, que especifica el separador
+de texto, con valor por defecto `" "`. `paste0` no tiene espacios por defecto.
+
+## Tip: Pruebas y Documentación {.tip}
+
+Es muy importante probar y documentar las funciones. 
+La documentación te ayuda a vos y a otros, a entender el propósito de la 
+función, como usarla, como funciona. Y es importante asegurarse de que la
+función hace lo que uno cree que hace.
+
+## Tip: Pruebas y Documentación {.tip}
+
+Cuando recién comenzas, tu forma de trabajar seguramente se parecerá a algo así:
+
+
+1. Escribe al función
+2. Comenta partes de la función para documentar su comportamiento.
+3. Carga la fuente del código
+4. Experimenta con la consola para asegurarte que se comporta como
+esperas.
+5. Arregla los posibles errores.
+6. Enjuaga y repite.
+
+## Tip: Pruebas y Documentación {.tip}
+
+La documentación formal para funciones, escrita en un archivo separado `.Rd`, 
+se convierte en la documentación que ves en las ayudas de las funciones.
+El paquete `roxygen2` permite a los programadores de escribir la documentación
+junto con el código de la función y luego procesarlo en los archivo `.Rd` apropiados.
+Querrás cambiar a este método más formal cuando empieces a escribir proyectos
+de R más complejos.
+
+Para la automatización de las pruebas se puede usar el paquete `testthat`
+
+
+
+
