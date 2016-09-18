@@ -30,3 +30,5 @@ navbar:
         href: 9_vectorizacion.html
       - text: "Funciones"
         href: 10_funciones.html
+      - text: "Guardando datos"
+        href: 11_guarndando.html

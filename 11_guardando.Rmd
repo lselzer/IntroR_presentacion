@@ -1,0 +1,112 @@
+---
+title: "Escribiendo Datos"
+author: "Luciano Selzer"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+source("_chunk_opts.R")
+gapminder <- read.csv("data/gapminder-FiveYearData.csv")
+dir.create("cleaned-data")
+```
+
+## Guardando gráficos
+
+Los gráficos creados con `ggplot2` pueden guardarse con `ggsave`
+
+```{r, eval=FALSE}
+ggsave("Mi_grafico_mas_reciente.pdf")
+```
+
+También podemos especificar que gráfico guardar con el argumento `plot`
+Hay otras opciones, como ancho (*width*), alto (*height*), ppp (*dpi*).
+
+---
+
+Por otro lado, quizás queremos guardar varios gráficos en un solo documento.
+
+Hay una forma más flexible, la función `pdf` crea un nuevo dipositivo donde
+guardar los gráficos. 
+
+```{r, eval=FALSE}
+pdf("Life_Exp_vs_time.pdf", width=12, height=4)
+ggplot(data=gapminder, aes(x=year, y=lifeExp, colour=country)) +
+  geom_line()
+
+# ¡Acordarse de apagar el dispositivo!
+
+dev.off()
+```
+
+
+## Ejercicio 1{.challenge}
+
+Reescribe el comando de arriba para agregar una segunda página,
+mostrando un plot en paneles donde cada panel corresponda a 
+un continente (pista: `facet_grid`)
+
+
+
+## Escribiendo datos
+
+También en algún momento vamos a querer guardar datos
+
+Podemos usar la función `write.table` que es similar a `read.table`
+
+Creemos un script para limpiar datos, y solo queremos los datos de 
+Australia:
+
+```{r}
+aust_subset <- gapminder[gapminder$country == "Australia",]
+
+write.table(aust_subset,
+  file="cleaned-data/gapminder-aus.csv",
+  sep=","
+)
+```
+
+---
+
+```{r, engine='sh'}
+head cleaned-data/gapminder-aus.csv
+```
+
+
+No se ve como se debe, hay algo de más
+
+---
+
+Veamos la ayuda
+
+```{r, eval=FALSE}
+?write.table
+```
+
+Por defecto, R envuelve las salidas en comillas y pone el número
+de fila.
+
+---
+
+```{r}
+aust_subset <- gapminder[gapminder$country == "Australia",]
+
+write.table(aust_subset,
+  file = "cleaned-data/gapminder-aus.csv",
+  sep = ",", quote = FALSE, row.names = FALSE
+)
+```
+
+---
+
+```{r, engine='sh'}
+head cleaned-data/gapminder-aus.csv
+```
+
+
+## Ejercicio 2{.challenge}
+
+Crea un nuevo script para limpieza de datos que seleccione solo los datos a
+partir de 1990. Usa este script para guardar el nuevo subset de datos
+en la carpeta `cleaned-data`.
+
+
