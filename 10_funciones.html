@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Luciano Selzer" />
+  <title>Funciones</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Funciones</h1>
+    <h2 class="author">Luciano Selzer</h2>
+    <h3 class="date">18 September, 2016</h3>
+</section>
+
+<section id="por-que-hacer-funciones" class="slide level2">
+<h1>¿Por qué hacer funciones?</h1>
+<p>Si nuestros datos fuesen estáticos no haría falta volver a correr nuestro análisis nunca.<br />
+Pero en general no suele ser así:</p>
+<ul>
+<li>A veces agregamos datos.</li>
+<li>Encontramos errores.</li>
+<li>O tenemos que repetir nuestro análisis porque cada cierto período de tiempo tenemos otro set de datos.</li>
+</ul>
+<p>Por ejemplo, <strong>gapminder</strong> es actualizado regularmente.</p>
+</section>
+<section class="slide level2">
+
+<p>Las funciones nos permiten reunir operaciones en una unidad. Nos da:</p>
+<ul>
+<li>Un nombre que podemos recordar y llamar.</li>
+<li>Nos evita tener que recordar las operaciones individuales.</li>
+<li>Un conjunto de argumentos de entrada y un valor de salida.</li>
+<li>Conexiones más ricas con el resto del ambiente de programación.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Son el bloque básico de construcción.</p>
+<p><img src="https://media.giphy.com/media/103TZqgLqRJq0M/giphy.gif" alt="lego" /></p>
+<p>Y si ya has creado una función podes considerarte programador.</p>
+</section>
+<section id="como-definimos-una-funcion-en-r" class="slide level2">
+<h1>¿Cómo definimos una función en R?</h1>
+<p>Creemos una nueva carpeta llamada <code>functions</code><br />
+Y dentro un archivo <code>funciones-leccion.R</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mi_suma &lt;-<span class="st"> </span>function(a, b) {
+  suma &lt;-<span class="st"> </span>a +<span class="st"> </span>b
+  <span class="kw">return</span>(suma)
+}</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Definamos una función para convertir grados Kelvin en Fahrenheit</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kelvin_a_fahr &lt;-<span class="st"> </span>function(temp) {
+  fahr &lt;-<span class="st"> </span>(temp -<span class="st"> </span><span class="fl">273.15</span>) *<span class="st"> </span>(<span class="dv">9</span>/<span class="dv">5</span>) +<span class="st"> </span><span class="dv">32</span>
+  <span class="kw">return</span>(fahr)
+}</code></pre></div>
+<p>Partes de una función:</p>
+<ul>
+<li>Nombre</li>
+<li>Argumentos</li>
+<li>Cuerpo</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>En R no es necesario explicitar el <code>return</code>.<br />
+Automáticamente devuelve el último comando ejecutado. Solo puede devolver <strong>un solo</strong> objeto.</p>
+</section>
+<section class="slide level2">
+
+<p>Usemos nuestra función.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># El punto de congelación del agua</span>
+<span class="kw">kelvin_a_fahr</span>(<span class="fl">273.15</span>)</code></pre></div>
+<pre><code>[1] 32</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># El punto de hervor</span>
+<span class="kw">kelvin_a_fahr</span>(<span class="fl">373.15</span>)</code></pre></div>
+<pre><code>[1] 212</code></pre>
+</section>
+<section id="ejercicio-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>Creen una función que convierta los grados Celsius a Kelvin</p>
+</section>
+<section id="combinando-funciones" class="slide level2">
+<h1>Combinando funciones</h1>
+<p>El verdadero poder de la funciones surge cuando son combinadas.</p>
+<p><img src="http://eggshell-robotics.node3000.com/pictures/hanoi_solving_lego.gif" alt="lego machine" /></p>
+</section>
+<section class="slide level2">
+
+<p>Definamos dos funciones:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kelvin_a_fahr &lt;-<span class="st"> </span>function(temp) {
+  fahr &lt;-<span class="st"> </span>(temp -<span class="st"> </span><span class="fl">273.15</span>) *<span class="st"> </span>(<span class="dv">9</span>/<span class="dv">5</span>) +<span class="st"> </span><span class="dv">32</span>
+  <span class="kw">return</span>(fahr)
+}
+
+celsius_a_kelvin &lt;-<span class="st"> </span>function(temp){
+  kelvin &lt;-<span class="st"> </span>temp +<span class="st"> </span><span class="fl">273.15</span>
+  <span class="kw">return</span>(kelvin)
+}</code></pre></div>
+</section>
+<section id="ejercicio-2" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>Creen una función que convierta los grados Celsius en Fahrenheit usando las dos funciones anteriores.</p>
+</section>
+<section class="slide level2">
+
+<p>Vamos a crear una función para calcular el producto bruto interno:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Toma el set de datos y multiplica la columna </span>
+<span class="co"># población por PBI per capita</span>
+calcPBI &lt;-<span class="st"> </span>function(dat) {
+  pbi &lt;-<span class="st"> </span>dat$pop *<span class="st"> </span>dat$gdpPercap
+  pbi
+}</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Usemos nuestra función</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">calcPBI</span>(<span class="kw">head</span>(gapminder))</code></pre></div>
+<pre><code>[1]  6567086330  7585448670  8758855797  9648014150  9678553274 11697659231</code></pre>
+<p>Nos es muy informativa la salida.</p>
+</section>
+<section class="slide level2">
+
+<p>Vamos a añadir argumentos para poder seleccionar el país y el año:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Toma el set de datos y multiplica la columna </span>
+<span class="co"># población por PBI per capita</span>
+calcPBI &lt;-<span class="st"> </span>function(dat, <span class="dt">year=</span><span class="ot">NULL</span>, <span class="dt">country=</span><span class="ot">NULL</span>) {
+  if(!<span class="kw">is.null</span>(year)) {
+    dat &lt;-<span class="st"> </span>dat[dat$year %in%<span class="st"> </span>year, ]
+  }
+  if (!<span class="kw">is.null</span>(country)) {
+    dat &lt;-<span class="st"> </span>dat[dat$country %in%<span class="st"> </span>country,]
+  }
+  gdp &lt;-<span class="st"> </span>dat$pop *<span class="st"> </span>dat$gdpPercap
+
+  new &lt;-<span class="st"> </span><span class="kw">cbind</span>(dat, <span class="dt">gdp =</span> gdp)
+  <span class="kw">return</span>(new)
+}</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Ahora podemos ver los datos de PBI para un año específico:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">calcPBI</span>(gapminder, <span class="dt">year =</span> <span class="dv">2007</span>))</code></pre></div>
+<pre><code>       country year      pop continent lifeExp  gdpPercap          gdp
+12 Afghanistan 2007 31889923      Asia  43.828   974.5803  31079291949
+24     Albania 2007  3600523    Europe  76.423  5937.0295  21376411360
+36     Algeria 2007 33333216    Africa  72.301  6223.3675 207444851958
+48      Angola 2007 12420476    Africa  42.731  4797.2313  59583895818
+60   Argentina 2007 40301927  Americas  75.320 12779.3796 515033625357
+72   Australia 2007 20434176   Oceania  81.235 34435.3674 703658358894</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Un país específico:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">calcPBI</span>(gapminder, <span class="dt">country =</span> <span class="st">&quot;Argentina&quot;</span>))</code></pre></div>
+<pre><code>     country year      pop continent lifeExp gdpPercap          gdp
+49 Argentina 1952 17876956  Americas  62.485  5911.315 105676319105
+50 Argentina 1957 19610538  Americas  64.399  6856.856 134466639306
+51 Argentina 1962 21283783  Americas  65.142  7133.166 151820757737
+52 Argentina 1967 22934225  Americas  65.634  8052.953 184688236498
+53 Argentina 1972 24779799  Americas  67.065  9443.039 233996596624
+54 Argentina 1977 26983828  Americas  68.481 10079.027 271970723960</code></pre>
+</section>
+<section class="slide level2">
+
+<p>O un país y un año específico:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">calcPBI</span>(gapminder, <span class="dt">country =</span> <span class="st">&quot;Argentina&quot;</span>, <span class="dt">year =</span> <span class="dv">2007</span>))</code></pre></div>
+<pre><code>     country year      pop continent lifeExp gdpPercap          gdp
+60 Argentina 2007 40301927  Americas   75.32  12779.38 515033625357</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Veamos que hemos hecho:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calcPBI &lt;-<span class="st"> </span>function(dat,
+                    <span class="dt">year =</span> <span class="ot">NULL</span>,
+                    <span class="dt">country =</span> <span class="ot">NULL</span>)</code></pre></div>
+<p>Nombramos la función como <code>calcPBI</code>.<br />
+Y tiene tres argumentos:</p>
+<ul>
+<li><code>dat</code> que ya lo teníamos</li>
+<li><code>year</code> y <code>country</code> cuyos valores por defecto son <code>NULL</code></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if(!<span class="kw">is.null</span>(year)) {
+    dat &lt;-<span class="st"> </span>dat[dat$year %in%<span class="st"> </span>year, ]
+  }
+  if (!<span class="kw">is.null</span>(country)) {
+    dat &lt;-<span class="st"> </span>dat[dat$country %in%<span class="st"> </span>country,]
+  }</code></pre></div>
+<p>Comprobamos si los argumentos son nulos, en caso que no lo sean solo seleccionamos los años o países que están en esos argumentos.</p>
+</section>
+<section id="tip-paso-por-valor" class="slide level2 tip">
+<h1>Tip: paso por valor</h1>
+<p>En R los argumentos de las funciones pasan como valor. R hace copias de los argumentos que son los que operamos dentro de la función. Cuando modificamos gapminder dentro de nuestra función modificamos una copia que solo existe dentro de la función.</p>
+<p>Es mucho más seguro escribir código de esta forma porque asegura que los objectos fuera de la función permanecen inalterados.</p>
+</section>
+<section id="tip-ambito-de-la-funcion" class="slide level2 tip">
+<h1>Tip: ámbito de la función</h1>
+<p>Otro concepto importante es el ámbito (<em>scope</em>) de la función. Todas las variables creadas en el cuerpo de la función solo existen dentro de su ámbito. Incluso si tenemos objetos con el mismo nombre en nuestro espacio de trabajo, estos no van a entrar en conflicto ni van a ser modificados por las variables creadas en nuestra función.</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  gdp &lt;-<span class="st"> </span>dat$pop *<span class="st"> </span>dat$gdpPercap
+  new &lt;-<span class="st"> </span><span class="kw">cbind</span>(dat, <span class="dt">gdp=</span>gdp)
+  <span class="kw">return</span>(new)
+<span class="er">}</span></code></pre></div>
+<p>Finalmente, calculamos el PBI y lo unimos a nuestros datos.</p>
+</section>
+<section id="ejercicio-3" class="slide level2 challenge">
+<h1>Ejercicio 3</h1>
+<p>Prueba nuestra función PBI calculando el PBI de Nueva Zelanda en 1987 ¿Cómo difiere del PBI de Nueva Zelanda en 1952?</p>
+</section>
+<section id="ejercicio-4" class="slide level2 challenge">
+<h1>Ejercicio 4</h1>
+<p>La función <code>paste()</code> puede ser usada para combinar texto.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mejores_practicas &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Escribe&quot;</span>, <span class="st">&quot;programas&quot;</span>, <span class="st">&quot;para&quot;</span>, <span class="st">&quot;personas&quot;</span>, 
+                       <span class="st">&quot;no&quot;</span>, <span class="st">&quot;para&quot;</span>, <span class="st">&quot;computadoras&quot;</span>)
+<span class="kw">paste</span>(mejores_practicas, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</code></pre></div>
+<pre><code>[1] &quot;Escribe programas para personas no para computadoras&quot;</code></pre>
+</section>
+<section id="ejercicio-4-1" class="slide level2 challenge">
+<h1>Ejercicio 4</h1>
+<p>Escribe una función llamada <code>vallar</code>, con dos argumentos <code>texto</code> y <code>envoltura</code>, e imprime el <code>texto</code> envuelto con la <code>envoltura</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vallar</span>(<span class="dt">texto =</span> mejores_practicas, <span class="dt">envoltura =</span> <span class="st">&quot;***&quot;</span>)</code></pre></div>
+<p>Nota: la función <code>paste</code> tiene un argumento <code>sep</code>, que especifica el separador de texto, con valor por defecto <code>&quot; &quot;</code>. <code>paste0</code> no tiene espacios por defecto.</p>
+</section>
+<section id="tip-pruebas-y-documentacion" class="slide level2 tip">
+<h1>Tip: Pruebas y Documentación</h1>
+<p>Es muy importante probar y documentar las funciones. La documentación te ayuda a vos y a otros, a entender el propósito de la función, como usarla, como funciona. Y es importante asegurarse de que la función hace lo que uno cree que hace.</p>
+</section>
+<section id="tip-pruebas-y-documentacion-1" class="slide level2 tip">
+<h1>Tip: Pruebas y Documentación</h1>
+<p>Cuando recién comenzas, tu forma de trabajar seguramente se parecerá a algo así:</p>
+<ol type="1">
+<li>Escribe al función</li>
+<li>Comenta partes de la función para documentar su comportamiento.</li>
+<li>Carga la fuente del código</li>
+<li>Experimenta con la consola para asegurarte que se comporta como esperas.</li>
+<li>Arregla los posibles errores.</li>
+<li>Enjuaga y repite.</li>
+</ol>
+</section>
+<section id="tip-pruebas-y-documentacion-2" class="slide level2 tip">
+<h1>Tip: Pruebas y Documentación</h1>
+<p>La documentación formal para funciones, escrita en un archivo separado <code>.Rd</code>, se convierte en la documentación que ves en las ayudas de las funciones. El paquete <code>roxygen2</code> permite a los programadores de escribir la documentación junto con el código de la función y luego procesarlo en los archivo <code>.Rd</code> apropiados. Querrás cambiar a este método más formal cuando empieces a escribir proyectos de R más complejos.</p>
+<p>Para la automatización de las pruebas se puede usar el paquete <code>testthat</code></p>
+</section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
