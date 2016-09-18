@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Luciano Selzer" />
+  <title>Escribiendo Datos</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Escribiendo Datos</h1>
+    <h2 class="author">Luciano Selzer</h2>
+    <h3 class="date">18 September, 2016</h3>
+</section>
+
+<section id="guardando-graficos" class="slide level2">
+<h1>Guardando gráficos</h1>
+<p>Los gráficos creados con <code>ggplot2</code> pueden guardarse con <code>ggsave</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;Mi_grafico_mas_reciente.pdf&quot;</span>)</code></pre></div>
+<p>También podemos especificar que gráfico guardar con el argumento <code>plot</code> Hay otras opciones, como ancho (<em>width</em>), alto (<em>height</em>), ppp (<em>dpi</em>).</p>
+</section>
+<section class="slide level2">
+
+<p>Por otro lado, quizás queremos guardar varios gráficos en un solo documento.</p>
+<p>Hay una forma más flexible, la función <code>pdf</code> crea un nuevo dipositivo donde guardar los gráficos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pdf</span>(<span class="st">&quot;Life_Exp_vs_time.pdf&quot;</span>, <span class="dt">width=</span><span class="dv">12</span>, <span class="dt">height=</span><span class="dv">4</span>)
+<span class="kw">ggplot</span>(<span class="dt">data=</span>gapminder, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>lifeExp, <span class="dt">colour=</span>country)) +
+<span class="st">  </span><span class="kw">geom_line</span>()
+
+<span class="co"># ¡Acordarse de apagar el dispositivo!</span>
+
+<span class="kw">dev.off</span>()</code></pre></div>
+</section>
+<section id="ejercicio-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>Reescribe el comando de arriba para agregar una segunda página, mostrando un plot en paneles donde cada panel corresponda a un continente (pista: <code>facet_grid</code>)</p>
+</section>
+<section id="escribiendo-datos" class="slide level2">
+<h1>Escribiendo datos</h1>
+<p>También en algún momento vamos a querer guardar datos</p>
+<p>Podemos usar la función <code>write.table</code> que es similar a <code>read.table</code></p>
+<p>Creemos un script para limpiar datos, y solo queremos los datos de Australia:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aust_subset &lt;-<span class="st"> </span>gapminder[gapminder$country ==<span class="st"> &quot;Australia&quot;</span>,]
+
+<span class="kw">write.table</span>(aust_subset,
+  <span class="dt">file=</span><span class="st">&quot;cleaned-data/gapminder-aus.csv&quot;</span>,
+  <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>
+)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<pre class="sh"><code>head cleaned-data/gapminder-aus.csv</code></pre>
+<pre><code>&quot;country&quot;,&quot;year&quot;,&quot;pop&quot;,&quot;continent&quot;,&quot;lifeExp&quot;,&quot;gdpPercap&quot;
+&quot;61&quot;,&quot;Australia&quot;,1952,8691212,&quot;Oceania&quot;,69.12,10039.59564
+&quot;62&quot;,&quot;Australia&quot;,1957,9712569,&quot;Oceania&quot;,70.33,10949.64959
+&quot;63&quot;,&quot;Australia&quot;,1962,10794968,&quot;Oceania&quot;,70.93,12217.22686
+&quot;64&quot;,&quot;Australia&quot;,1967,11872264,&quot;Oceania&quot;,71.1,14526.12465
+&quot;65&quot;,&quot;Australia&quot;,1972,13177000,&quot;Oceania&quot;,71.93,16788.62948
+&quot;66&quot;,&quot;Australia&quot;,1977,14074100,&quot;Oceania&quot;,73.49,18334.19751
+&quot;67&quot;,&quot;Australia&quot;,1982,15184200,&quot;Oceania&quot;,74.74,19477.00928
+&quot;68&quot;,&quot;Australia&quot;,1987,16257249,&quot;Oceania&quot;,76.32,21888.88903
+&quot;69&quot;,&quot;Australia&quot;,1992,17481977,&quot;Oceania&quot;,77.56,23424.76683</code></pre>
+<p>No se ve como se debe, hay algo de más</p>
+</section>
+<section class="slide level2">
+
+<p>Veamos la ayuda</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?write.table</code></pre></div>
+<p>Por defecto, R envuelve las salidas en comillas y pone el número de fila.</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aust_subset &lt;-<span class="st"> </span>gapminder[gapminder$country ==<span class="st"> &quot;Australia&quot;</span>,]
+
+<span class="kw">write.table</span>(aust_subset,
+  <span class="dt">file =</span> <span class="st">&quot;cleaned-data/gapminder-aus.csv&quot;</span>,
+  <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">quote =</span> <span class="ot">FALSE</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>
+)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<pre class="sh"><code>head cleaned-data/gapminder-aus.csv</code></pre>
+<pre><code>country,year,pop,continent,lifeExp,gdpPercap
+Australia,1952,8691212,Oceania,69.12,10039.59564
+Australia,1957,9712569,Oceania,70.33,10949.64959
+Australia,1962,10794968,Oceania,70.93,12217.22686
+Australia,1967,11872264,Oceania,71.1,14526.12465
+Australia,1972,13177000,Oceania,71.93,16788.62948
+Australia,1977,14074100,Oceania,73.49,18334.19751
+Australia,1982,15184200,Oceania,74.74,19477.00928
+Australia,1987,16257249,Oceania,76.32,21888.88903
+Australia,1992,17481977,Oceania,77.56,23424.76683</code></pre>
+</section>
+<section id="ejercicio-2" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>Crea un nuevo script para limpieza de datos que seleccione solo los datos a partir de 1990. Usa este script para guardar el nuevo subset de datos en la carpeta <code>cleaned-data</code>.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
