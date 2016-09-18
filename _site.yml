@@ -28,3 +28,5 @@ navbar:
         href: 8_graficos.html
       - text: "Vectorización"
         href: 9_vectorizacion.html
+      - text: "Funciones"
+        href: 10_funciones.html
