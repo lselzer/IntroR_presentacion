@@ -94,7 +94,7 @@ Plyr has functions for operating on `lists`, `data.frames` and `arrays`
 El nombre de la funciones depende de lo que esperan como entrada, y la
 estructura de salida. 
 
-```{r, out.height= 400, fig.retina = NULL, echo=FALSE}
+```{r, out.height= 500, fig.retina = NULL, echo=FALSE}
 knitr::include_graphics("img/full_apply_suite.png")
 ```
 
