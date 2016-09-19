@@ -65,7 +65,7 @@ El problema que tenemos se conoce como "divide-aplica-combina":
 
 ![Split apply combine](img/splitapply.png)
 
-## The `plyr` package
+## El paquete `plyr`
 
 
 Familia de funciones `apply`.
@@ -94,7 +94,7 @@ Plyr has functions for operating on `lists`, `data.frames` and `arrays`
 El nombre de la funciones depende de lo que esperan como entrada, y la
 estructura de salida. 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.height=5}
 knitr::include_graphics("img/full_apply_suite.png")
 ```
 
