@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Luciano Selzer" />
+  <title>Introducción a R</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Introducción a R</h1>
+    <h2 class="author">Luciano Selzer</h2>
+    <h3 class="date">19 September, 2016</h3>
+</section>
+
+<section class="slide level2">
+
+<p>Anteriormente vimos como las funciones simplifican nuestro código.</p>
+<p>Definimos la función <code>calcPBI</code> que calcula el PBI y le agregamos dos argumentos para poder calcular por año y/o país</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Takes a dataset and multiplies the population column</span>
+<span class="co"># with the GDP per capita column.</span>
+calcPBI &lt;-<span class="st"> </span>function(dat, <span class="dt">year=</span><span class="ot">NULL</span>, <span class="dt">country=</span><span class="ot">NULL</span>) {
+  if(!<span class="kw">is.null</span>(year)) {
+    dat &lt;-<span class="st"> </span>dat[dat$year %in%<span class="st"> </span>year, ]
+  }
+  if (!<span class="kw">is.null</span>(country)) {
+    dat &lt;-<span class="st"> </span>dat[dat$country %in%<span class="st"> </span>country,]
+  }
+  gdp &lt;-<span class="st"> </span>dat$pop *<span class="st"> </span>dat$gdpPercap
+
+  new &lt;-<span class="st"> </span><span class="kw">cbind</span>(dat, <span class="dt">gdp=</span>gdp)
+  <span class="kw">return</span>(new)
+}</code></pre></div>
+</section>
+<section id="divide-y-venceras" class="slide level2">
+<h1>Divide y vencerás</h1>
+<p>Muchas veces queremos hacer los cálculos u operaciones por grupo.<br />
+Arriba calculamos el PBI multiplicando dos columnas. ¿Y si quisieramos calcular el PBI medio por continente?</p>
+</section>
+<section class="slide level2">
+
+<p>Podríamos ejecutar <code>calcGPD</code> y luego calcular la media de cada continente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">conPBI &lt;-<span class="st"> </span><span class="kw">calcPBI</span>(gapminder)
+<span class="kw">mean</span>(conPBI[conPBI$continent ==<span class="st"> &quot;Africa&quot;</span>, <span class="st">&quot;gdp&quot;</span>])</code></pre></div>
+<pre><code>[1] 20904782844</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(conPBI[conPBI$continent ==<span class="st"> &quot;Americas&quot;</span>, <span class="st">&quot;gdp&quot;</span>])</code></pre></div>
+<pre><code>[1] 379262350210</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(conPBI[conPBI$continent ==<span class="st"> &quot;Asia&quot;</span>, <span class="st">&quot;gdp&quot;</span>])</code></pre></div>
+<pre><code>[1] 227233738153</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Pero no es muy <em>lindo</em>. Usando una función disminuimos la repetición. Eso <strong>está</strong> bueno.<br />
+Pero hay mucha repetición: lleva tiempo, ahora y más adelante, y puede introducir errores.</p>
+<p>Podríamos escribir una nueva función que sea flexible como <code>calcPBI</code>, el esfuerzo sería considerable y muchas pruebas para hacerlo bien.</p>
+</section>
+<section class="slide level2">
+
+<p>El problema que tenemos se conoce como “divide-aplica-combina”:</p>
+<p><img src="img/splitapply.png" alt="Split apply combine" /></p>
+</section>
+<section id="the-plyr-package" class="slide level2">
+<h1>The <code>plyr</code> package</h1>
+<p>Familia de funciones <code>apply</code>.</p>
+<p>El paquete <a href="http://had.co.nz/plyr/">plyr</a> provee un set de herramientas que hacen que sea más amigable lidiar con este problema.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Plyr tiene funciones para operar en <code>listas</code>, <code>data.frames</code> y <code>arreglos</code> (matrices, o vectores n-dimensionales). Cada función: Plyr has functions for operating on <code>lists</code>, <code>data.frames</code> and <code>arrays</code> (matrices, or n-dimensional vectors). Each function performs:</p>
+<ol type="1">
+<li>Una operación de <strong>división</strong>.</li>
+<li><strong>Aplica</strong> una función en cada división.</li>
+<li>Re<strong>combina</strong> las salidas como un solo objeto.</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<p>El nombre de la funciones depende de lo que esperan como entrada, y la estructura de salida.</p>
+<p><img src="img/full_apply_suite.png" style="display: block; margin: auto;" /></p>
+</section>
+<section class="slide level2">
+
+<p>Cada función de **ply (<code>daply</code>, <code>ddply</code>, <code>llply</code>, <code>laply</code>, …) tiene la misma estructura y las mismas 4 caraterísticas clave y estructura:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">**<span class="kw">ply</span>(.data, .variables, .fun)</code></pre></div>
+<ul>
+<li>La primera letra correponde al tipo de entrada y la seguna el tipo de salida</li>
+<li>.data - el objeto a ser procesado</li>
+<li>.variables - identifica las variables para dividir</li>
+<li>.fun - da la función a ser ejecutada en cada pedazo</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Ahora podemos ejecutar rápidamente la media de PBI por continente:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ddply</span>(
+ <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),
+ <span class="dt">.variables =</span> <span class="st">&quot;continent&quot;</span>,
+ <span class="dt">.fun =</span> function(x) <span class="kw">mean</span>(x$gdp)
+)</code></pre></div>
+<pre><code>  continent           V1
+1    Africa  20904782844
+2  Americas 379262350210
+3      Asia 227233738153
+4    Europe 269442085301
+5   Oceania 188187105354</code></pre>
+</section>
+<section class="slide level2">
+
+<p>¿Qué tal si quisieramos otro tipo de salida?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dlply</span>(
+ <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),
+ <span class="dt">.variables =</span> <span class="st">&quot;continent&quot;</span>,
+ <span class="dt">.fun =</span> function(x) <span class="kw">mean</span>(x$gdp)
+)</code></pre></div>
+<pre><code>$Africa
+[1] 20904782844
+
+$Americas
+[1] 379262350210
+
+$Asia
+[1] 227233738153
+
+$Europe
+[1] 269442085301
+
+$Oceania
+[1] 188187105354
+
+attr(,&quot;split_type&quot;)
+[1] &quot;data.frame&quot;
+attr(,&quot;split_labels&quot;)
+  continent
+1    Africa
+2  Americas
+3      Asia
+4    Europe
+5   Oceania</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Llamamos la misma función de nuevo, pero cambiamos la segunda letra a <code>l</code>, por lo que la salida es devuelta como una lista.</p>
+<p>Podemos especificar varias columnas por grupo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ddply</span>(
+ <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),
+ <span class="dt">.variables =</span> <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>, <span class="st">&quot;year&quot;</span>),
+ <span class="dt">.fun =</span> function(x) <span class="kw">mean</span>(x$gdp)
+)</code></pre></div>
+<pre><code>   continent year           V1
+1     Africa 1952   5992294608
+2     Africa 1957   7359188796
+3     Africa 1962   8784876958
+4     Africa 1967  11443994101
+5     Africa 1972  15072241974
+6     Africa 1977  18694898732
+7     Africa 1982  22040401045
+8     Africa 1987  24107264108
+9     Africa 1992  26256977719
+10    Africa 1997  30023173824
+11    Africa 2002  35303511424
+12    Africa 2007  45778570846
+13  Americas 1952 117738997171
+14  Americas 1957 140817061264
+15  Americas 1962 169153069442
+16  Americas 1967 217867530844
+17  Americas 1972 268159178814
+18  Americas 1977 324085389022
+19  Americas 1982 363314008350
+20  Americas 1987 439447790357
+21  Americas 1992 489899820623
+22  Americas 1997 582693307146
+23  Americas 2002 661248623419
+24  Americas 2007 776723426068
+25      Asia 1952  34095762661
+26      Asia 1957  47267432088
+27      Asia 1962  60136869012
+28      Asia 1967  84648519224
+29      Asia 1972 124385747313
+30      Asia 1977 159802590186
+31      Asia 1982 194429049919
+32      Asia 1987 241784763369
+33      Asia 1992 307100497486
+34      Asia 1997 387597655323
+35      Asia 2002 458042336179
+36      Asia 2007 627513635079
+37    Europe 1952  84971341466
+38    Europe 1957 109989505140
+39    Europe 1962 138984693095
+40    Europe 1967 173366641137
+41    Europe 1972 218691462733
+42    Europe 1977 255367522034
+43    Europe 1982 279484077072
+44    Europe 1987 316507473546
+45    Europe 1992 342703247405
+46    Europe 1997 383606933833
+47    Europe 2002 436448815097
+48    Europe 2007 493183311052
+49   Oceania 1952  54157223944
+50   Oceania 1957  66826828013
+51   Oceania 1962  82336453245
+52   Oceania 1967 105958863585
+53   Oceania 1972 134112109227
+54   Oceania 1977 154707711162
+55   Oceania 1982 176177151380
+56   Oceania 1987 209451563998
+57   Oceania 1992 236319179826
+58   Oceania 1997 289304255183
+59   Oceania 2002 345236880176
+60   Oceania 2007 403657044512</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">daply</span>(
+ <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),
+ <span class="dt">.variables =</span> <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>, <span class="st">&quot;year&quot;</span>),
+ <span class="dt">.fun =</span> function(x) <span class="kw">mean</span>(x$gdp)
+)</code></pre></div>
+<pre><code>          year
+continent          1952         1957         1962         1967
+  Africa     5992294608   7359188796   8784876958  11443994101
+  Americas 117738997171 140817061264 169153069442 217867530844
+  Asia      34095762661  47267432088  60136869012  84648519224
+  Europe    84971341466 109989505140 138984693095 173366641137
+  Oceania   54157223944  66826828013  82336453245 105958863585
+          year
+continent          1972         1977         1982         1987
+  Africa    15072241974  18694898732  22040401045  24107264108
+  Americas 268159178814 324085389022 363314008350 439447790357
+  Asia     124385747313 159802590186 194429049919 241784763369
+  Europe   218691462733 255367522034 279484077072 316507473546
+  Oceania  134112109227 154707711162 176177151380 209451563998
+          year
+continent          1992         1997         2002         2007
+  Africa    26256977719  30023173824  35303511424  45778570846
+  Americas 489899820623 582693307146 661248623419 776723426068
+  Asia     307100497486 387597655323 458042336179 627513635079
+  Europe   342703247405 383606933833 436448815097 493183311052
+  Oceania  236319179826 289304255183 345236880176 403657044512</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Podemos llamar a estas funciones en lugar de bucles <code>for</code> (y generalmente es más rápido). Para reemplazar un bucle <code>for</code>, pon el código del cuerpo del bucle dentro una función anónima.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">d_ply</span>(
+  <span class="dt">.data =</span> gapminder,
+  <span class="dt">.variables =</span> <span class="st">&quot;continent&quot;</span>,
+  <span class="dt">.fun =</span> function(x) {
+    meanGDPperCap &lt;-<span class="st"> </span><span class="kw">mean</span>(x$gdpPercap)
+    <span class="kw">print</span>(<span class="kw">paste</span>(
+      <span class="st">&quot;The mean GDP per capita for&quot;</span>, <span class="kw">unique</span>(x$continent),
+      <span class="st">&quot;is&quot;</span>, <span class="kw">format</span>(meanGDPperCap, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>)
+   ))
+  }
+)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<pre><code>[1] &quot;The mean GDP per capita for Africa is 2,193.755&quot;
+[1] &quot;The mean GDP per capita for Americas is 7,136.11&quot;
+[1] &quot;The mean GDP per capita for Asia is 7,902.15&quot;
+[1] &quot;The mean GDP per capita for Europe is 14,469.48&quot;
+[1] &quot;The mean GDP per capita for Oceania is 18,621.61&quot;</code></pre>
+</section>
+<section id="tip-imprimiendo-numeros" class="slide level2 tip">
+<h1>Tip: Imprimiendo números</h1>
+<p>La función <code>format</code> puede ser usada para hacer los números que quedn “bien” para imprimir mensajes.</p>
+</section>
+<section id="ejercicio-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>Calcula la expectativa de vida promedio por contiente. ¿Cuál es la mayor? ¿Cuál es la menor?</p>
+</section>
+<section id="ejercicio-2" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>Calcula la expectativa de vida promedio por continente y por año. ¿Cual tuvo la expectativa más corta y más larga en 2007? ¿Cual tuvo el mayor cambio entre 1952 y 2007?</p>
+</section>
+<section id="ejercicio-avanzado" class="slide level2 challenge">
+<h1>Ejercicio Avanzado</h1>
+<p>Calcula la diferencia de medias entre la expectativa de vida en los años 1952 y 2007 usando la salida del ejercicio 2 usando una de las funciones de <code>plyr</code>.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
