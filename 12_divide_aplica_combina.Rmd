@@ -37,6 +37,8 @@ Muchas veces queremos hacer los cálculos u operaciones por grupo.
 Arriba calculamos el PBI multiplicando dos columnas. ¿Y si quisieramos
 calcular el PBI medio por continente?
 
+![divide and conquer](https://media.giphy.com/media/GLkQ1upVWKdeo/giphy.gif)
+
 ---
 
 Podríamos ejecutar `calcGPD` y luego calcular la media de cada continente:
