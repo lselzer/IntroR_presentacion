@@ -32,3 +32,5 @@ navbar:
         href: 10_funciones.html
       - text: "Guardando datos"
         href: 11_guardando.html
+      - text: "Divide-aplica-combina"
+        href: 12_divide_aplica_combina.html

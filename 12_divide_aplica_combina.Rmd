@@ -1,0 +1,226 @@
+---
+title: "Introducción a R"
+author: "Luciano Selzer"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+source("_chunk_opts.R")
+gapminder <- read.csv("data/gapminder-FiveYearData.csv", header = TRUE)
+```
+
+Anteriormente vimos como las funciones simplifican nuestro código.
+
+Definimos la función `calcPBI` que calcula el PBI y le agregamos
+dos argumentos para poder calcular por año y/o país
+
+```{r}
+# Takes a dataset and multiplies the population column
+# with the GDP per capita column.
+calcPBI <- function(dat, year=NULL, country=NULL) {
+  if(!is.null(year)) {
+    dat <- dat[dat$year %in% year, ]
+  }
+  if (!is.null(country)) {
+    dat <- dat[dat$country %in% country,]
+  }
+  gdp <- dat$pop * dat$gdpPercap
+
+  new <- cbind(dat, gdp=gdp)
+  return(new)
+}
+```
+
+## Divide y vencerás 
+
+Muchas veces queremos hacer los cálculos u operaciones por grupo.  
+Arriba calculamos el PBI multiplicando dos columnas. ¿Y si quisieramos
+calcular el PBI medio por continente?
+
+---
+
+Podríamos ejecutar `calcGPD` y luego calcular la media de cada continente:
+
+```{r}
+conPBI <- calcPBI(gapminder)
+mean(conPBI[conPBI$continent == "Africa", "gdp"])
+mean(conPBI[conPBI$continent == "Americas", "gdp"])
+mean(conPBI[conPBI$continent == "Asia", "gdp"])
+```
+
+
+---
+
+Pero no es muy *lindo*.
+Usando una función disminuimos la repetición. Eso **está** bueno.  
+Pero hay mucha repetición: lleva tiempo, ahora y más adelante, y 
+puede introducir errores.
+
+Podríamos escribir una nueva función que sea flexible como `calcPBI`, 
+el esfuerzo sería considerable y muchas pruebas para hacerlo bien.
+
+---
+
+El problema que tenemos se conoce como "divide-aplica-combina":
+
+![Split apply combine](img/splitapply.png)
+
+## The `plyr` package
+
+
+Familia de funciones `apply`.
+
+El paquete [plyr](http://had.co.nz/plyr/) provee un set de herramientas que 
+hacen que sea más amigable lidiar con este problema.
+
+
+```{r}
+library(plyr)
+```
+
+---
+
+Plyr tiene funciones para operar en `listas`, `data.frames` y `arreglos` 
+(matrices, o vectores n-dimensionales). Cada función:
+Plyr has functions for operating on `lists`, `data.frames` and `arrays`
+(matrices, or n-dimensional vectors). Each function performs:
+
+1. Una operación de **división**.
+2. **Aplica** una función en cada división.
+3. Re**combina** las salidas como un solo objeto.
+
+---
+
+El nombre de la funciones depende de lo que esperan como entrada, y la
+estructura de salida. 
+
+```{r, echo=FALSE}
+knitr::include_graphics("img/full_apply_suite.png")
+```
+
+
+---
+
+Cada función de **ply (`daply`, `ddply`, `llply`, `laply`, ...) tiene la misma
+estructura y las mismas 4 caraterísticas clave y estructura:
+
+```{r, eval=FALSE}
+**ply(.data, .variables, .fun)
+```
+
+* La primera letra correponde al tipo de entrada y la seguna el tipo de salida
+* .data - el objeto a ser procesado
+* .variables - identifica las variables para dividir
+* .fun - da la función a ser ejecutada en cada pedazo
+
+---
+
+Ahora podemos ejecutar rápidamente la media de PBI por continente:
+
+
+``` {r}
+ddply(
+ .data = calcPBI(gapminder),
+ .variables = "continent",
+ .fun = function(x) mean(x$gdp)
+)
+```
+
+---
+
+¿Qué tal si quisieramos otro tipo de salida?
+
+```{r}
+dlply(
+ .data = calcPBI(gapminder),
+ .variables = "continent",
+ .fun = function(x) mean(x$gdp)
+)
+```
+
+---
+
+Llamamos la misma función de nuevo, pero cambiamos la segunda letra a `l`,
+por lo que la salida es devuelta como una lista.
+
+Podemos especificar varias columnas por grupo:
+
+
+``` {r}
+ddply(
+ .data = calcPBI(gapminder),
+ .variables = c("continent", "year"),
+ .fun = function(x) mean(x$gdp)
+)
+```
+
+---
+
+```{r}
+daply(
+ .data = calcPBI(gapminder),
+ .variables = c("continent", "year"),
+ .fun = function(x) mean(x$gdp)
+)
+```
+
+---
+
+Podemos llamar a estas funciones en lugar de bucles `for` (y generalmente
+es más rápido). Para reemplazar un bucle `for`, pon el código del cuerpo del
+bucle dentro una función anónima.
+
+```{r, eval=FALSE}
+d_ply(
+  .data = gapminder,
+  .variables = "continent",
+  .fun = function(x) {
+    meanGDPperCap <- mean(x$gdpPercap)
+    print(paste(
+      "The mean GDP per capita for", unique(x$continent),
+      "is", format(meanGDPperCap, big.mark = ",")
+   ))
+  }
+)
+```
+
+---
+
+```{r, echo=FALSE}
+d_ply(
+  .data = gapminder,
+  .variables = "continent",
+  .fun = function(x) {
+    meanGDPperCap <- mean(x$gdpPercap)
+    print(paste(
+      "The mean GDP per capita for", unique(x$continent),
+      "is", format(meanGDPperCap, big.mark = ",")
+   ))
+  }
+)
+```
+
+---
+
+
+## Tip: Imprimiendo números{.tip}
+
+La función `format` puede ser usada para hacer los números
+que quedn "bien" para imprimir mensajes.
+
+## Ejercicio 1{.challenge}
+
+Calcula la expectativa de vida promedio por contiente. ¿Cuál es la mayor?
+¿Cuál es la menor?
+
+## Ejercicio 2{.challenge}
+
+Calcula la expectativa de vida promedio por continente y por año. ¿Cual tuvo
+la expectativa más corta y más larga en 2007? ¿Cual tuvo el mayor cambio entre
+1952 y 2007?
+
+## Ejercicio Avanzado{.challenge}
+
+Calcula la diferencia de medias entre la expectativa de vida en los años 1952 y
+2007 usando la salida del ejercicio 2 usando una de las funciones de `plyr`.
+
