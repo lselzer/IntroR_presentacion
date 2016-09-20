@@ -124,9 +124,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <p>Anteriormente vimos como las funciones simplifican nuestro código.</p>
 <p>Definimos la función <code>calcPBI</code> que calcula el PBI y le agregamos dos argumentos para poder calcular por año y/o país</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Takes a dataset and multiplies the population column</span>
-<span class="co"># with the GDP per capita column.</span>
-calcPBI &lt;-<span class="st"> </span>function(dat, <span class="dt">year=</span><span class="ot">NULL</span>, <span class="dt">country=</span><span class="ot">NULL</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Toma el set de datos y multiplica la columna </span>
+<span class="co"># población por PBI per capita</span>
+calcPBI &lt;-<span class="st"> </span>function(dat, <span class="dt">year =</span> <span class="ot">NULL</span>, <span class="dt">country =</span> <span class="ot">NULL</span>) {
   if(!<span class="kw">is.null</span>(year)) {
     dat &lt;-<span class="st"> </span>dat[dat$year %in%<span class="st"> </span>year, ]
   }
@@ -135,7 +135,7 @@ calcPBI &lt;-<span class="st"> </span>function(dat, <span class="dt">year=</span
   }
   gdp &lt;-<span class="st"> </span>dat$pop *<span class="st"> </span>dat$gdpPercap
 
-  new &lt;-<span class="st"> </span><span class="kw">cbind</span>(dat, <span class="dt">gdp=</span>gdp)
+  new &lt;-<span class="st"> </span><span class="kw">cbind</span>(dat, <span class="dt">gdp =</span> gdp)
   <span class="kw">return</span>(new)
 }</code></pre></div>
 </section>
