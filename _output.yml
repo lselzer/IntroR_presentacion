@@ -7,3 +7,5 @@ revealjs::revealjs_presentation:
     previewLinks: true
     highlight: pygments
     center: true
+  includes:
+    after_body: doc_suffix.html
