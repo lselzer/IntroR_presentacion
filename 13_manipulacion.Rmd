@@ -1,0 +1,222 @@
+---
+title: "Manipulación de data.frame con dplyr"
+author: "Luciano Selzer"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+---
+
+```{r setup, include=FALSE}
+source("_chunk_opts.R")
+gapminder <- read.csv("data/gapminder-FiveYearData.csv")
+```
+
+
+La manipulación de datos es una de las operaciones más comunes:
+
++ seleccionar observaciones
++ seleccionar variables
++ agrupar por características
++ calcular estadísticas
+
+---
+
+Podemos hacerlo en R base:
+
+```{r}
+mean(gapminder[gapminder$continent == "Africa", "gdpPercap"])
+mean(gapminder[gapminder$continent == "Americas", "gdpPercap"])
+mean(gapminder[gapminder$continent == "Asia", "gdpPercap"])
+```
+
+Pero lleva mucha repetición
+
+
+## El paquete `dplyr`
+
+El paquete [`dplyr`](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
+tiene varias funciones útiles que:
+
++ Reducen la repetición
++ Reducen la probabilidad de cometer errores
++ Reducen la cantidad de tipeo
++ Es más fácil de leer
+
+---
+
+Vamos a usar las 6 más comunes y también el *pipe* (tubo) (`%>%`) para 
+combinarlas:
+
+1. `select()`
+2. `filter()`
+3. `group_by()`
+4. `summarize()`
+5. `mutate()`
+
+---
+
+Si no lo han instalado antes, háganlo con:
+
+
+```{r,eval=FALSE}
+install.packages('dplyr')
+```
+
+Y carguen el paquete:
+
+```{r,message=FALSE}
+library(dplyr)
+```
+
+## Usando select()
+
+Seleccionar variables
+
+```{r}
+year_country_gdp <- select(gapminder,year,country,gdpPercap)
+```
+
+
+```{r, out.height=400,out.width=400, echo=FALSE, fig.retina=NULL}
+knitr::include_graphics("img/13-dplyr-fig1.png")
+```
+
+---
+
+El verdadero poder aparece usando los pipes
+
+```{r}
+year_country_gdp <- gapminder %>% select(year,country,gdpPercap)
+```
+
+
+¿Cómo funcionan los pipes?
+
+## Usando filter()
+
+Podemos filtrar usando `filter()`
+
+```{r}
+year_country_gdp_euro <- gapminder %>%
+    filter(continent == "Europe") %>%
+    select(year, country, gdpPercap)
+```
+
+## Ejercicio 1{.challenge}
+
+Escribe en una sola operación (que puede tener varias lineas e incluir pipes) 
+que produzca un data.frame que tenga los valores de África para `lifeExp`, 
+`country` y `year`, pero no otros continentes.
+
+¿Cuántas filas tiene tu data.frame? ¿Por qué?
+
+
+## Usando group_by() y summarize()
+
+Podemos definir variables de agrupación usando `group_by()`
+
+```{r}
+str(gapminder)
+
+```
+
+---
+
+```{r}
+str(gapminder %>% group_by(continent))
+```
+
+
+La estructura no es igual que en original.  
+Una `list` que contiene las filas que corresponden a un continente en particular.
+
+---
+
+```{r, echo=FALSE, fig.retina=NULL, out.height=400}
+knitr::include_graphics("img/13-dplyr-fig2.png")
+```
+
+
+
+## Usando summarize()
+
+`group_by()` no es muy interesante por si solo. Es más interesante de
+usar con `summarize()`. Esto nos permite usar otras funciones como `mean`
+o `sd` de forma similar a `plyr`
+
+
+```{r}
+gdp_bycontinents <- gapminder %>%
+    group_by(continent) %>%
+    summarize(mean_gdpPercap = mean(gdpPercap))
+```
+
+---
+
+```{r, echo=FALSE, fig.retina=NULL, out.height=700, out.width=600}
+knitr::include_graphics("img/13-dplyr-fig3.png")
+```
+
+
+## Ejercicio 2{.challenge}
+
+Calcula la expectativa de vida promedio por país ¿Cuál tiene la mayor?¿Y cuál 
+la menor?
+
+---
+
+Nos permite calcular la media de PBI por continente pero se pueden hacer más cosas.
+También podemos agrupar por varias variables. Por ejemplo `year` y `continent`.
+
+
+```{r}
+gdp_bycontinents_byyear <- gapminder %>%
+    group_by(continent, year) %>%
+    summarize(mean_gdpPercap = mean(gdpPercap))
+```
+
+---
+
+Eso de por si es bastante útil, pero además podemos calcular ¡varias variables
+por vez!
+
+
+```{r}
+gdp_pop_bycontinents_byyear <- gapminder %>%
+    group_by(continent, year) %>%
+    summarize(mean_gdpPercap = mean(gdpPercap),
+              sd_gdpPercap = sd(gdpPercap),
+              mean_pop = mean(pop),
+              sd_pop = sd(pop))
+```
+
+## Usando mutate()
+
+Podemos crear nuevas antes de (o incluso después) de resumir la información 
+usando `mutate()`.
+
+```{r}
+gdp_pop_bycontinents_byyear <- gapminder %>%
+    mutate(gdp_billion = gdpPercap*pop/10^9) %>%
+    group_by(continent,year) %>%
+    summarize(mean_gdpPercap = mean(gdpPercap),
+              sd_gdpPercap = sd(gdpPercap),
+              mean_pop = mean(pop),
+              sd_pop = sd(pop),
+              mean_gdp_billion = mean(gdp_billion),
+              sd_gdp_billion = sd(gdp_billion))
+```
+
+
+
+## Ejercicio Avanzdo
+
+Calcula la expectativa de vida promedio en 2002 para dos países seleccionados
+al azar de cada continente. Luego ordena los nombres de los continentes 
+en el orden inverso a la expectativa de vida.  
+**Pista**: usa las funciones de `dplyr`, `arrange()` y `sample_n()`, tienen
+una sintaxis similar a otras funciones del paquete.
+
+## Otros recursos muy buenos
+
+* [Data Wrangling Cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+* [Introduction to dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)
+
