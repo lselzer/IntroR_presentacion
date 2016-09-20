@@ -117,7 +117,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <section>
     <h1 class="title">¿Cómo obtener ayuda?</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">19 September, 2016</h3>
+    <h3 class="date">20 September, 2016</h3>
 </section>
 
 <section id="archivos-de-ayuda" class="slide level2">
@@ -293,6 +293,59 @@ Pista: usa <code>??csv</code> para buscar funciones relacionadas con csv.</p>
   })();
 </script>
 
+<!--http://stackoverflow.com/questions/34706859/set-header-and-footer-reveal-js-presentation -->
+
+<style type="text/css">
+    /* 1. Style header/footer <div> so they are positioned as desired. */
+    #header-left {
+        position: absolute;
+        top: 2%;
+        left: 2%;
+        font-size: 12pt;
+    }
+    #header-right {
+        position: absolute;
+        top: 2%;
+        right: 2%;
+        font-size: 12pt;
+    }
+    #footer-left {
+        position: absolute;
+        bottom: 2%;
+        left: 2%;
+    }
+</style>
+
+<!-- 2. Create hidden header/footer <div> -->
+<div id="hidden" style="display:none;">
+    <div id="header">
+        <div id="header-left"><a href="index.html">Inicio</a></div>
+        <div id="header-right"><a href="" id="PDF">Descargar PDF</a></div>
+        <div id="footer-left">
+          <img src="img/logo_untdf_icpa_small.png" alt="logo untdf icpa small" />
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+    var header = $('#header').html();
+    if ( window.location.search.match( /print-pdf/gi ) ) {
+        Reveal.addEventListener( 'ready', function( event ) {
+            $('.slide-background').append(header);
+        });
+    }
+    else {
+        $('div.reveal').append(header);
+   }
+</script>
+<script type="text/javascript" charset="utf-8">
+  var a = document.getElementById("PDF");
+  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  
+  
+</script>
 
   </body>
 </html>
