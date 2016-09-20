@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Luciano Selzer" />
+  <title>Manipulación de data.frame con dplyr</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Manipulación de data.frame con dplyr</h1>
+    <h2 class="author">Luciano Selzer</h2>
+    <h3 class="date">20 September, 2016</h3>
+</section>
+
+<section class="slide level2">
+
+<p>La manipulación de datos es una de las operaciones más comunes:</p>
+<ul>
+<li>seleccionar observaciones</li>
+<li>seleccionar variables</li>
+<li>agrupar por características</li>
+<li>calcular estadísticas</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Podemos hacerlo en R base:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(gapminder[gapminder$continent ==<span class="st"> &quot;Africa&quot;</span>, <span class="st">&quot;gdpPercap&quot;</span>])</code></pre></div>
+<pre><code>[1] 2193.755</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(gapminder[gapminder$continent ==<span class="st"> &quot;Americas&quot;</span>, <span class="st">&quot;gdpPercap&quot;</span>])</code></pre></div>
+<pre><code>[1] 7136.11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(gapminder[gapminder$continent ==<span class="st"> &quot;Asia&quot;</span>, <span class="st">&quot;gdpPercap&quot;</span>])</code></pre></div>
+<pre><code>[1] 7902.15</code></pre>
+<p>Pero lleva mucha repetición</p>
+</section>
+<section id="el-paquete-dplyr" class="slide level2">
+<h1>El paquete <code>dplyr</code></h1>
+<p>El paquete <a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf"><code>dplyr</code></a> tiene varias funciones útiles que:</p>
+<ul>
+<li>Reducen la repetición</li>
+<li>Reducen la probabilidad de cometer errores</li>
+<li>Reducen la cantidad de tipeo</li>
+<li>Es más fácil de leer</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Vamos a usar las 6 más comunes y también el <em>pipe</em> (tubo) (<code>%&gt;%</code>) para combinarlas:</p>
+<ol type="1">
+<li><code>select()</code></li>
+<li><code>filter()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarize()</code></li>
+<li><code>mutate()</code></li>
+</ol>
+</section>
+<section class="slide level2">
+
+<p>Si no lo han instalado antes, háganlo con:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;dplyr&#39;</span>)</code></pre></div>
+<p>Y carguen el paquete:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
+</section>
+<section id="usando-select" class="slide level2">
+<h1>Usando select()</h1>
+<p>Seleccionar variables</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">year_country_gdp &lt;-<span class="st"> </span><span class="kw">select</span>(gapminder,year,country,gdpPercap)</code></pre></div>
+<p><img src="img/13-dplyr-fig1.png" width="400" height="400" style="display: block; margin: auto;" /></p>
+</section>
+<section class="slide level2">
+
+<p>El verdadero poder aparece usando los pipes</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">year_country_gdp &lt;-<span class="st"> </span>gapminder %&gt;%<span class="st"> </span><span class="kw">select</span>(year,country,gdpPercap)</code></pre></div>
+<p>¿Cómo funcionan los pipes?</p>
+</section>
+<section id="usando-filter" class="slide level2">
+<h1>Usando filter()</h1>
+<p>Podemos filtrar usando <code>filter()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">year_country_gdp_euro &lt;-<span class="st"> </span>gapminder %&gt;%
+<span class="st">    </span><span class="kw">filter</span>(continent ==<span class="st"> &quot;Europe&quot;</span>) %&gt;%
+<span class="st">    </span><span class="kw">select</span>(year, country, gdpPercap)</code></pre></div>
+</section>
+<section id="ejercicio-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>Escribe en una sola operación (que puede tener varias lineas e incluir pipes) que produzca un data.frame que tenga los valores de África para <code>lifeExp</code>, <code>country</code> y <code>year</code>, pero no otros continentes.</p>
+<p>¿Cuántas filas tiene tu data.frame? ¿Por qué?</p>
+</section>
+<section id="usando-group_by-y-summarize" class="slide level2">
+<h1>Usando group_by() y summarize()</h1>
+<p>Podemos definir variables de agrupación usando <code>group_by()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gapminder)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   1704 obs. of  6 variables:
+ $ country  : Factor w/ 142 levels &quot;Afghanistan&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ year     : int  1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
+ $ pop      : num  8425333 9240934 10267083 11537966 13079460 ...
+ $ continent: Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ lifeExp  : num  28.8 30.3 32 34 36.1 ...
+ $ gdpPercap: num  779 821 853 836 740 ...</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gapminder %&gt;%<span class="st"> </span><span class="kw">group_by</span>(continent))</code></pre></div>
+<pre><code>Classes &#39;grouped_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 1704 obs. of  6 variables:
+ $ country  : Factor w/ 142 levels &quot;Afghanistan&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ year     : int  1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
+ $ pop      : num  8425333 9240934 10267083 11537966 13079460 ...
+ $ continent: Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ lifeExp  : num  28.8 30.3 32 34 36.1 ...
+ $ gdpPercap: num  779 821 853 836 740 ...
+ - attr(*, &quot;vars&quot;)=List of 1
+  ..$ : symbol continent
+ - attr(*, &quot;drop&quot;)= logi TRUE
+ - attr(*, &quot;indices&quot;)=List of 5
+  ..$ : int  24 25 26 27 28 29 30 31 32 33 ...
+  ..$ : int  48 49 50 51 52 53 54 55 56 57 ...
+  ..$ : int  0 1 2 3 4 5 6 7 8 9 ...
+  ..$ : int  12 13 14 15 16 17 18 19 20 21 ...
+  ..$ : int  60 61 62 63 64 65 66 67 68 69 ...
+ - attr(*, &quot;group_sizes&quot;)= int  624 300 396 360 24
+ - attr(*, &quot;biggest_group_size&quot;)= int 624
+ - attr(*, &quot;labels&quot;)=&#39;data.frame&#39;:  5 obs. of  1 variable:
+  ..$ continent: Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 1 2 3 4 5
+  ..- attr(*, &quot;vars&quot;)=List of 1
+  .. ..$ : symbol continent
+  ..- attr(*, &quot;drop&quot;)= logi TRUE</code></pre>
+<p>La estructura no es igual que en original.<br />
+Una <code>list</code> que contiene las filas que corresponden a un continente en particular.</p>
+</section>
+<section class="slide level2">
+
+<p><img src="img/13-dplyr-fig2.png" height="400" style="display: block; margin: auto;" /></p>
+</section>
+<section id="usando-summarize" class="slide level2">
+<h1>Usando summarize()</h1>
+<p><code>group_by()</code> no es muy interesante por si solo. Es más interesante de usar con <code>summarize()</code>. Esto nos permite usar otras funciones como <code>mean</code> o <code>sd</code> de forma similar a <code>plyr</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gdp_bycontinents &lt;-<span class="st"> </span>gapminder %&gt;%
+<span class="st">    </span><span class="kw">group_by</span>(continent) %&gt;%
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_gdpPercap =</span> <span class="kw">mean</span>(gdpPercap))</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p><img src="img/13-dplyr-fig3.png" width="600" height="700" style="display: block; margin: auto;" /></p>
+</section>
+<section id="ejercicio-2" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>Calcula la expectativa de vida promedio por país ¿Cuál tiene la mayor?¿Y cuál la menor?</p>
+</section>
+<section class="slide level2">
+
+<p>Nos permite calcular la media de PBI por continente pero se pueden hacer más cosas. También podemos agrupar por varias variables. Por ejemplo <code>year</code> y <code>continent</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gdp_bycontinents_byyear &lt;-<span class="st"> </span>gapminder %&gt;%
+<span class="st">    </span><span class="kw">group_by</span>(continent, year) %&gt;%
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_gdpPercap =</span> <span class="kw">mean</span>(gdpPercap))</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Eso de por si es bastante útil, pero además podemos calcular ¡varias variables por vez!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gdp_pop_bycontinents_byyear &lt;-<span class="st"> </span>gapminder %&gt;%
+<span class="st">    </span><span class="kw">group_by</span>(continent, year) %&gt;%
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_gdpPercap =</span> <span class="kw">mean</span>(gdpPercap),
+              <span class="dt">sd_gdpPercap =</span> <span class="kw">sd</span>(gdpPercap),
+              <span class="dt">mean_pop =</span> <span class="kw">mean</span>(pop),
+              <span class="dt">sd_pop =</span> <span class="kw">sd</span>(pop))</code></pre></div>
+</section>
+<section id="usando-mutate" class="slide level2">
+<h1>Usando mutate()</h1>
+<p>Podemos crear nuevas antes de (o incluso después) de resumir la información usando <code>mutate()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gdp_pop_bycontinents_byyear &lt;-<span class="st"> </span>gapminder %&gt;%
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">gdp_billion =</span> gdpPercap*pop/<span class="dv">10</span>^<span class="dv">9</span>) %&gt;%
+<span class="st">    </span><span class="kw">group_by</span>(continent,year) %&gt;%
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_gdpPercap =</span> <span class="kw">mean</span>(gdpPercap),
+              <span class="dt">sd_gdpPercap =</span> <span class="kw">sd</span>(gdpPercap),
+              <span class="dt">mean_pop =</span> <span class="kw">mean</span>(pop),
+              <span class="dt">sd_pop =</span> <span class="kw">sd</span>(pop),
+              <span class="dt">mean_gdp_billion =</span> <span class="kw">mean</span>(gdp_billion),
+              <span class="dt">sd_gdp_billion =</span> <span class="kw">sd</span>(gdp_billion))</code></pre></div>
+</section>
+<section id="ejercicio-avanzdo" class="slide level2">
+<h1>Ejercicio Avanzdo</h1>
+<p>Calcula la expectativa de vida promedio en 2002 para dos países seleccionados al azar de cada continente. Luego ordena los nombres de los continentes en el orden inverso a la expectativa de vida.<br />
+<strong>Pista</strong>: usa las funciones de <code>dplyr</code>, <code>arrange()</code> y <code>sample_n()</code>, tienen una sintaxis similar a otras funciones del paquete.</p>
+</section>
+<section id="otros-recursos-muy-buenos" class="slide level2">
+<h1>Otros recursos muy buenos</h1>
+<ul>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data Wrangling Cheat sheet</a></li>
+<li><a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">Introduction to dplyr</a></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+<!--http://stackoverflow.com/questions/34706859/set-header-and-footer-reveal-js-presentation -->
+
+<style type="text/css">
+    /* 1. Style header/footer <div> so they are positioned as desired. */
+    #header-left {
+        position: absolute;
+        top: 2%;
+        left: 2%;
+        font-size: 12pt;
+    }
+    #header-right {
+        position: absolute;
+        top: 2%;
+        right: 2%;
+        font-size: 12pt;
+    }
+    #footer-left {
+        position: absolute;
+        bottom: 2%;
+        left: 2%;
+    }
+</style>
+
+<!-- 2. Create hidden header/footer <div> -->
+<div id="hidden" style="display:none;">
+    <div id="header">
+        <div id="header-left"><a href="index.html">Inicio</a></div>
+        <div id="header-right"><a href="" id="PDF">Descargar PDF</a></div>
+        <div id="footer-left">
+          <img src="img/logo_untdf_icpa_small.png" alt="logo untdf icpa small" />
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+    var header = $('#header').html();
+    if ( window.location.search.match( /print-pdf/gi ) ) {
+        Reveal.addEventListener( 'ready', function( event ) {
+            $('.slide-background').append(header);
+        });
+    }
+    else {
+        $('div.reveal').append(header);
+   }
+</script>
+<script type="text/javascript" charset="utf-8">
+  var a = document.getElementById("PDF");
+  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  
+  
+</script>
+
+  </body>
+</html>
