@@ -4,4 +4,4 @@
 .Ruserdata
 _site/
 libs/
-*.html
+_output.yml
