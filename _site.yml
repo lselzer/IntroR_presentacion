@@ -34,3 +34,5 @@ navbar:
         href: 11_guardando.html
       - text: "Divide-aplica-combina"
         href: 12_divide_aplica_combina.html
+      - text: "Manipulación de data.frames con dplyr"
+        href: 13_manipulacion.html
