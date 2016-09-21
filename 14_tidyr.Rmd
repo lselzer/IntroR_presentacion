@@ -96,12 +96,12 @@ str(gapminder)
 
 A veces, tenemos formatos intermedios: 
 
-ID:             | Observaciones:
-----------------|---------------
-   `continent`  |   `pop`
-   `country`    |    `lifeExp` 
-   `year`       |    `gdpPercap`
-  
+ID:          Observaciones:
+-----------  ---------------
+`continent`  `pop`
+`country`    `lifeExp` 
+`year`       `gdpPercap`
+-----------  ---------------
 
 
 Es un buen formato porque las tres observaciones tienen diferentes unidades
