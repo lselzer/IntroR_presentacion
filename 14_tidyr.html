@@ -177,7 +177,7 @@ Pero muchas funciones de R necesitan los datos en formato largo</p>
 <section class="slide level2">
 
 <p>A veces, tenemos formatos intermedios:</p>
-<p>ID: | Observaciones: —————-|————— <code>continent</code>| <code>pop</code> <code>country</code>| <code>lifeExp</code> <code>year</code>| <code>gdpPercap</code></p>
+<p>ID: | Observaciones: —————-|————— <code>continent</code> | <code>pop</code> <code>country</code> | <code>lifeExp</code> <code>year</code> | <code>gdpPercap</code></p>
 <p>Es un buen formato porque las tres observaciones tienen diferentes unidades</p>
 <p><strong>Nota:</strong> Algunas funciones de gráficos en R sí funcionan mejor con datos en formato ancho.</p>
 </section>
@@ -287,7 +287,7 @@ gap_long$year &lt;-<span class="st"> </span><span class="kw">as.integer</span>(g
 </section>
 <section id="de-formato-largo-a-intermedio-con-spread" class="slide level2">
 <h1>De formato largo a intermedio con spread()</h1>
-<p>Vamos a chequear que los datos sean iguales a los otros. Vamos a usar el opuesto de <code>gather()</code> para extender nuestras variables observadas en con la función <code>spread()</code>. Podemos hacerlo hasta el formato intermedio o el ancho.</p>
+<p>Vamos a chequear que los datos sean iguales a los otros. Vamos a usar el opuesto de <code>gather()</code> para extender nuestras variables observadas con la función <code>spread()</code>. Podemos hacerlo hasta el formato intermedio o el ancho.</p>
 </section>
 <section class="slide level2">
 
@@ -296,6 +296,9 @@ gap_long$year &lt;-<span class="st"> </span><span class="kw">as.integer</span>(g
 <pre><code>[1] 1704    6</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(gapminder)</code></pre></div>
 <pre><code>[1] 1704    6</code></pre>
+</section>
+<section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(gap_normal)</code></pre></div>
 <pre><code>[1] &quot;continent&quot; &quot;country&quot;   &quot;year&quot;      &quot;gdpPercap&quot; &quot;lifeExp&quot;   &quot;pop&quot;      </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(gapminder)</code></pre></div>
@@ -311,6 +314,9 @@ gap_long$year &lt;-<span class="st"> </span><span class="kw">as.integer</span>(g
 [3] &quot;Component \&quot;continent\&quot;: 1212 string mismatches&quot;            
 [4] &quot;Component \&quot;lifeExp\&quot;: Mean relative difference: 0.203822&quot;  
 [5] &quot;Component \&quot;gdpPercap\&quot;: Mean relative difference: 1.162302&quot;</code></pre>
+</section>
+<section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gap_normal)</code></pre></div>
 <pre><code>  country year      pop continent lifeExp gdpPercap
 1 Algeria 1952  9279525    Africa  43.077  2449.008
@@ -341,8 +347,11 @@ gap_long$year &lt;-<span class="st"> </span><span class="kw">as.integer</span>(g
 <p>Vamos a conservar las variables identificatorias y extender todas las observaciones de las tres medidas (<code>pop</code>,<code>lifeExp</code>,<code>gdpPercap</code>) y tiempo (<code>year</code>).</p>
 <p>Primero necesitamos crear las etiquetas apropiadas para nuestras nuevas variables (tiempo*medida) y también unificar nuestras variables identificatorias pas simplificar el proceso:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_temp &lt;-<span class="st"> </span>gap_long %&gt;%<span class="st"> </span>
-<span class="st">  </span><span class="kw">unite</span>(var_ID, continent, country, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
-<span class="kw">str</span>(gap_temp)</code></pre></div>
+<span class="st">  </span><span class="kw">unite</span>(var_ID, continent, country, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gap_temp)</code></pre></div>
 <pre><code>&#39;data.frame&#39;:   5112 obs. of  4 variables:
  $ var_ID    : chr  &quot;Africa_Algeria&quot; &quot;Africa_Angola&quot; &quot;Africa_Benin&quot; &quot;Africa_Botswana&quot; ...
  $ obs_type  : chr  &quot;gdpPercap&quot; &quot;gdpPercap&quot; &quot;gdpPercap&quot; &quot;gdpPercap&quot; ...
@@ -407,9 +416,9 @@ gap_long$year &lt;-<span class="st"> </span><span class="kw">as.integer</span>(g
  $ pop_2002      : num  31287142 10866106 7026113 1630347 12251209 ...
  $ pop_2007      : num  33333216 12420476 8078314 1639131 14326203 ...</code></pre>
 </section>
-<section id="ejercicio-3" class="slide level2">
+<section id="ejercicio-3" class="slide level2 challenge">
 <h1>Ejercicio 3</h1>
-<p>Lleva esto un paso más lejos y crea <code>gap_ridiculamente_ancho</code> extendiendo paises, año y las tres medidas. <strong>Hint</strong> la nueva data.frame debería tener solo 5 filas</p>
+<p>Lleva esto un paso más lejos y crea <code>gap_ridiculamente_ancho</code> extendiendo paises, año y las tres medidas. <strong>Pista</strong> la nueva data.frame debería tener solo 5 filas</p>
 </section>
 <section class="slide level2">
 
@@ -420,8 +429,11 @@ gap_wide_betterID &lt;-<span class="st"> </span>gap_long %&gt;%
 <span class="st">    </span><span class="kw">unite</span>(ID_var, continent, country, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) %&gt;%
 <span class="st">    </span><span class="kw">unite</span>(var_names, obs_type, year, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) %&gt;%
 <span class="st">    </span><span class="kw">spread</span>(var_names, obs_values) %&gt;%
-<span class="st">    </span><span class="kw">separate</span>(ID_var, <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>, <span class="st">&quot;country&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
-<span class="kw">str</span>(gap_wide_betterID)</code></pre></div>
+<span class="st">    </span><span class="kw">separate</span>(ID_var, <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>, <span class="st">&quot;country&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gap_wide_betterID)</code></pre></div>
 <pre><code>&#39;data.frame&#39;:   142 obs. of  38 variables:
  $ continent     : chr  &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; ...
  $ country       : chr  &quot;Algeria&quot; &quot;Angola&quot; &quot;Benin&quot; &quot;Botswana&quot; ...
@@ -461,6 +473,9 @@ gap_wide_betterID &lt;-<span class="st"> </span>gap_long %&gt;%
  $ pop_1997      : num  29072015 9875024 6066080 1536536 10352843 ...
  $ pop_2002      : num  31287142 10866106 7026113 1630347 12251209 ...
  $ pop_2007      : num  33333216 12420476 8078314 1639131 14326203 ...</code></pre>
+</section>
+<section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(gap_wide, gap_wide_betterID)</code></pre></div>
 <pre><code>[1] TRUE</code></pre>
 <p>¡Fuimos y volvimos!</p>
