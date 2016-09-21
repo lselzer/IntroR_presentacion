@@ -98,9 +98,9 @@ A veces, tenemos formatos intermedios:
 
 ID:             | Observaciones:
 ----------------|---------------
-   `continent`|   `pop`
-   `country`|    `lifeExp` 
-   `year`|    `gdpPercap`
+   `continent`  |   `pop`
+   `country`    |    `lifeExp` 
+   `year`       |    `gdpPercap`
   
 
 
@@ -201,7 +201,7 @@ la lección  de `dplyr`.
 ## De formato largo a intermedio con spread()
 
 Vamos a chequear que los datos sean iguales a los otros. Vamos a usar el opuesto
-de `gather()` para extender nuestras variables observadas en con la función
+de `gather()` para extender nuestras variables observadas con la función
 `spread()`. Podemos hacerlo hasta el formato intermedio o el ancho.
 
 ---
@@ -210,6 +210,11 @@ de `gather()` para extender nuestras variables observadas en con la función
 gap_normal <- gap_long %>% spread(obs_type, obs_values)
 dim(gap_normal)
 dim(gapminder)
+```
+
+---
+
+```{r}
 names(gap_normal)
 names(gapminder)
 ```
@@ -223,6 +228,11 @@ Lo arreglamos antes de probar si son `all.equal()`.
 ```{r}
 gap_normal <- gap_normal[,names(gapminder)]
 all.equal(gap_normal,gapminder)
+```
+
+---
+
+```{r}
 head(gap_normal)
 head(gapminder)
 ```
@@ -252,6 +262,11 @@ simplificar el proceso:
 ```{r}
 gap_temp <- gap_long %>% 
   unite(var_ID, continent, country, sep = "_")
+```
+
+---
+
+```{r}
 str(gap_temp)
 ```
 
@@ -278,11 +293,11 @@ gap_wide_new <- gap_long %>%
 str(gap_wide_new)
 ```
 
-## Ejercicio 3
+## Ejercicio 3{.challenge}
 
 Lleva esto un paso más lejos y crea `gap_ridiculamente_ancho` extendiendo
 paises, año y las tres medidas.
-**Hint** la nueva data.frame debería tener solo 5 filas
+**Pista** la nueva data.frame debería tener solo 5 filas
 
 ---
 
@@ -298,8 +313,17 @@ gap_wide_betterID <- gap_long %>%
     unite(var_names, obs_type, year, sep = "_") %>%
     spread(var_names, obs_values) %>%
     separate(ID_var, c("continent", "country"), sep = "_")
-str(gap_wide_betterID)
+```
 
+---
+
+```{r}
+str(gap_wide_betterID)
+```
+
+---
+
+```{r}
 all.equal(gap_wide, gap_wide_betterID)
 ```
 
