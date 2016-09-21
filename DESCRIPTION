@@ -1,5 +1,5 @@
 Package: placeholder
 Title: Does not matter.
 Version: 0.0.1
-Imports: revealjs, animation, ggplot2, gganimate, tweenr, dplyr
+Imports: revealjs, animation, ggplot2, gganimate, tweenr, dplyr, tidyr
 Remotes: rstudio/revealjs, thomasp85/tweenr, dgrtwo/gganimate

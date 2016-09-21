@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Luciano Selzer" />
+  <title>Manipulación de data.frame con tidyr</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Manipulación de data.frame con tidyr</h1>
+    <h2 class="author">Luciano Selzer</h2>
+    <h3 class="date">21 September, 2016</h3>
+</section>
+
+<section class="slide level2">
+
+<p>Muchas veces necesitamos manipular nuestros datos entre el formato “ancho” y “largo” En el formato “largo”:</p>
+<ul>
+<li>cada columna es una variable</li>
+<li>cada fila es una observación</li>
+</ul>
+<p>Una columna para la variable observada y las otras otras columnas son variables de identificación.</p>
+</section>
+<section class="slide level2">
+
+<p>En el formato ancho cada fila es un paciente, sujeto, o sitio y hay muchas observaciones de cada uno.</p>
+<ul>
+<li>Multiples observaciones en el tiempo</li>
+<li>Multiples variables</li>
+<li>Una mezcla de ambas</li>
+</ul>
+<p>Quizás sea más fácil entrar los datos en formato ancho.<br />
+Pero muchas funciones de R necesitan los datos en formato largo</p>
+</section>
+<section class="slide level2">
+
+<p><img src="img/14-tidyr-fig1.png" alt="" /></p>
+</section>
+<section class="slide level2">
+
+<p>Para los humanos es más fácil leer los datos en formato ancho, pero para las computadoras es más fácil el formato largo.</p>
+<p>Las bases de datos están en formato largo, con cada fila una observación. En el formato largo todos los datos están en columnas, en cambio en el formato ancho parte de los datos está en los nombres de columna.</p>
+</section>
+<section id="empezando" class="slide level2">
+<h1>Empezando</h1>
+<p>Instala los paquetes si no los tienes</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>)
+<span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
+<p>Y cargalos</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;tidyr&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
+</section>
+<section class="slide level2">
+
+<p>Veamos como están dispuestos los datos:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gapminder)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   1704 obs. of  6 variables:
+ $ country  : chr  &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; ...
+ $ year     : int  1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
+ $ pop      : num  8425333 9240934 10267083 11537966 13079460 ...
+ $ continent: chr  &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; &quot;Asia&quot; ...
+ $ lifeExp  : num  28.8 30.3 32 34 36.1 ...
+ $ gdpPercap: num  779 821 853 836 740 ...</code></pre>
+</section>
+<section id="ejercicio-1" class="slide level2 challenge">
+<h1>Ejercicio 1</h1>
+<p>¿Gapminder está en formato largo, ancho o intermedio?</p>
+</section>
+<section class="slide level2">
+
+<p>A veces, tenemos formatos intermedios:</p>
+<p>ID: | Observaciones: —————-|————— - <code>continent</code>| - <code>pop</code> - <code>country</code>| - <code>lifeExp</code> - <code>year</code>| - <code>gdpPercap</code></p>
+<p>Es un buen formato porque las tres observaciones tienen diferentes unidades</p>
+<p><strong>Nota:</strong> Algunas funciones de gráficos en R sí funcionan mejor con datos en formato ancho.</p>
+</section>
+<section id="de-formato-ancho-a-largo-gather" class="slide level2">
+<h1>De formato ancho a largo gather()</h1>
+<p>Hasta ahora usamos una versión cómoda de gapminder, pero en la vida real vamos a tener datos en formato ancho.</p>
+<p>Vamos a cargar una versión en este formato. Pero no queremos que <code>continent</code>y <code>country</code> sean factores así que lo leemos con <code>stringsAsFactors = FALSE</code>.</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_wide &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/gapminder_wide.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+<span class="kw">str</span>(gap_wide)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   142 obs. of  38 variables:
+ $ continent     : chr  &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; ...
+ $ country       : chr  &quot;Algeria&quot; &quot;Angola&quot; &quot;Benin&quot; &quot;Botswana&quot; ...
+ $ gdpPercap_1952: num  2449 3521 1063 851 543 ...
+ $ gdpPercap_1957: num  3014 3828 960 918 617 ...
+ $ gdpPercap_1962: num  2551 4269 949 984 723 ...
+ $ gdpPercap_1967: num  3247 5523 1036 1215 795 ...
+ $ gdpPercap_1972: num  4183 5473 1086 2264 855 ...
+ $ gdpPercap_1977: num  4910 3009 1029 3215 743 ...
+ $ gdpPercap_1982: num  5745 2757 1278 4551 807 ...
+ $ gdpPercap_1987: num  5681 2430 1226 6206 912 ...
+ $ gdpPercap_1992: num  5023 2628 1191 7954 932 ...
+ $ gdpPercap_1997: num  4797 2277 1233 8647 946 ...
+ $ gdpPercap_2002: num  5288 2773 1373 11004 1038 ...
+ $ gdpPercap_2007: num  6223 4797 1441 12570 1217 ...
+ $ lifeExp_1952  : num  43.1 30 38.2 47.6 32 ...
+ $ lifeExp_1957  : num  45.7 32 40.4 49.6 34.9 ...
+ $ lifeExp_1962  : num  48.3 34 42.6 51.5 37.8 ...
+ $ lifeExp_1967  : num  51.4 36 44.9 53.3 40.7 ...
+ $ lifeExp_1972  : num  54.5 37.9 47 56 43.6 ...
+ $ lifeExp_1977  : num  58 39.5 49.2 59.3 46.1 ...
+ $ lifeExp_1982  : num  61.4 39.9 50.9 61.5 48.1 ...
+ $ lifeExp_1987  : num  65.8 39.9 52.3 63.6 49.6 ...
+ $ lifeExp_1992  : num  67.7 40.6 53.9 62.7 50.3 ...
+ $ lifeExp_1997  : num  69.2 41 54.8 52.6 50.3 ...
+ $ lifeExp_2002  : num  71 41 54.4 46.6 50.6 ...
+ $ lifeExp_2007  : num  72.3 42.7 56.7 50.7 52.3 ...
+ $ pop_1952      : num  9279525 4232095 1738315 442308 4469979 ...
+ $ pop_1957      : num  10270856 4561361 1925173 474639 4713416 ...
+ $ pop_1962      : num  11000948 4826015 2151895 512764 4919632 ...
+ $ pop_1967      : num  12760499 5247469 2427334 553541 5127935 ...
+ $ pop_1972      : num  14760787 5894858 2761407 619351 5433886 ...
+ $ pop_1977      : num  17152804 6162675 3168267 781472 5889574 ...
+ $ pop_1982      : num  20033753 7016384 3641603 970347 6634596 ...
+ $ pop_1987      : num  23254956 7874230 4243788 1151184 7586551 ...
+ $ pop_1992      : num  26298373 8735988 4981671 1342614 8878303 ...
+ $ pop_1997      : num  29072015 9875024 6066080 1536536 10352843 ...
+ $ pop_2002      : int  31287142 10866106 7026113 1630347 12251209 7021078 15929988 4048013 8835739 614382 ...
+ $ pop_2007      : int  33333216 12420476 8078314 1639131 14326203 8390505 17696293 4369038 10238807 710960 ...</code></pre>
+</section>
+<section class="slide level2">
+
+<p><img src="img/14-tidyr-fig2.png" alt="" /></p>
+<p>El primer paso hacia convertir nuestros datos a un formato intermedio es convertir de ancho a largo.</p>
+<p>Con la función <code>gather()</code> de <code>tidyr</code> va a juntar las columnas de observaciones en una sola variable.</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_long &lt;-<span class="st"> </span>gap_wide %&gt;%
+<span class="st">    </span><span class="kw">gather</span>(obstype_year,obs_values, <span class="kw">starts_with</span>(<span class="st">&#39;pop&#39;</span>),
+           <span class="kw">starts_with</span>(<span class="st">&#39;lifeExp&#39;</span>), <span class="kw">starts_with</span>(<span class="st">&#39;gdpPercap&#39;</span>))
+<span class="kw">str</span>(gap_long)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   5112 obs. of  4 variables:
+ $ continent   : chr  &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; ...
+ $ country     : chr  &quot;Algeria&quot; &quot;Angola&quot; &quot;Benin&quot; &quot;Botswana&quot; ...
+ $ obstype_year: chr  &quot;pop_1952&quot; &quot;pop_1952&quot; &quot;pop_1952&quot; &quot;pop_1952&quot; ...
+ $ obs_values  : num  9279525 4232095 1738315 442308 4469979 ...</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Dentro de <code>gather</code> el primer nombre es la nueva clumna con la nueva variable de indentificación y la segunda con el nombre de la nueva columna que va a tener los valores.</p>
+<p>Podríamos haber escrito todos los nombre, pero la función <code>starts_with()</code> nos ahorra trabajo. También podemos usar el signo <code>-</code> para indicar cuales columnas nos son variables.</p>
+</section>
+<section class="slide level2">
+
+<p><img src="img/14-tidyr-fig3.png" alt="" /></p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_long &lt;-<span class="st"> </span>gap_wide %&gt;%<span class="st"> </span><span class="kw">gather</span>(obstype_year,obs_values,-continent,-country)
+<span class="kw">str</span>(gap_long)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   5112 obs. of  4 variables:
+ $ continent   : chr  &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; ...
+ $ country     : chr  &quot;Algeria&quot; &quot;Angola&quot; &quot;Benin&quot; &quot;Botswana&quot; ...
+ $ obstype_year: chr  &quot;gdpPercap_1952&quot; &quot;gdpPercap_1952&quot; &quot;gdpPercap_1952&quot; &quot;gdpPercap_1952&quot; ...
+ $ obs_values  : num  2449 3521 1063 851 543 ...</code></pre>
+<p>Puede parecer trivial pero a veces tenes una variable identificatoria y 40 obsevaciones con nombres distintos.</p>
+</section>
+<section class="slide level2">
+
+<p>Ahora <code>obstype_year</code> en verdad contiene dos cosas:</p>
+<ul>
+<li>la observación</li>
+<li>el año</li>
+</ul>
+<p>Podemos usar la función <code>separate()</code> para dividir una cadena en múltiples variables.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_long &lt;-<span class="st"> </span>gap_long %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">separate</span>(obstype_year,
+           <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&#39;obs_type&#39;</span>,<span class="st">&#39;year&#39;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
+gap_long$year &lt;-<span class="st"> </span><span class="kw">as.integer</span>(gap_long$year)</code></pre></div>
+</section>
+<section id="ejercicio-2" class="slide level2 challenge">
+<h1>Ejercicio 2</h1>
+<p>Usando <code>gap_long</code>, calcula la expectativa de vida, población, gdpPercap para cada contintente. <strong>Pista</strong>: usa las funciones <code>group_by()</code> y <code>summarize()</code> aprendidas en la lección de <code>dplyr</code>.</p>
+</section>
+<section id="de-formato-largo-a-intermedio-con-spread" class="slide level2">
+<h1>De formato largo a intermedio con spread()</h1>
+<p>Vamos a chequear que los datos sean iguales a los otros. Vamos a usar el opuesto de <code>gather()</code> para extender nuestras variables observadas en con la función <code>spread()</code>. Podemos hacerlo hasta el formato intermedio o el ancho.</p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_normal &lt;-<span class="st"> </span>gap_long %&gt;%<span class="st"> </span><span class="kw">spread</span>(obs_type, obs_values)
+<span class="kw">dim</span>(gap_normal)</code></pre></div>
+<pre><code>[1] 1704    6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(gapminder)</code></pre></div>
+<pre><code>[1] 1704    6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(gap_normal)</code></pre></div>
+<pre><code>[1] &quot;continent&quot; &quot;country&quot;   &quot;year&quot;      &quot;gdpPercap&quot; &quot;lifeExp&quot;   &quot;pop&quot;      </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(gapminder)</code></pre></div>
+<pre><code>[1] &quot;country&quot;   &quot;year&quot;      &quot;pop&quot;       &quot;continent&quot; &quot;lifeExp&quot;   &quot;gdpPercap&quot;</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Ahora tenemos un formato intermedio <code>gap_normal</code>, con las mismas dimensiones pero el orden de las variables es distinto. Lo arreglamos antes de probar si son <code>all.equal()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_normal &lt;-<span class="st"> </span>gap_normal[,<span class="kw">names</span>(gapminder)]
+<span class="kw">all.equal</span>(gap_normal,gapminder)</code></pre></div>
+<pre><code>[1] &quot;Component \&quot;country\&quot;: 1704 string mismatches&quot;              
+[2] &quot;Component \&quot;pop\&quot;: Mean relative difference: 1.634504&quot;      
+[3] &quot;Component \&quot;continent\&quot;: 1212 string mismatches&quot;            
+[4] &quot;Component \&quot;lifeExp\&quot;: Mean relative difference: 0.203822&quot;  
+[5] &quot;Component \&quot;gdpPercap\&quot;: Mean relative difference: 1.162302&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gap_normal)</code></pre></div>
+<pre><code>  country year      pop continent lifeExp gdpPercap
+1 Algeria 1952  9279525    Africa  43.077  2449.008
+2 Algeria 1957 10270856    Africa  45.685  3013.976
+3 Algeria 1962 11000948    Africa  48.303  2550.817
+4 Algeria 1967 12760499    Africa  51.407  3246.992
+5 Algeria 1972 14760787    Africa  54.518  4182.664
+6 Algeria 1977 17152804    Africa  58.014  4910.417</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gapminder)</code></pre></div>
+<pre><code>      country year      pop continent lifeExp gdpPercap
+1 Afghanistan 1952  8425333      Asia  28.801  779.4453
+2 Afghanistan 1957  9240934      Asia  30.332  820.8530
+3 Afghanistan 1962 10267083      Asia  31.997  853.1007
+4 Afghanistan 1967 11537966      Asia  34.020  836.1971
+5 Afghanistan 1972 13079460      Asia  36.088  739.9811
+6 Afghanistan 1977 14880372      Asia  38.438  786.1134</code></pre>
+</section>
+<section class="slide level2">
+
+<p>El original estaba ordenado por <code>country</code>, <code>continent</code>, luego <code>year</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_normal &lt;-<span class="st"> </span>gap_normal %&gt;%<span class="st"> </span><span class="kw">arrange</span>(country,continent,year)
+<span class="kw">all.equal</span>(gap_normal,gapminder)</code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+</section>
+<section class="slide level2">
+
+<p>Ahora convirtamos desde largo hasta ancho.</p>
+<p>Vamos a conservar las variables identificatorias y extender todas las observaciones de las tres medidas (<code>pop</code>,<code>lifeExp</code>,<code>gdpPercap</code>) y tiempo (<code>year</code>).</p>
+<p>Primero necesitamos crear las etiquetas apropiadas para nuestras nuevas variables (tiempo*medida) y también unificar nuestras variables identificatorias pas simplificar el proceso:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_temp &lt;-<span class="st"> </span>gap_long %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(var_ID, continent, country, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
+<span class="kw">str</span>(gap_temp)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   5112 obs. of  4 variables:
+ $ var_ID    : chr  &quot;Africa_Algeria&quot; &quot;Africa_Angola&quot; &quot;Africa_Benin&quot; &quot;Africa_Botswana&quot; ...
+ $ obs_type  : chr  &quot;gdpPercap&quot; &quot;gdpPercap&quot; &quot;gdpPercap&quot; &quot;gdpPercap&quot; ...
+ $ year      : int  1952 1952 1952 1952 1952 1952 1952 1952 1952 1952 ...
+ $ obs_values: num  2449 3521 1063 851 543 ...</code></pre>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_temp &lt;-<span class="st"> </span>gap_long %&gt;%
+<span class="st">    </span><span class="kw">unite</span>(ID_var,continent,country,<span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) %&gt;%
+<span class="st">    </span><span class="kw">unite</span>(var_names, obs_type, year, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
+<span class="kw">str</span>(gap_temp)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   5112 obs. of  3 variables:
+ $ ID_var    : chr  &quot;Africa_Algeria&quot; &quot;Africa_Angola&quot; &quot;Africa_Benin&quot; &quot;Africa_Botswana&quot; ...
+ $ var_names : chr  &quot;gdpPercap_1952&quot; &quot;gdpPercap_1952&quot; &quot;gdpPercap_1952&quot; &quot;gdpPercap_1952&quot; ...
+ $ obs_values: num  2449 3521 1063 851 543 ...</code></pre>
+<p>Usando <code>unite()</code> ahora tenemos una sola columna ID que es combinación de de <code>continent</code>,<code>country</code>, y definimos los nombres de las variables. ahora modemos entubar con <code>spread()</code></p>
+</section>
+<section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_wide_new &lt;-<span class="st"> </span>gap_long %&gt;%
+<span class="st">    </span><span class="kw">unite</span>(ID_var, continent, country, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) %&gt;%
+<span class="st">    </span><span class="kw">unite</span>(var_names, obs_type, year, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) %&gt;%
+<span class="st">    </span><span class="kw">spread</span>(var_names, obs_values)
+<span class="kw">str</span>(gap_wide_new)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   142 obs. of  37 variables:
+ $ ID_var        : chr  &quot;Africa_Algeria&quot; &quot;Africa_Angola&quot; &quot;Africa_Benin&quot; &quot;Africa_Botswana&quot; ...
+ $ gdpPercap_1952: num  2449 3521 1063 851 543 ...
+ $ gdpPercap_1957: num  3014 3828 960 918 617 ...
+ $ gdpPercap_1962: num  2551 4269 949 984 723 ...
+ $ gdpPercap_1967: num  3247 5523 1036 1215 795 ...
+ $ gdpPercap_1972: num  4183 5473 1086 2264 855 ...
+ $ gdpPercap_1977: num  4910 3009 1029 3215 743 ...
+ $ gdpPercap_1982: num  5745 2757 1278 4551 807 ...
+ $ gdpPercap_1987: num  5681 2430 1226 6206 912 ...
+ $ gdpPercap_1992: num  5023 2628 1191 7954 932 ...
+ $ gdpPercap_1997: num  4797 2277 1233 8647 946 ...
+ $ gdpPercap_2002: num  5288 2773 1373 11004 1038 ...
+ $ gdpPercap_2007: num  6223 4797 1441 12570 1217 ...
+ $ lifeExp_1952  : num  43.1 30 38.2 47.6 32 ...
+ $ lifeExp_1957  : num  45.7 32 40.4 49.6 34.9 ...
+ $ lifeExp_1962  : num  48.3 34 42.6 51.5 37.8 ...
+ $ lifeExp_1967  : num  51.4 36 44.9 53.3 40.7 ...
+ $ lifeExp_1972  : num  54.5 37.9 47 56 43.6 ...
+ $ lifeExp_1977  : num  58 39.5 49.2 59.3 46.1 ...
+ $ lifeExp_1982  : num  61.4 39.9 50.9 61.5 48.1 ...
+ $ lifeExp_1987  : num  65.8 39.9 52.3 63.6 49.6 ...
+ $ lifeExp_1992  : num  67.7 40.6 53.9 62.7 50.3 ...
+ $ lifeExp_1997  : num  69.2 41 54.8 52.6 50.3 ...
+ $ lifeExp_2002  : num  71 41 54.4 46.6 50.6 ...
+ $ lifeExp_2007  : num  72.3 42.7 56.7 50.7 52.3 ...
+ $ pop_1952      : num  9279525 4232095 1738315 442308 4469979 ...
+ $ pop_1957      : num  10270856 4561361 1925173 474639 4713416 ...
+ $ pop_1962      : num  11000948 4826015 2151895 512764 4919632 ...
+ $ pop_1967      : num  12760499 5247469 2427334 553541 5127935 ...
+ $ pop_1972      : num  14760787 5894858 2761407 619351 5433886 ...
+ $ pop_1977      : num  17152804 6162675 3168267 781472 5889574 ...
+ $ pop_1982      : num  20033753 7016384 3641603 970347 6634596 ...
+ $ pop_1987      : num  23254956 7874230 4243788 1151184 7586551 ...
+ $ pop_1992      : num  26298373 8735988 4981671 1342614 8878303 ...
+ $ pop_1997      : num  29072015 9875024 6066080 1536536 10352843 ...
+ $ pop_2002      : num  31287142 10866106 7026113 1630347 12251209 ...
+ $ pop_2007      : num  33333216 12420476 8078314 1639131 14326203 ...</code></pre>
+</section>
+<section id="ejercicio-3" class="slide level2">
+<h1>Ejercicio 3</h1>
+<p>Lleva esto un paso más lejos y crea <code>gap_ridiculamente_ancho</code> extendiendo paises, año y las tres medidas. <strong>Hint</strong> la nueva data.frame debería tener solo 5 filas</p>
+</section>
+<section class="slide level2">
+
+<p>Ahora tenemos una dataframe ancho, pero la variable <code>ID_var</code> podría ser más usable, separemos en dos variables con <code>separate()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gap_wide_betterID &lt;-<span class="st"> </span><span class="kw">separate</span>(gap_wide_new, ID_var, 
+                              <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>,<span class="st">&quot;country&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
+gap_wide_betterID &lt;-<span class="st"> </span>gap_long %&gt;%
+<span class="st">    </span><span class="kw">unite</span>(ID_var, continent, country, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) %&gt;%
+<span class="st">    </span><span class="kw">unite</span>(var_names, obs_type, year, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>) %&gt;%
+<span class="st">    </span><span class="kw">spread</span>(var_names, obs_values) %&gt;%
+<span class="st">    </span><span class="kw">separate</span>(ID_var, <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>, <span class="st">&quot;country&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
+<span class="kw">str</span>(gap_wide_betterID)</code></pre></div>
+<pre><code>&#39;data.frame&#39;:   142 obs. of  38 variables:
+ $ continent     : chr  &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; &quot;Africa&quot; ...
+ $ country       : chr  &quot;Algeria&quot; &quot;Angola&quot; &quot;Benin&quot; &quot;Botswana&quot; ...
+ $ gdpPercap_1952: num  2449 3521 1063 851 543 ...
+ $ gdpPercap_1957: num  3014 3828 960 918 617 ...
+ $ gdpPercap_1962: num  2551 4269 949 984 723 ...
+ $ gdpPercap_1967: num  3247 5523 1036 1215 795 ...
+ $ gdpPercap_1972: num  4183 5473 1086 2264 855 ...
+ $ gdpPercap_1977: num  4910 3009 1029 3215 743 ...
+ $ gdpPercap_1982: num  5745 2757 1278 4551 807 ...
+ $ gdpPercap_1987: num  5681 2430 1226 6206 912 ...
+ $ gdpPercap_1992: num  5023 2628 1191 7954 932 ...
+ $ gdpPercap_1997: num  4797 2277 1233 8647 946 ...
+ $ gdpPercap_2002: num  5288 2773 1373 11004 1038 ...
+ $ gdpPercap_2007: num  6223 4797 1441 12570 1217 ...
+ $ lifeExp_1952  : num  43.1 30 38.2 47.6 32 ...
+ $ lifeExp_1957  : num  45.7 32 40.4 49.6 34.9 ...
+ $ lifeExp_1962  : num  48.3 34 42.6 51.5 37.8 ...
+ $ lifeExp_1967  : num  51.4 36 44.9 53.3 40.7 ...
+ $ lifeExp_1972  : num  54.5 37.9 47 56 43.6 ...
+ $ lifeExp_1977  : num  58 39.5 49.2 59.3 46.1 ...
+ $ lifeExp_1982  : num  61.4 39.9 50.9 61.5 48.1 ...
+ $ lifeExp_1987  : num  65.8 39.9 52.3 63.6 49.6 ...
+ $ lifeExp_1992  : num  67.7 40.6 53.9 62.7 50.3 ...
+ $ lifeExp_1997  : num  69.2 41 54.8 52.6 50.3 ...
+ $ lifeExp_2002  : num  71 41 54.4 46.6 50.6 ...
+ $ lifeExp_2007  : num  72.3 42.7 56.7 50.7 52.3 ...
+ $ pop_1952      : num  9279525 4232095 1738315 442308 4469979 ...
+ $ pop_1957      : num  10270856 4561361 1925173 474639 4713416 ...
+ $ pop_1962      : num  11000948 4826015 2151895 512764 4919632 ...
+ $ pop_1967      : num  12760499 5247469 2427334 553541 5127935 ...
+ $ pop_1972      : num  14760787 5894858 2761407 619351 5433886 ...
+ $ pop_1977      : num  17152804 6162675 3168267 781472 5889574 ...
+ $ pop_1982      : num  20033753 7016384 3641603 970347 6634596 ...
+ $ pop_1987      : num  23254956 7874230 4243788 1151184 7586551 ...
+ $ pop_1992      : num  26298373 8735988 4981671 1342614 8878303 ...
+ $ pop_1997      : num  29072015 9875024 6066080 1536536 10352843 ...
+ $ pop_2002      : num  31287142 10866106 7026113 1630347 12251209 ...
+ $ pop_2007      : num  33333216 12420476 8078314 1639131 14326203 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(gap_wide, gap_wide_betterID)</code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>Fuimos y volvimos!</p>
+</section>
+<section id="otros-recursos-utiles" class="slide level2">
+<h1>Otros recursos útiles</h1>
+<ul>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data Wrangling Cheat sheet</a></li>
+<li><a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html">Introduction to tidyr</a></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
+  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+<!--http://stackoverflow.com/questions/34706859/set-header-and-footer-reveal-js-presentation -->
+
+<style type="text/css">
+    /* 1. Style header/footer <div> so they are positioned as desired. */
+    #header-left {
+        position: absolute;
+        top: 2%;
+        left: 2%;
+        font-size: 12pt;
+    }
+    #header-right {
+        position: absolute;
+        top: 2%;
+        right: 2%;
+        font-size: 12pt;
+    }
+    #footer-left {
+        position: absolute;
+        bottom: 2%;
+        left: 2%;
+    }
+</style>
+
+<!-- 2. Create hidden header/footer <div> -->
+<div id="hidden" style="display:none;">
+    <div id="header">
+        <div id="header-left"><a href="index.html">Inicio</a></div>
+        <div id="header-right"><a href="" id="PDF">Descargar PDF</a></div>
+        <div id="footer-left">
+          <img src="img/logo_untdf_icpa_small.png" alt="logo untdf icpa small" />
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+    var header = $('#header').html();
+    if ( window.location.search.match( /print-pdf/gi ) ) {
+        Reveal.addEventListener( 'ready', function( event ) {
+            $('.slide-background').append(header);
+        });
+    }
+    else {
+        $('div.reveal').append(header);
+   }
+</script>
+<script type="text/javascript" charset="utf-8">
+  var a = document.getElementById("PDF");
+  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  
+  
+</script>
+
+  </body>
+</html>
