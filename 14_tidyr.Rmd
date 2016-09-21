@@ -98,9 +98,9 @@ A veces, tenemos formatos intermedios:
 
 ID:             | Observaciones:
 ----------------|---------------
-  - `continent`|  - `pop`
-  - `country`|   - `lifeExp` 
-  - `year`|   - `gdpPercap`
+   `continent`|   `pop`
+   `country`|    `lifeExp` 
+   `year`|    `gdpPercap`
   
 
 
@@ -303,7 +303,7 @@ str(gap_wide_betterID)
 all.equal(gap_wide, gap_wide_betterID)
 ```
 
-Fuimos y volvimos!
+¡Fuimos y volvimos!
 
 
 ## Otros recursos útiles
