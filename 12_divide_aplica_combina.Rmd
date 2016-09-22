@@ -1,5 +1,5 @@
 ---
-title: "Introducción a R"
+title: "Divide-Aplica-Combina"
 author: "Luciano Selzer"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
@@ -84,8 +84,7 @@ library(plyr)
 
 Plyr tiene funciones para operar en `listas`, `data.frames` y `arreglos` 
 (matrices, o vectores n-dimensionales). Cada función:
-Plyr has functions for operating on `lists`, `data.frames` and `arrays`
-(matrices, or n-dimensional vectors). Each function performs:
+
 
 1. Una operación de **división**.
 2. **Aplica** una función en cada división.
