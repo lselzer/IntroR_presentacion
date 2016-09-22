@@ -38,3 +38,5 @@ navbar:
         href: 13_manipulacion.html
       - text: "Manipulación de data.frames con tidyr"
         href: 14_tidyr.html
+      - text: "Reportes dinámicos con knitr"
+        href: 14_rmarkdown.html
