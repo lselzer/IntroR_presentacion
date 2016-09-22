@@ -1,5 +1,5 @@
 ---
-title: "Reportes con knitr"
+title: "Reportes dinámicos con knitr"
 author: "Luciano Selzer"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 ---
