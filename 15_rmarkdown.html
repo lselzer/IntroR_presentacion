@@ -248,76 +248,103 @@ summary(cars)
 gapminder <- read.csv("~/data/gapminder.csv")
 &#96;&#96;&#96;
 </pre>
-<p>That is, you place a chunk of R code between <code>```{r chunk_name}</code> and <code>```</code>. It’s a good idea to give each chunk a name, as they will help you to fix errors and, if any graphs are produced, the file names are based on the name of the code chunk that produced them.</p>
+<p>Pones el código de R entre <code>```{r nombre_fragmento}</code> y <code>```</code>.</p>
+<p>Es buena idea darle un nombre a cada código, te ayudará a arreglar errores, y el nombre de los gráficos estarán basados en el nombre del fragmento que los produjo.</p>
 </section>
 <section id="ejercicio-2" class="slide level2 challenge">
 <h1>Ejercicio 2</h1>
-<blockquote>
-<p>Add code chunks to</p>
+<p>Añade fragmentos de código para</p>
 <ul>
-<li>Load the ggplot2 package</li>
-<li>Read the gapminder data</li>
-<li>Create a plot {: .challenge}</li>
+<li>cargar el paquete ggplot2</li>
+<li>leer los datos de gapminder</li>
+<li>crear un gráfico</li>
 </ul>
-</blockquote>
 </section>
 <section id="como-se-compila" class="slide level2">
 <h1>Como se compila</h1>
-<p>When you press the “Knit HTML” button, the R Markdown document is processed by <a href="http://yihui.name/knitr">knitr</a> and a plain Markdown document is produced (as well as, potentially, a set of figure files): the R code is executed and replaced by both the input and the output; if figures are produced, links to those figures are included.</p>
-<p>The Markdown and figure documents are then processed by the tool <a href="http://pandoc.org/">pandoc</a>, which converts the Markdown file into an html file, with the figures embedded.</p>
 <p><img src="fig/rmd-rmd_to_html_fig-1.png" width="768" style="display: block; margin: auto auto auto 0;" /></p>
+</section>
+<section class="slide level2">
+
+<p>Cuando presionas el botón “Knit HTML”, el doumento de R Markdown es procesado por <a href="http://yihui.name/knitr">knitr</a> y se produce un archivo de texto plano de Markdown (potencialmente también unos archivos de figuras): el código de R se ejecuta y se reemplaza tanto la entrada como la salida; si se producen figuras, se inserta el vínculo hacia ellas.</p>
+<p>El documento de Markdown y las figuras son luego procesadas por la herramienta <a href="http://pandoc.org/">pandoc</a>, que convierte el documento Markdown en HTML con las figuras incrustadas</p>
 </section>
 <section id="opciones-de-fragmentos" class="slide level2">
 <h1>Opciones de fragmentos</h1>
-<p>There are a variety of options to affect how the code chunks are treated.</p>
+<p>Hay una gran variedad de opciones que afectan como se trata el código dentro de los fragmentos.</p>
 <ul>
-<li>Use <code>echo=FALSE</code> to avoid having the code itself shown.</li>
-<li>Use <code>results=&quot;hide&quot;</code> to avoid having any results printed.</li>
-<li>Use <code>eval=FALSE</code> to have the code shown but not evaluated.</li>
-<li>Use <code>warning=FALSE</code> and <code>message=FALSE</code> to hide any warnings or messages produced.</li>
-<li>Use <code>fig.height</code> and <code>fig.width</code> to control the size of the figures produced (in inches).</li>
+<li>Usa <code>echo=FALSE</code> para evitar que se muestre el código.</li>
+<li>Usa <code>results=&quot;hide&quot;</code> para evitar que se muestre el resultado.</li>
+<li>Usa <code>eval=FALSE</code> para mostrar el código pero no evaluarlo.</li>
+<li>Usa <code>warning=FALSE</code> y <code>message=FALSE</code> para esconder las advertencias y mensajes.</li>
+<li>Usa <code>fig.height</code> y <code>fig.width</code> para controlar el tamaño de la figuras (en pulgadas)</li>
 </ul>
-<p>So you might write:</p>
+</section>
+<section class="slide level2">
+
+<p>Entonces podrías escribir:</p>
 <pre>
-&#96;&#96;&#96;{r load_libraries, echo=FALSE, message=FALSE}
+&#96;&#96;&#96;{r cargar_paquetes, echo=FALSE, message=FALSE}
 library(dplyr)
 library(ggplot2)
 &#96;&#96;&#96;
 </pre>
-<p>Often there will be particular options that you’ll want to use repeatedly; for this, you can set <em>global</em> chunk options, like so:</p>
+</section>
+<section class="slide level2">
+
+<p>Muchas veces vas a querer usar algunas opciones en todos los fragmentos. Para esto, podés configurar opciones <em>globales</em>:</p>
 <pre>
 &#96;&#96;&#96;{r global_options, echo=FALSE}
-knitr::opts_chunk$set(fig.path="Figs/", message=FALSE, warning=FALSE,
-                      echo=FALSE, results="hide", fig.width=11)
+knitr::opts_chunk$set(fig.path="Figs/", 
+                      message=FALSE, 
+                      warning=FALSE,
+                      echo=FALSE, 
+                      results="hide", 
+                      fig.width=11)
 &#96;&#96;&#96;
 </pre>
-<p>The <code>fig.path</code> option defines where the figures will be saved. The <code>/</code> here is really important; without it, the figures would be saved in the standard place but just with names that being with <code>Figs</code>.</p>
-<p>If you have multiple R Markdown files in a common directory, you might want to use <code>fig.path</code> to define separate prefixes for the figure file names, like <code>fig.path=&quot;Figs/cleaning-&quot;</code> and <code>fig.path=&quot;Figs/analysis-&quot;</code>.</p>
-<blockquote>
-<h2 id="ejercicio-3">Ejercicio 3</h2>
-<p>Use chunk options to control the size of a figure and to hide the code. {: .challenge}</p>
-</blockquote>
+</section>
+<section class="slide level2">
+
+<p>La opción de <code>fig.path</code> define donde van a ser guardadas las figuras. La <code>/</code> es muy importante, sin ellas las figuras se guardarían en el lugar normal pero con el nombre que empieza con <code>Figs</code>.</p>
+<p>Si tenés muchos archivos de R Markdown, podrías usar <code>fig.path</code> para definir distintos prefijos a los nombres de las figuras, como <code>fig.path=&quot;Figs/cleaning-&quot;</code> y <code>fig.path=&quot;Figs/analysis-&quot;</code>.</p>
+</section>
+<section id="ejercicio-3" class="slide level2 challenge">
+<h1>Ejercicio 3</h1>
+<p>Usa las opciones de fragmentos para controlar el tamaño de una figura y esconder el código que la genera.</p>
 </section>
 <section id="codigo-de-r-en-linea" class="slide level2">
 <h1>Código de R en linea</h1>
-<p>You can make <em>every</em> number in your report reproducible. Use <code>`r</code> and <code>`</code> for an in-line code chunk, like so: <code>`r round(some_value, 2)`</code>. The code will be executed and replaced with the <em>value</em> of the result.</p>
-<p>Don’t let these in-line chunks get split across lines.</p>
-<p>Perhaps precede the paragraph with a larger code chunk that does calculations and defines things, with <code>include=FALSE</code> for that larger chunk (which is the same as <code>echo=FALSE</code> and <code>results=&quot;hide&quot;</code>).</p>
-<p>I’m very particular about rounding in such situations. I may want <code>2.0</code>, but <code>round(2.03, 1)</code> will give just <code>2</code>.</p>
-<p>The <a href="https://github.com/kbroman/broman/blob/master/R/myround.R"><code>myround</code></a> function in my <a href="https://github.com/kbroman">R/broman</a> package handles this.</p>
-<blockquote>
-<h2 id="ejercicio-4">Ejercicio 4</h2>
-<p>Try out a bit of in-line R code. {: .challenge}</p>
-</blockquote>
+<p>Podés hacer <em>cada</em> número en tu reporte reproducible.</p>
+<p>Usa:<br />
+<code>`r</code> y <code>`</code><br />
+para fragmento de código en línea, así: <code>`r round(algun_valor, 2)`</code>. El código va a ser ejectuado y reemplazado con el <em>valor</em> del resultado.</p>
+<p>No dejes que los fragmentos en línea se separen entre línas</p>
 </section>
-<section id="other-output-options" class="slide level2">
-<h1>Other output options</h1>
-<blockquote>
-<h2 id="tip-creating-pdf-documents">Tip: Creating PDF documents</h2>
-<p>Creating .pdf documents may require installation of some extra software. If required this is detailed in an error message.</p>
-<p>Tex for windows is available <a href="http://miktex.org/2.9/setup">here</a>.</p>
-<p>Tex for mac is available <a href="http://tug.org/mactex">here</a>. {: .callout}</p>
-</blockquote>
+<section class="slide level2">
+
+<p>A veces podrías preceder un párrafo con un fragmento largo que haga todos los calculos y defina cosas; con <code>include=FALSE</code> para el framento mayor (que es equivalente a <code>echo=FALSE</code> y <code>results=&quot;hide&quot;</code>).</p>
+<p>Pueden usar la función <code>sprint()</code> para redonder hasta un decimal sin perder decimales (e.g. <code>sprintf(&quot;%.1f&quot;, -2.03)</code> -2.0)</p>
+</section>
+<section id="ejercicio-4" class="slide level2 challenge">
+<h1>Ejercicio 4</h1>
+<p>Prueba agregar código de R en línea</p>
+</section>
+<section id="otras-opciones-de-salida" class="slide level2">
+<h1>Otras opciones de salida</h1>
+<p>Podés convertir los archivos de R Markdown en:</p>
+<ul>
+<li>PDF</li>
+<li>Word</li>
+<li>Presentaciones</li>
+</ul>
+<p>Haciendo clic en la flecha hacia abajo al lado de Knit HTML. También podés cambiar el tipo de salida especificando <code>pdf_document</code> o <code>word_document</code> en el encabezado del documento.</p>
+</section>
+<section id="tip-creando-documentos-pdf" class="slide level2 tip">
+<h1>Tip: Creando documentos PDF</h1>
+<p>Crear documentos .pdf puede requerir la instalación de software extra. Si es requerido se detalla en un mensaje de error.</p>
+<p>Tex para Windows está disponible <a href="http://miktex.org/2.9/setup">aquí</a>.</p>
+<p>Tex para Mac está disponible <a href="http://tug.org/mactex">aquí</a>.</p>
 </section>
 <section id="recursos" class="slide level2">
 <h1>Recursos</h1>
