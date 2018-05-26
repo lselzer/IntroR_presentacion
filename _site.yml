@@ -12,20 +12,26 @@ navbar:
       menu:
       - text: "Introducción"
         href: 1_presentacion.html
+      - text: "Gráficos con buena calidad"
+        href: 8_graficos.html
       - text: "Proyectos"
         href: 2_proyectos.html
+      - text: "Explorando Data Frames"
+        href: 5_data.frames.html
+      - text: "Manipulación de data.frames con dplyr"
+        href: 13_manipulacion.html
+      - text: "Manipulación de data.frames con tidyr"
+        href: 14_tidyr.html
+      - text: "Reportes dinámicos con knitr"
+        href: 15_rmarkdown.html
       - text: "Ayuda en R"
         href: 3_help.html
       - text: "Estructura de Datos"
         href: 4_datos.html
-      - text: "Explorando Data Frames"
-        href: 5_data.frames.html
       - text: "Subconjuntos de Datos"
         href: 6_subsetting.html
       - text: "Control de Flujos"
         href: 7_control_de_flujo.html
-      - text: "Gráficos con buena calidad"
-        href: 8_graficos.html
       - text: "Vectorización"
         href: 9_vectorizacion.html
       - text: "Funciones"
@@ -34,9 +40,4 @@ navbar:
         href: 11_guardando.html
       - text: "Divide-aplica-combina"
         href: 12_divide_aplica_combina.html
-      - text: "Manipulación de data.frames con dplyr"
-        href: 13_manipulacion.html
-      - text: "Manipulación de data.frames con tidyr"
-        href: 14_tidyr.html
-      - text: "Reportes dinámicos con knitr"
-        href: 15_rmarkdown.html
+      
