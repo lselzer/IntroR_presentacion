@@ -8,48 +8,76 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -92,22 +120,394 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       border-color: gray;
     }
 
+
   </style>
 
     <style type="text/css">code{white-space: pre;}</style>
 
     <link rel="stylesheet" href="style.css"/>
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
-    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
 
 </head>
 <body>
@@ -117,43 +517,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <section>
     <h1 class="title">Divide-Aplica-Combina</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">22 September, 2016</h3>
+    <h3 class="date">27 May, 2018</h3>
 </section>
 
 <section class="slide level2">
 
 <p>Anteriormente vimos como las funciones simplifican nuestro código.</p>
 <p>Definimos la función <code>calcPBI</code> que calcula el PBI y le agregamos dos argumentos para poder calcular por año y/o país</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Toma el set de datos y multiplica la columna </span>
-<span class="co"># población por PBI per capita</span>
-calcPBI &lt;-<span class="st"> </span>function(dat, <span class="dt">year =</span> <span class="ot">NULL</span>, <span class="dt">country =</span> <span class="ot">NULL</span>) {
-  if(!<span class="kw">is.null</span>(year)) {
-    dat &lt;-<span class="st"> </span>dat[dat$year %in%<span class="st"> </span>year, ]
-  }
-  if (!<span class="kw">is.null</span>(country)) {
-    dat &lt;-<span class="st"> </span>dat[dat$country %in%<span class="st"> </span>country,]
-  }
-  gdp &lt;-<span class="st"> </span>dat$pop *<span class="st"> </span>dat$gdpPercap
-
-  new &lt;-<span class="st"> </span><span class="kw">cbind</span>(dat, <span class="dt">gdp =</span> gdp)
-  <span class="kw">return</span>(new)
-}</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Toma el set de datos y multiplica la columna </span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># población por PBI per capita</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">calcPBI &lt;-<span class="st"> </span><span class="cf">function</span>(dat, <span class="dt">year =</span> <span class="ot">NULL</span>, <span class="dt">country =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="cf">if</span>(<span class="op">!</span><span class="kw">is.null</span>(year)) {</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    dat &lt;-<span class="st"> </span>dat[dat<span class="op">$</span>year <span class="op">%in%</span><span class="st"> </span>year, ]</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(country)) {</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    dat &lt;-<span class="st"> </span>dat[dat<span class="op">$</span>country <span class="op">%in%</span><span class="st"> </span>country,]</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  }</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  gdp &lt;-<span class="st"> </span>dat<span class="op">$</span>pop <span class="op">*</span><span class="st"> </span>dat<span class="op">$</span>gdpPercap</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  new &lt;-<span class="st"> </span><span class="kw">cbind</span>(dat, <span class="dt">gdp =</span> gdp)</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">  <span class="kw">return</span>(new)</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">}</a></code></pre></div>
 </section>
 <section id="divide-y-venceras" class="slide level2">
-<h1>Divide y vencerás</h1>
+<h2>Divide y vencerás</h2>
 <p>Muchas veces queremos hacer los cálculos u operaciones por grupo.<br />
 Arriba calculamos el PBI multiplicando dos columnas. ¿Y si quisieramos calcular el PBI medio por continente?</p>
-<p><img src="https://media.giphy.com/media/GLkQ1upVWKdeo/giphy.gif" alt="divide and conquer" /></p>
+<p><img data-src="https://media.giphy.com/media/GLkQ1upVWKdeo/giphy.gif" alt="divide and conquer" /></p>
 </section>
 <section class="slide level2">
 
 <p>Podríamos ejecutar <code>calcGPD</code> y luego calcular la media de cada continente:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">conPBI &lt;-<span class="st"> </span><span class="kw">calcPBI</span>(gapminder)
-<span class="kw">mean</span>(conPBI[conPBI$continent ==<span class="st"> &quot;Africa&quot;</span>, <span class="st">&quot;gdp&quot;</span>])</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">conPBI &lt;-<span class="st"> </span><span class="kw">calcPBI</span>(gapminder)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">mean</span>(conPBI[conPBI<span class="op">$</span>continent <span class="op">==</span><span class="st"> &quot;Africa&quot;</span>, <span class="st">&quot;gdp&quot;</span>])</a></code></pre></div>
 <pre><code>[1] 20904782844</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(conPBI[conPBI$continent ==<span class="st"> &quot;Americas&quot;</span>, <span class="st">&quot;gdp&quot;</span>])</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">mean</span>(conPBI[conPBI<span class="op">$</span>continent <span class="op">==</span><span class="st"> &quot;Americas&quot;</span>, <span class="st">&quot;gdp&quot;</span>])</a></code></pre></div>
 <pre><code>[1] 379262350210</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(conPBI[conPBI$continent ==<span class="st"> &quot;Asia&quot;</span>, <span class="st">&quot;gdp&quot;</span>])</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">mean</span>(conPBI[conPBI<span class="op">$</span>continent <span class="op">==</span><span class="st"> &quot;Asia&quot;</span>, <span class="st">&quot;gdp&quot;</span>])</a></code></pre></div>
 <pre><code>[1] 227233738153</code></pre>
 </section>
 <section class="slide level2">
@@ -165,13 +565,13 @@ Pero hay mucha repetición: lleva tiempo, ahora y más adelante, y puede introdu
 <section class="slide level2">
 
 <p>El problema que tenemos se conoce como “divide-aplica-combina”:</p>
-<p><img src="img/splitapply.png" alt="Split apply combine" /></p>
+<p><img data-src="img/splitapply.png" alt="Split apply combine" /></p>
 </section>
 <section id="el-paquete-plyr" class="slide level2">
-<h1>El paquete <code>plyr</code></h1>
+<h2>El paquete <code>plyr</code></h2>
 <p>Familia de funciones <code>apply</code>.</p>
 <p>El paquete <a href="http://had.co.nz/plyr/">plyr</a> provee un set de herramientas que hacen que sea más amigable lidiar con este problema.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">library</span>(plyr)</a></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -190,7 +590,7 @@ Pero hay mucha repetición: lleva tiempo, ahora y más adelante, y puede introdu
 <section class="slide level2">
 
 <p>Cada función de **ply (<code>daply</code>, <code>ddply</code>, <code>llply</code>, <code>laply</code>, …) tiene la misma estructura y las mismas 4 caraterísticas clave y estructura:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">**<span class="kw">ply</span>(.data, .variables, .fun)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="op">**</span><span class="kw">ply</span>(.data, .variables, .fun)</a></code></pre></div>
 <ul>
 <li>La primera letra correponde al tipo de entrada y la seguna el tipo de salida</li>
 <li>.data - el objeto a ser procesado</li>
@@ -201,11 +601,11 @@ Pero hay mucha repetición: lleva tiempo, ahora y más adelante, y puede introdu
 <section class="slide level2">
 
 <p>Ahora podemos ejecutar rápidamente la media de PBI por continente:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ddply</span>(
- <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),
- <span class="dt">.variables =</span> <span class="st">&quot;continent&quot;</span>,
- <span class="dt">.fun =</span> function(x) <span class="kw">mean</span>(x$gdp)
-)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">ddply</span>(</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"> <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"> <span class="dt">.variables =</span> <span class="st">&quot;continent&quot;</span>,</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"> <span class="dt">.fun =</span> <span class="cf">function</span>(x) <span class="kw">mean</span>(x<span class="op">$</span>gdp)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">)</a></code></pre></div>
 <pre><code>  continent           V1
 1    Africa  20904782844
 2  Americas 379262350210
@@ -216,11 +616,11 @@ Pero hay mucha repetición: lleva tiempo, ahora y más adelante, y puede introdu
 <section class="slide level2">
 
 <p>¿Qué tal si quisieramos otro tipo de salida?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dlply</span>(
- <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),
- <span class="dt">.variables =</span> <span class="st">&quot;continent&quot;</span>,
- <span class="dt">.fun =</span> function(x) <span class="kw">mean</span>(x$gdp)
-)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">dlply</span>(</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"> <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"> <span class="dt">.variables =</span> <span class="st">&quot;continent&quot;</span>,</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"> <span class="dt">.fun =</span> <span class="cf">function</span>(x) <span class="kw">mean</span>(x<span class="op">$</span>gdp)</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">)</a></code></pre></div>
 <pre><code>$Africa
 [1] 20904782844
 
@@ -250,11 +650,11 @@ attr(,&quot;split_labels&quot;)
 
 <p>Llamamos la misma función de nuevo, pero cambiamos la segunda letra a <code>l</code>, por lo que la salida es devuelta como una lista.</p>
 <p>Podemos especificar varias columnas por grupo:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ddply</span>(
- <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),
- <span class="dt">.variables =</span> <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>, <span class="st">&quot;year&quot;</span>),
- <span class="dt">.fun =</span> function(x) <span class="kw">mean</span>(x$gdp)
-)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">ddply</span>(</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"> <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"> <span class="dt">.variables =</span> <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>, <span class="st">&quot;year&quot;</span>),</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"> <span class="dt">.fun =</span> <span class="cf">function</span>(x) <span class="kw">mean</span>(x<span class="op">$</span>gdp)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">)</a></code></pre></div>
 <pre><code>   continent year           V1
 1     Africa 1952   5992294608
 2     Africa 1957   7359188796
@@ -319,11 +719,11 @@ attr(,&quot;split_labels&quot;)
 </section>
 <section class="slide level2">
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">daply</span>(
- <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),
- <span class="dt">.variables =</span> <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>, <span class="st">&quot;year&quot;</span>),
- <span class="dt">.fun =</span> function(x) <span class="kw">mean</span>(x$gdp)
-)</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">daply</span>(</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"> <span class="dt">.data =</span> <span class="kw">calcPBI</span>(gapminder),</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"> <span class="dt">.variables =</span> <span class="kw">c</span>(<span class="st">&quot;continent&quot;</span>, <span class="st">&quot;year&quot;</span>),</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"> <span class="dt">.fun =</span> <span class="cf">function</span>(x) <span class="kw">mean</span>(x<span class="op">$</span>gdp)</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">)</a></code></pre></div>
 <pre><code>          year
 continent          1952         1957         1962         1967
   Africa     5992294608   7359188796   8784876958  11443994101
@@ -349,17 +749,17 @@ continent          1992         1997         2002         2007
 <section class="slide level2">
 
 <p>Podemos llamar a estas funciones en lugar de bucles <code>for</code> (y generalmente es más rápido). Para reemplazar un bucle <code>for</code>, pon el código del cuerpo del bucle dentro una función anónima.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">d_ply</span>(
-  <span class="dt">.data =</span> gapminder,
-  <span class="dt">.variables =</span> <span class="st">&quot;continent&quot;</span>,
-  <span class="dt">.fun =</span> function(x) {
-    meanGDPperCap &lt;-<span class="st"> </span><span class="kw">mean</span>(x$gdpPercap)
-    <span class="kw">print</span>(<span class="kw">paste</span>(
-      <span class="st">&quot;The mean GDP per capita for&quot;</span>, <span class="kw">unique</span>(x$continent),
-      <span class="st">&quot;is&quot;</span>, <span class="kw">format</span>(meanGDPperCap, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>)
-   ))
-  }
-)</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">d_ply</span>(</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="dt">.data =</span> gapminder,</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">  <span class="dt">.variables =</span> <span class="st">&quot;continent&quot;</span>,</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">  <span class="dt">.fun =</span> <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">    meanGDPperCap &lt;-<span class="st"> </span><span class="kw">mean</span>(x<span class="op">$</span>gdpPercap)</a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">    <span class="kw">print</span>(<span class="kw">paste</span>(</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">      <span class="st">&quot;The mean GDP per capita for&quot;</span>, <span class="kw">unique</span>(x<span class="op">$</span>continent),</a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">      <span class="st">&quot;is&quot;</span>, <span class="kw">format</span>(meanGDPperCap, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb18-9" data-line-number="9">   ))</a>
+<a class="sourceLine" id="cb18-10" data-line-number="10">  }</a>
+<a class="sourceLine" id="cb18-11" data-line-number="11">)</a></code></pre></div>
 </section>
 <section class="slide level2">
 
@@ -370,26 +770,26 @@ continent          1992         1997         2002         2007
 [1] &quot;The mean GDP per capita for Oceania is 18,621.61&quot;</code></pre>
 </section>
 <section id="tip-imprimiendo-numeros" class="slide level2 tip">
-<h1>Tip: Imprimiendo números</h1>
+<h2>Tip: Imprimiendo números</h2>
 <p>La función <code>format</code> puede ser usada para hacer los números que quedn “bien” para imprimir mensajes.</p>
 </section>
 <section id="ejercicio-1" class="slide level2 challenge">
-<h1>Ejercicio 1</h1>
+<h2>Ejercicio 1</h2>
 <p>Calcula la expectativa de vida promedio por contiente. ¿Cuál es la mayor? ¿Cuál es la menor?</p>
 </section>
 <section id="ejercicio-2" class="slide level2 challenge">
-<h1>Ejercicio 2</h1>
+<h2>Ejercicio 2</h2>
 <p>Calcula la expectativa de vida promedio por continente y por año. ¿Cual tuvo la expectativa más corta y más larga en 2007? ¿Cual tuvo el mayor cambio entre 1952 y 2007?</p>
 </section>
 <section id="ejercicio-avanzado" class="slide level2 challenge">
-<h1>Ejercicio Avanzado</h1>
+<h2>Ejercicio Avanzado</h2>
 <p>Calcula la diferencia de medias entre la expectativa de vida en los años 1952 y 2007 usando la salida del ejercicio 2 usando una de las funciones de <code>plyr</code>.</p>
 </section>
     </div>
   </div>
 
-  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
-  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
 
   <script>
 
@@ -409,6 +809,8 @@ continent          1992         1997         2002         2007
         // Transition style for full page slide backgrounds
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
+
+
         // Optional reveal.js plugins
         dependencies: [
         ]
@@ -419,7 +821,7 @@ continent          1992         1997         2002         2007
     (function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
       document.getElementsByTagName("head")[0].appendChild(script);
     })();
   </script>

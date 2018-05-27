@@ -8,48 +8,76 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/reveal.css"/>
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<link rel="stylesheet" href="site_libs/reveal.js-3.3.0/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
 
   <!-- some tweaks to reveal css -->
@@ -92,22 +120,394 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       border-color: gray;
     }
 
+
   </style>
 
     <style type="text/css">code{white-space: pre;}</style>
 
     <link rel="stylesheet" href="style.css"/>
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'site_libs/reveal.js-3.3.0/css/print/pdf.css' : 'site_libs/reveal.js-3.3.0/css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="site_libs/reveal.js-3.3.0/lib/js/html5shiv.js"></script>
-    <![endif]-->
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
 
 </head>
 <body>
@@ -117,15 +517,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <section>
     <h1 class="title">Introducción a R</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">22 September, 2016</h3>
+    <h3 class="date">27 May, 2018</h3>
 </section>
 
-<section><section id="que-es-r" class="titleslide slide level1"><h1>¿Qué es R?</h1></section><section id="r-es" class="slide level2">
-<h1>R es:</h1>
+<section><section id="que-es-r" class="title-slide slide level1"><h1>¿Qué es R?</h1></section><section id="r-es" class="slide level2">
+<h2>R es:</h2>
 <ul>
-<li>Es un lenguaje de programación</li>
+<li>Es un lenguaje de programación
+<ul>
 <li>Interactivo</li>
 <li>Programática</li>
+</ul></li>
 <li>Software Libre</li>
 <li>Muchos usuarios
 <ul>
@@ -134,20 +536,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 </ul>
 </section><section id="usos" class="slide level2">
-<h1>Usos</h1>
+<h2>Usos</h2>
 <ul>
-<li>Análisis de datos experimentales</li>
+<li>Análisis de datos experimentales
+<ul>
 <li>Regresiones: Lineal, GLM, GLMM, GAM</li>
 <li>Análisis Multivariado: CCA, PCA</li>
 <li>Análisis no Paramétrico</li>
 <li>Text Mining</li>
-<li>Usado en:</li>
+</ul></li>
+<li>Usado en:
+<ul>
 <li>Laboratorios de Investigación</li>
 <li>Agencias Gubernamentales</li>
 <li>Empresas</li>
+</ul></li>
 </ul>
 </section><section id="que-se-puede-hacer" class="slide level2">
-<h1>¿Qué se puede hacer?</h1>
+<h2>¿Qué se puede hacer?</h2>
 <ul>
 <li>Realizar pre-procesado de datos</li>
 <li>Analizar datos</li>
@@ -158,23 +564,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </section><section class="slide level2">
 
-<p><img src="img/interactive-1-htmlwidget.png" alt="interactive widget" /></p>
+<p><img data-src="img/interactive-1-htmlwidget.png" alt="interactive widget" /></p>
 </section><section class="slide level2">
 
-<p><img src="img/interactive-2-shiny.png" alt="interactive widget" /></p>
+<p><img data-src="img/interactive-2-shiny.png" alt="interactive widget" /></p>
 </section></section>
-<section><section id="prerrequisitos" class="titleslide slide level1"><h1>Prerrequisitos</h1></section><section id="r" class="slide level2">
-<h1>R</h1>
+<section><section id="prerrequisitos" class="title-slide slide level1"><h1>Prerrequisitos</h1></section><section id="r" class="slide level2">
+<h2>R</h2>
 <p>Para bajarlo ir a <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>,</p>
 </section><section id="git" class="slide level2">
-<h1>GIT</h1>
+<h2>GIT</h2>
 <p>Control de Versión<br />
 <a href="https://git-scm.com/" class="uri">https://git-scm.com/</a></p>
 </section><section id="rstudio" class="slide level2">
-<h1>RStudio</h1>
+<h2>RStudio</h2>
 <p><em>RStudio Desktop</em> <a href="https://www.rstudio.com/products/rstudio/download2/" class="uri">https://www.rstudio.com/products/rstudio/download2/</a></p>
 </section><section id="crear-cuenta-en-github" class="slide level2">
-<h1>Crear Cuenta en GitHub</h1>
+<h2>Crear Cuenta en GitHub</h2>
 <p><a href="https://github.com/" class="uri">https://github.com/</a></p>
 <ul>
 <li>Completar el formulario</li>
@@ -182,7 +588,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Verificar cuenta de correo</li>
 </ul>
 </section><section id="configuracion-de-rstudio" class="slide level2">
-<h1>Configuración de RStudio</h1>
+<h2>Configuración de RStudio</h2>
 <p>Para esto hay que:</p>
 <ul>
 <li>abrir RStudio</li>
@@ -194,9 +600,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Presionar <code>Ok</code>.</li>
 </ul>
 </section><section id="configurar-github" class="slide level2">
-<h1>Configurar GitHub</h1>
+<h2>Configurar GitHub</h2>
 </section><section id="en-rstudio" class="slide level2">
-<h1>En Rstudio:</h1>
+<h2>En Rstudio:</h2>
 <ol type="1">
 <li>Vayan a <code>Tools\Global Options...</code>, luego a la pestaña de <code>Git\SVN</code>.</li>
 <li>Ahí deben hacer clic en <code>create RSA key</code>. Pueden poner una <code>Passphase</code>.</li>
@@ -204,7 +610,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Luego, presionan en <code>View public key</code>. Copian la clave.</li>
 </ol>
 </section><section id="en-el-sitio-web-de-github" class="slide level2">
-<h1>En el sitio web de <a href="https://www.github.com">Github</a>:</h1>
+<h2>En el sitio web de <a href="https://www.github.com">Github</a>:</h2>
 <ol type="1">
 <li>En la esquina superior derecha hay un icono que es su foto de usuario. Hacen clic ahí y luego en <code>Settings</code>.</li>
 <li>Van la pestaña <code>SSH and GPG keys</code>.</li>
@@ -214,20 +620,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Finalmente, presionan <code>Add SSH Key</code></li>
 </ol>
 </section></section>
-<section><section id="introduccion" class="titleslide slide level1"><h1>Introducción</h1></section><section id="introduccion-a-rstudio" class="slide level2">
-<h1>Introducción a RStudio</h1>
+<section><section id="introduccion" class="title-slide slide level1"><h1>Introducción</h1></section><section id="introduccion-a-rstudio" class="slide level2">
+<h2>Introducción a RStudio</h2>
 <ul>
 <li>Interfaz de desarrollo integrada (IDE)</li>
 <li>gratis</li>
 <li>código abierto.</li>
 <li>Editor de código,</li>
 <li>Múltiples plataformas (incluyendo servidores)</li>
-<li>Muchas ventajas:</li>
+<li>Muchas ventajas:
+<ul>
 <li>Integración con control de versión</li>
 <li>Manejo de proyectos</li>
+</ul></li>
 </ul>
 </section><section id="disposicion-basica" class="slide level2">
-<h1>Disposición Básica</h1>
+<h2>Disposición Básica</h2>
 <ul>
 <li>La consola interactiva de R (a la izquierda)</li>
 <li>El Entorno/Historial, en inglés Environment/History (en pestañas en la parte superior derecha)</li>
@@ -235,24 +643,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Una vez que abre un archivo, como por ejemplo un script de R, un panel de edición se abre en la parte superior izquierda.</p>
 </section><section id="flujo-de-trabajo-con-rstudio" class="slide level2">
-<h1>Flujo de trabajo con RStudio</h1>
+<h2>Flujo de trabajo con RStudio</h2>
 <p>Hay dos maneras básicas de trabajar con RStudio.</p>
 <ol type="1">
-<li>Probar y jugar dentro de la consola interactiva y luego copiar el código a un archivo .R para ejecutar más tarde.</li>
-</ol>
+<li>Probar y jugar dentro de la consola interactiva y luego copiar el código a un archivo .R para ejecutar más tarde.
 <ul>
 <li>Funciona bien cuando se hacen pequeñas pruebas y recién se comienza.</li>
 <li>Pero rápidamente se vuelve laborioso.</li>
-</ul>
-<ol start="2" type="1">
-<li>Empezar a escribir un archivo .R y luego usar el comando / atajo de RStudio para ejecutar la línea actual o las líneas seleccionadas en la consola.</li>
-</ol>
+</ul></li>
+<li>Empezar a escribir un archivo .R y luego usar el comando / atajo de RStudio para ejecutar la línea actual o las líneas seleccionadas en la consola.
 <ul>
 <li>Es la mejor forma de empezar; así todo el código queda guardado para más tarde</li>
 <li>Podrás ejecutar el archivo desde RStudio o usando la función de R <code>source()</code>.</li>
-</ul>
+</ul></li>
+</ol>
 </section><section id="tip-ejecutando-partes-de-tu-codigo" class="slide level2 tip">
-<h1>Tip: Ejecutando partes de tu código</h1>
+<h2>Tip: Ejecutando partes de tu código</h2>
 <ol type="1">
 <li>hacer click en el botón <code>Run</code> arriba del panel de edición,</li>
 <li>Seleccionar “Run Lines” desde el menú “Code”, o</li>
@@ -261,19 +667,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Para ejecutar un bloque de código: + Seleccionálo y después solo presiona <code>Run</code>.</p>
 <p>Si has modificado una parte del bloque que has ejecutado recién podés usar el botón a continuación, <code>Re-run the previous region</code>.</p>
 </section></section>
-<section><section id="introduccion-a-r" class="titleslide slide level1"><h1>Introducción a R</h1></section><section id="la-consola-interactiva" class="slide level2">
-<h1>La consola interactiva</h1>
+<section><section id="introduccion-a-r" class="title-slide slide level1"><h1>Introducción a R</h1></section><section id="la-consola-interactiva" class="slide level2">
+<h2>La consola interactiva</h2>
 <p>Read, Eval, Print</p>
 </section><section id="r-como-calculadora" class="slide level2">
-<h1>R como calculadora</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> +<span class="st"> </span><span class="dv">100</span></code></pre></div>
+<h2>R como calculadora</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
 <p>[1] 101</p>
 </section><section id="tip-cancelando-comandos" class="slide level2 tip">
-<h1>Tip: Cancelando comandos</h1>
+<h2>Tip: Cancelando comandos</h2>
 <p>Si estás usando R desde la linea de comando en vez de dentro de RStudio, hay que presionar <code>Ctrl+C</code> en vez de <code>Esc</code> para cancelar el comando. Esto también se aplica a usuarios de Mac también.</p>
 <p>Cancelar un comando no es útil solamente para anular comandos incompletos: también podés cancelar una computación que R está ejecutando (por ejemplo, si está tomando demasiado tiempo), o para eliminar el código que estás escribiendo actualmente.</p>
 </section><section id="orden-de-ejecucion" class="slide level2">
-<h1>Orden de ejecución</h1>
+<h2>Orden de ejecución</h2>
 <p>De mayor a menor precedencia:</p>
 <ul>
 <li>Paréntesis: <code>(</code>, <code>)</code></li>
@@ -284,34 +690,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Substracción: <code>-</code></li>
 </ul>
 </section><section id="orden-de-ejecucion-1" class="slide level2">
-<h1>Orden de Ejecución</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">3</span> +<span class="st"> </span>(<span class="dv">5</span> *<span class="st"> </span>(<span class="dv">2</span> ^<span class="st"> </span><span class="dv">2</span>))) <span class="co"># difícil de leer</span>
-<span class="dv">3</span> +<span class="st"> </span><span class="dv">5</span> *<span class="st"> </span><span class="dv">2</span> ^<span class="st"> </span><span class="dv">2</span>       <span class="co"># claro, si recordás las reglas</span>
-<span class="dv">3</span> +<span class="st"> </span><span class="dv">5</span> *<span class="st"> </span>(<span class="dv">2</span> ^<span class="st"> </span><span class="dv">2</span>)     <span class="co"># si olvidás algunas reglas esto puede ayudar.</span></code></pre></div>
+<h2>Orden de Ejecución</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))) <span class="co"># difícil de leer</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>       <span class="co"># claro, si recordás las reglas</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)     <span class="co"># si olvidás algunas reglas esto puede ayudar.</span></a></code></pre></div>
 </section><section id="notacion-cientifica" class="slide level2">
-<h1>Notación Cientifica</h1>
+<h2>Notación Cientifica</h2>
 <p>Los números muy grandes o pequeños se imprimen en notación científica:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>/<span class="dv">10000</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dv">2</span><span class="op">/</span><span class="dv">10000</span></a></code></pre></div>
 <pre><code>[1] 2e-04</code></pre>
-<p>que es una abreviatura de multiplicar por <code>10^XX</code>“. Por lo que <code>2e-4</code> es una abreviatura de <code>2 * 10^(-4)</code>.</p>
+<p>que es una abreviatura de multiplicar por <code>10^XX</code>&quot;. Por lo que <code>2e-4</code> es una abreviatura de <code>2 * 10^(-4)</code>.</p>
 </section><section class="slide level2">
 
 <p>Uno mismo puede entrar números en notación científica:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="fl">5e3</span> <span class="co">#No hay menos aquí</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fl">5e3</span> <span class="co">#No hay menos aquí</span></a></code></pre></div>
 <pre><code>[1] 5000</code></pre>
 </section><section id="funciones-matematicas" class="slide level2">
-<h1>Funciones matemáticas</h1>
+<h2>Funciones matemáticas</h2>
 <p>R tiene muchas funciones matemáticas incorporadas. Para llamar una función simplemente escribimos su nombre, seguido por paréntesis de apertura y cierre. Cualquier cosa dentro de los paréntesis es llamado argumentos de la función:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sin</span>(<span class="dv">1</span>)  <span class="co"># funciones trigonométricas</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">sin</span>(<span class="dv">1</span>)  <span class="co"># funciones trigonométricas</span></a></code></pre></div>
 <pre><code>[1] 0.841471</code></pre>
 </section><section id="ayuda-memoria" class="slide level2">
-<h1>Ayuda Memoria</h1>
+<h2>Ayuda Memoria</h2>
 <p>No se preocupen por recordar todas las funciones en R. Se pueden buscar en Google, o si recuerdan como comienza el nombre de la función, pueden presionar la tecla <code>Tab</code> para usar la función de autocompletado de RStudio.</p>
 <p>Escribiendo un signo de pregunta <code>?</code> antes del nombre la funcion abrirá la página de ayuda de esa función.</p>
 </section><section id="comparando-cosas" class="slide level2">
-<h1>Comparando cosas</h1>
+<h2>Comparando cosas</h2>
 <p>También podemos hacer comparaciones en R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> ==<span class="st"> </span><span class="dv">1</span> <span class="co"># igualdad (notar que son dos signos igual, se lee como &quot;es igual a&quot;)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="co"># igualdad (notar que son dos signos igual, se lee como &quot;es igual a&quot;)</span></a></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
 </section><section class="slide level2">
 
@@ -319,52 +725,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;"><strong>Operador</strong></th>
-<th style="text-align: left;"><strong>Comparación</strong></th>
+<th><strong>Operador</strong></th>
+<th><strong>Comparación</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">==</td>
-<td style="text-align: left;">igual</td>
+<td>==</td>
+<td>igual</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">!=</td>
-<td style="text-align: left;">distinto,</td>
+<td>!=</td>
+<td>distinto,</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">&gt;</td>
-<td style="text-align: left;">mayor</td>
+<td>&gt;</td>
+<td>mayor</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">&lt;</td>
-<td style="text-align: left;">menor</td>
+<td>&lt;</td>
+<td>menor</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">&gt;=</td>
-<td style="text-align: left;">mayor o igual</td>
+<td>&gt;=</td>
+<td>mayor o igual</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">&lt;=</td>
-<td style="text-align: left;">menor o igual</td>
+<td>&lt;=</td>
+<td>menor o igual</td>
 </tr>
 </tbody>
 </table>
 </div>
 </section><section id="tip-comparando-numeros" class="slide level2 tip">
-<h1>Tip: Comparando números</h1>
+<h2>Tip: Comparando números</h2>
 <p>Un advertencia acerca de la comparación de números: nunca usar <code>==</code> para comparar dos números a menos que sean integers (un tipo de data que se usa para representar números enteros específicamente).</p>
 <p>Las computadoras solo pueden representar números decimales con un cierto grado de precisión. Por lo que dos números que cuando son impresos por R se ven iguales, pueden tener representaciones subyacentes diferentes y por lo tanto ser diferentes por un pequeño margen de error (llamado <em>Machine numeric tolerance</em>)</p>
 <p>En su lugar, deberías usar la función <code>all.equal</code></p>
 <p>Para más información, leer: <a href="http://floating-point-gui.de">http://floating-point-gui.de/</a></p>
 </section><section id="variables-y-asignacion" class="slide level2">
-<h1>Variables y asignación</h1>
+<h2>Variables y asignación</h2>
 <p>Podemos guardar los valores en variales usando el operador de asignación <code>&lt;-</code>, de esta forma:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>/<span class="dv">40</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">40</span></a></code></pre></div>
 <p>La asignación de valores puede contener la variable que esta siendo asignada:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>x +<span class="st"> </span><span class="dv">1</span> <span class="co"># notar como RStudio actualiza la descrición de x en la pestaña Environment</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="co"># notar como RStudio actualiza la descrición de x en la pestaña Environment</span></a></code></pre></div>
 </section><section id="reglas-para-nombrar-variables" class="slide level2">
-<h1>Reglas para nombrar variables</h1>
+<h2>Reglas para nombrar variables</h2>
 <p>Los nombres de la variables pueden contener letras, números, guiones bajos y puntos.</p>
 <p>No pueden empezar con un número o guión bajo ni pueden contener espacios.</p>
 <p>Distintas personas usan distintas convenciones para nombrar variables con nombres largos, incluidos:</p>
@@ -375,39 +781,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Cual usar es una decisión individual (o del proyecto), pero hay que ser <strong>consistente</strong></p>
 </section><section id="vectorizacion" class="slide level2">
-<h1>Vectorización</h1>
+<h2>Vectorización</h2>
 <p>Una consideración final de lo que hay estar atento es que R está <em>vectorizado</em>, lo que significa que las variables y funciones pueden tener vectores como valores. Por ejemplo:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span>:<span class="dv">5</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a></code></pre></div>
 <pre><code>[1] 1 2 3 4 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>^(<span class="dv">1</span>:<span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="dv">2</span><span class="op">^</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</a></code></pre></div>
 <pre><code>[1]  2  4  8 16 32</code></pre>
 </section><section class="slide level2">
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">5</span>
-<span class="dv">2</span>^x</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="dv">2</span><span class="op">^</span>x</a></code></pre></div>
 <pre><code>[1]  2  4  8 16 32</code></pre>
 </section><section id="manejando-el-entorno" class="slide level2">
-<h1>Manejando el entorno</h1>
+<h2>Manejando el entorno</h2>
 <p>Hay algunas funciones muy útiles para interactuar con la sesión de R.</p>
 <p><code>ls</code> listará todas los objetos (funciones y variables) almacenados en el entorno global (tu sesión de trabajo en R)</p>
 </section><section id="tip-objetos-ocultos" class="slide level2 tip">
-<h1>Tip: objetos ocultos</h1>
+<h2>Tip: objetos ocultos</h2>
 <p><code>ls</code> ocultará cualquier objeto cuyo nombre empiece con un punto “.” por defecto. Para listar todos los objetos, hay que tipear <code>ls(all.names=TRUE)</code>.</p>
 </section><section id="manejando-el-entorno-1" class="slide level2">
-<h1>Manejando el entorno</h1>
+<h2>Manejando el entorno</h2>
 <p>Podés usar <code>rm</code> para eliminar objetos que no sean necesarios:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(x)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">rm</span>(x)</a></code></pre></div>
 </section><section class="slide level2">
 
 <p>Si tenés muchos objetos en tu entorno y querés borrar todos ellos, podés pasar el resultado de <code>ls</code> como argumento de la función <code>rm</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
 <p>En este caso hemos especificado que el resultado de <code>ls</code> sea usado por el argumento <code>list</code> en <code>rm</code>. Cuando asignamos valores a argumentos por nombre, ¡<strong>hay que</strong> usar el operardor <code>=</code>!</p>
 </section><section id="tip-warnings-vs-errors" class="slide level2 tip">
-<h1>Tip: Warnings vs Errors</h1>
+<h2>Tip: Warnings vs Errors</h2>
 <p>¡Presten atención cuando R hace algo inesperado! R tira errores, como el de arriba, cuando no puede proceder con un cálculo. Los <em>Warnings</em> (advertencias) por otro lado generalmente significa que la función se ejecutó, pero que probablemente no ha funcionado como se esperaba.</p>
 <p>En ambos casos, el mensaje que imprime R generalmente contiene pista de como arreglar el problema. Aunque a veces pueden ser algo crípticos y requieran cierta experiencia saber que es lo que está pasando.</p>
 </section><section id="paquetes-r" class="slide level2">
-<h1>Paquetes R</h1>
+<h2>Paquetes R</h2>
 <p>Los paquetes de R son colecciones de funciones o a veces datos, que son justamente empaquetadas.<br />
 Añaden funciones que no están presentes en R.</p>
 </section><section class="slide level2">
@@ -420,39 +826,39 @@ Añaden funciones que no están presentes en R.</p>
 <li>Para usar un paquete en la sesión actual tipear <code>library(packagename)</code></li>
 </ul>
 </section></section>
-<section><section id="ejercicios" class="titleslide slide level1"><h1>Ejercicios</h1></section><section id="ejercicio-1" class="slide level2">
-<h1>Ejercicio 1</h1>
+<section><section id="ejercicios" class="title-slide slide level1"><h1>Ejercicios</h1></section><section id="ejercicio-1" class="slide level2">
+<h2>Ejercicio 1</h2>
 <p>¿Cuál de los siguientes nombres son válidos como nombre de variable?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">min_height
-max.height
-_age
-.mass
-MaxLength
-min-length
-2widths
-celsius2kelvin</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">min_height</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">max.height</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">_age</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">.mass</a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">MaxLength</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">min<span class="op">-</span>length</a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">2widths</a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">celsius2kelvin</a></code></pre></div>
 </section><section id="ejercicio-2" class="slide level2">
-<h1>Ejercicio 2</h1>
+<h2>Ejercicio 2</h2>
 <p>¿Cuál será el valor de cada variable luego cada comando en el siguiente código?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mass &lt;-<span class="st"> </span><span class="fl">47.5</span>
-age &lt;-<span class="st"> </span><span class="dv">122</span>
-mass &lt;-<span class="st"> </span>mass *<span class="st"> </span><span class="fl">2.3</span>
-age &lt;-<span class="st"> </span>age -<span class="st"> </span><span class="dv">20</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">mass &lt;-<span class="st"> </span><span class="fl">47.5</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">age &lt;-<span class="st"> </span><span class="dv">122</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">mass &lt;-<span class="st"> </span>mass <span class="op">*</span><span class="st"> </span><span class="fl">2.3</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">age &lt;-<span class="st"> </span>age <span class="op">-</span><span class="st"> </span><span class="dv">20</span></a></code></pre></div>
 </section><section id="ejercicio-3" class="slide level2">
-<h1>Ejercicio 3</h1>
+<h2>Ejercicio 3</h2>
 <p>Ejectuta el código anterior y escribe un código para comparar mass y age ¿Es mass más grande que age?</p>
 </section><section id="ejercicio-4" class="slide level2">
-<h1>Ejercicio 4</h1>
+<h2>Ejercicio 4</h2>
 <p>Limpia el entorno eliminando las variables mass y age.</p>
 </section><section id="ejercicio-5" class="slide level2">
-<h1>Ejercicio 5</h1>
+<h2>Ejercicio 5</h2>
 <p>Instala los paquetes: <code>ggplot2</code>, <code>plyr</code>, <code>gapminder</code></p>
 </section></section>
     </div>
   </div>
 
-  <script src="site_libs/reveal.js-3.3.0/lib/js/head.min.js"></script>
-  <script src="site_libs/reveal.js-3.3.0/js/reveal.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
 
   <script>
 
@@ -472,6 +878,8 @@ age &lt;-<span class="st"> </span>age -<span class="st"> </span><span class="dv"
         // Transition style for full page slide backgrounds
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
 
+
+
         // Optional reveal.js plugins
         dependencies: [
         ]
@@ -482,7 +890,7 @@ age &lt;-<span class="st"> </span>age -<span class="st"> </span><span class="dv"
     (function () {
       var script = document.createElement("script");
       script.type = "text/javascript";
-      script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
       document.getElementsByTagName("head")[0].appendChild(script);
     })();
   </script>
