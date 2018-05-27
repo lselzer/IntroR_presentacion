@@ -35,7 +35,7 @@ opts_knit$set(animation.fun = function(x, options, format = "gif") {
   
   sprintf("![%s](%s)", options$label, paste0(opts_knit$get("base.url"), mov.fname))
 })
-install_github("dgrtwo/gganimate")
+devtools::install_github("dgrtwo/gganimate")
 ```
 
 ## Sistemas gráficos en R
