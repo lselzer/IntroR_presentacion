@@ -35,7 +35,6 @@ opts_knit$set(animation.fun = function(x, options, format = "gif") {
   
   sprintf("![%s](%s)", options$label, paste0(opts_knit$get("base.url"), mov.fname))
 })
-devtools::install_github("dgrtwo/gganimate")
 ```
 
 ## Sistemas gráficos en R
@@ -352,7 +351,7 @@ p <- ggplot(gapminder_tw,
   theme_light(20)
 
 
-gg_animate(p, title_frame = FALSE)
+gganimate(p, title_frame = FALSE)
 ```
 ---
 
