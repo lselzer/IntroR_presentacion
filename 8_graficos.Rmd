@@ -12,8 +12,8 @@ output:
       previewLinks: true
       highlight: pygments
       center: true
-  includes:
-    after_body: doc_suffix.html
+    includes:
+      after_body: doc_suffix.html
 ---
 
 ```{r setup, include=FALSE}

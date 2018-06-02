@@ -2,17 +2,18 @@
 title: "Escribiendo Datos"
 author: "Luciano Selzer"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-revealjs::revealjs_presentation:
-  self_contained: false
-  lib_dir: libs
-  css: style.css
-  reveal_options:
-    slideNumber: true
-    previewLinks: true
-    highlight: pygments
-    center: true
-  includes:
-    after_body: doc_suffix.html
+output:
+  revealjs::revealjs_presentation:
+    self_contained: false
+    lib_dir: libs
+    css: style.css
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+      highlight: pygments
+      center: true
+    includes:
+      after_body: doc_suffix.html
 ---
 
 ```{r setup, include=FALSE}

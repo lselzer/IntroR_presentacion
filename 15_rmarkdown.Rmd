@@ -2,6 +2,7 @@
 title: "Reportes dinámicos con knitr"
 author: "Luciano Selzer"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
 revealjs::revealjs_presentation:
   self_contained: false
   lib_dir: libs
