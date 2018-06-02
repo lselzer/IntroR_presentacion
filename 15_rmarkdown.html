@@ -1,467 +1,276 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="author" content="Luciano Selzer" />
-  <title>Reportes dinámicos con knitr</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
 
 
-
-<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
-
-
-  <!-- some tweaks to reveal css -->
-  <style type="text/css">
-    .reveal h1 { font-size: 2.0em; }
-    .reveal h2 { font-size: 1.5em;  }
-    .reveal h3 { font-size: 1.25em;	}
-    .reveal h4 { font-size: 1em;	}
-
-    .reveal .slides>section,
-    .reveal .slides>section>section {
-      padding: 0px 0px;
-    }
+<meta name="author" content="Luciano Selzer" />
 
 
+<title>Reportes dinámicos con knitr</title>
 
-    .reveal table {
-      border-width: 1px;
-      border-spacing: 2px;
-      border-style: dotted;
-      border-color: gray;
-      border-collapse: collapse;
-      font-size: 0.7em;
-    }
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
-    .reveal table th {
-      border-width: 1px;
-      padding-left: 10px;
-      padding-right: 25px;
-      font-weight: bold;
-      border-style: dotted;
-      border-color: gray;
-    }
-
-    .reveal table td {
-      border-width: 1px;
-      padding-left: 10px;
-      padding-right: 25px;
-      border-style: dotted;
-      border-color: gray;
-    }
-
-
-  </style>
-
-    <style type="text/css">code{white-space: pre;}</style>
-
-    <link rel="stylesheet" href="style.css"/>
-
-<!-- Printing and PDF exports -->
-<script id="paper-css" type="application/dynamic-css">
-
-/* Default Print Stylesheet Template
-   by Rob Glazebrook of CSSnewbie.com
-   Last Updated: June 4, 2008
-
-   Feel free (nay, compelled) to edit, append, and
-   manipulate this file as you see fit. */
-
-
-@media print {
-
-	/* SECTION 1: Set default width, margin, float, and
-	   background. This prevents elements from extending
-	   beyond the edge of the printed page, and prevents
-	   unnecessary background images from printing */
-	html {
-		background: #fff;
-		width: auto;
-		height: auto;
-		overflow: visible;
-	}
-	body {
-		background: #fff;
-		font-size: 20pt;
-		width: auto;
-		height: auto;
-		border: 0;
-		margin: 0 5%;
-		padding: 0;
-		overflow: visible;
-		float: none !important;
-	}
-
-	/* SECTION 2: Remove any elements not needed in print.
-	   This would include navigation, ads, sidebars, etc. */
-	.nestedarrow,
-	.controls,
-	.fork-reveal,
-	.share-reveal,
-	.state-background,
-	.reveal .progress,
-	.reveal .backgrounds {
-		display: none !important;
-	}
-
-	/* SECTION 3: Set body font face, size, and color.
-	   Consider using a serif font for readability. */
-	body, p, td, li, div {
-		font-size: 20pt!important;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
-		color: #000;
-	}
-
-	/* SECTION 4: Set heading font face, sizes, and color.
-	   Differentiate your headings from your body text.
-	   Perhaps use a large sans-serif for distinction. */
-	h1,h2,h3,h4,h5,h6 {
-		color: #000!important;
-		height: auto;
-		line-height: normal;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
-		text-shadow: 0 0 0 #000 !important;
-		text-align: left;
-		letter-spacing: normal;
-	}
-	/* Need to reduce the size of the fonts for printing */
-	h1 { font-size: 28pt !important;  }
-	h2 { font-size: 24pt !important; }
-	h3 { font-size: 22pt !important; }
-	h4 { font-size: 22pt !important; font-variant: small-caps; }
-	h5 { font-size: 21pt !important; }
-	h6 { font-size: 20pt !important; font-style: italic; }
-
-	/* SECTION 5: Make hyperlinks more usable.
-	   Ensure links are underlined, and consider appending
-	   the URL to the end of the link for usability. */
-	a:link,
-	a:visited {
-		color: #000 !important;
-		font-weight: bold;
-		text-decoration: underline;
-	}
-	/*
-	.reveal a:link:after,
-	.reveal a:visited:after {
-		content: " (" attr(href) ") ";
-		color: #222 !important;
-		font-size: 90%;
-	}
-	*/
-
-
-	/* SECTION 6: more reveal.js specific additions by @skypanther */
-	ul, ol, div, p {
-		visibility: visible;
-		position: static;
-		width: auto;
-		height: auto;
-		display: block;
-		overflow: visible;
-		margin: 0;
-		text-align: left !important;
-	}
-	.reveal pre,
-	.reveal table {
-		margin-left: 0;
-		margin-right: 0;
-	}
-	.reveal pre code {
-		padding: 20px;
-		border: 1px solid #ddd;
-	}
-	.reveal blockquote {
-		margin: 20px 0;
-	}
-	.reveal .slides {
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-
-		left: 0 !important;
-		top: 0 !important;
-		margin-left: 0 !important;
-		margin-top: 0 !important;
-		padding: 0 !important;
-		zoom: 1 !important;
-
-		overflow: visible !important;
-		display: block !important;
-
-		text-align: left !important;
-		-webkit-perspective: none;
-		   -moz-perspective: none;
-		    -ms-perspective: none;
-		        perspective: none;
-
-		-webkit-perspective-origin: 50% 50%;
-		   -moz-perspective-origin: 50% 50%;
-		    -ms-perspective-origin: 50% 50%;
-		        perspective-origin: 50% 50%;
-	}
-	.reveal .slides section {
-		visibility: visible !important;
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-		display: block !important;
-		overflow: visible !important;
-
-		left: 0 !important;
-		top: 0 !important;
-		margin-left: 0 !important;
-		margin-top: 0 !important;
-		padding: 60px 20px !important;
-		z-index: auto !important;
-
-		opacity: 1 !important;
-
-		page-break-after: always !important;
-
-		-webkit-transform-style: flat !important;
-		   -moz-transform-style: flat !important;
-		    -ms-transform-style: flat !important;
-		        transform-style: flat !important;
-
-		-webkit-transform: none !important;
-		   -moz-transform: none !important;
-		    -ms-transform: none !important;
-		        transform: none !important;
-
-		-webkit-transition: none !important;
-		   -moz-transition: none !important;
-		    -ms-transition: none !important;
-		        transition: none !important;
-	}
-	.reveal .slides section.stack {
-		padding: 0 !important;
-	}
-	.reveal section:last-of-type {
-		page-break-after: avoid !important;
-	}
-	.reveal section .fragment {
-		opacity: 1 !important;
-		visibility: visible !important;
-
-		-webkit-transform: none !important;
-		   -moz-transform: none !important;
-		    -ms-transform: none !important;
-		        transform: none !important;
-	}
-	.reveal section img {
-		display: block;
-		margin: 15px 0px;
-		background: rgba(255,255,255,1);
-		border: 1px solid #666;
-		box-shadow: none;
-	}
-
-	.reveal section small {
-		font-size: 0.8em;
-	}
-
-}  
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
 </script>
 
 
-<script id="pdf-css" type="application/dynamic-css">
-    
-/**
- * This stylesheet is used to print reveal.js
- * presentations to PDF.
- *
- * https://github.com/hakimel/reveal.js#pdf-export
- */
 
-* {
-	-webkit-print-color-adjust: exact;
+<style type="text/css">
+h1 {
+  font-size: 34px;
 }
-
-body {
-	margin: 0 auto !important;
-	border: 0;
-	padding: 0;
-	float: none !important;
-	overflow: visible;
+h1.title {
+  font-size: 38px;
 }
-
-html {
-	width: 100%;
-	height: 100%;
-	overflow: visible;
+h2 {
+  font-size: 30px;
 }
-
-/* Remove any elements not needed in print. */
-.nestedarrow,
-.reveal .controls,
-.reveal .progress,
-.reveal .playback,
-.reveal.overview,
-.fork-reveal,
-.share-reveal,
-.state-background {
-	display: none !important;
+h3 {
+  font-size: 24px;
 }
-
-h1, h2, h3, h4, h5, h6 {
-	text-shadow: 0 0 0 #000 !important;
+h4 {
+  font-size: 18px;
 }
-
-.reveal pre code {
-	overflow: hidden !important;
-	font-family: Courier, 'Courier New', monospace !important;
+h5 {
+  font-size: 16px;
 }
-
-ul, ol, div, p {
-	visibility: visible;
-	position: static;
-	width: auto;
-	height: auto;
-	display: block;
-	overflow: visible;
-	margin: auto;
+h6 {
+  font-size: 12px;
 }
-.reveal {
-	width: auto !important;
-	height: auto !important;
-	overflow: hidden !important;
+.table th:not([align]) {
+  text-align: left;
 }
-.reveal .slides {
-	position: static;
-	width: 100%;
-	height: auto;
+</style>
 
-	left: auto;
-	top: auto;
-	margin: 0 !important;
-	padding: 0 !important;
-
-	overflow: visible;
-	display: block;
-
-	-webkit-perspective: none;
-	   -moz-perspective: none;
-	    -ms-perspective: none;
-	        perspective: none;
-
-	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
-	   -moz-perspective-origin: 50% 50%;
-	    -ms-perspective-origin: 50% 50%;
-	        perspective-origin: 50% 50%;
-}
-
-.reveal .slides section {
-	page-break-after: always !important;
-
-	visibility: visible !important;
-	position: relative !important;
-	display: block !important;
-	position: relative !important;
-
-	margin: 0 !important;
-	padding: 0 !important;
-	box-sizing: border-box !important;
-	min-height: 1px;
-
-	opacity: 1 !important;
-
-	-webkit-transform-style: flat !important;
-	   -moz-transform-style: flat !important;
-	    -ms-transform-style: flat !important;
-	        transform-style: flat !important;
-
-	-webkit-transform: none !important;
-	   -moz-transform: none !important;
-	    -ms-transform: none !important;
-	        transform: none !important;
-}
-
-.reveal section.stack {
-	margin: 0 !important;
-	padding: 0 !important;
-	page-break-after: avoid !important;
-	height: auto !important;
-	min-height: auto !important;
-}
-
-.reveal img {
-	box-shadow: none;
-}
-
-.reveal .roll {
-	overflow: visible;
-	line-height: 1em;
-}
-
-/* Slide backgrounds are placed inside of their slide when exporting to PDF */
-.reveal section .slide-background {
-	display: block !important;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: -1;
-}
-
-/* All elements should be above the slide-background */
-.reveal section>* {
-	position: relative;
-	z-index: 1;
-}
-
-/* Display slide speaker notes when 'showNotes' is enabled */
-.reveal .speaker-notes-pdf {
-	display: block;
-	width: 100%;
-	max-height: none;
-	left: auto;
-	top: auto;
-	z-index: 100;
-}
-
-/* Display slide numbers when 'slideNumber' is enabled */
-.reveal .slide-number-pdf {
-	display: block;
-	position: absolute;
-	font-size: 14px;
-}
-
-</script>
-
-
-<script>
-var style = document.createElement( 'style' );
-style.type = 'text/css';
-var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
-var style_script = document.getElementById(style_script_id).text;
-style.innerHTML = style_script;
-document.getElementsByTagName('head')[0].appendChild(style);
-</script>
 
 </head>
+
 <body>
-  <div class="reveal">
-    <div class="slides">
 
-<section>
-    <h1 class="title">Reportes dinámicos con knitr</h1>
-    <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">01 June, 2018</h3>
-</section>
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
 
-<section id="reportes-de-analisis-de-datos" class="slide level2">
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Introducción a R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Inicio
+  </a>
+</li>
+<li>
+  <a href="prerequisitos.html">Prerequisitos</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-television"></span>
+     
+    Presentaciones
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1_presentacion.html">Introducción</a>
+    </li>
+    <li>
+      <a href="8_graficos.html">Gráficos con buena calidad</a>
+    </li>
+    <li>
+      <a href="2_proyectos.html">Proyectos</a>
+    </li>
+    <li>
+      <a href="5_data.frames.html">Explorando Data Frames</a>
+    </li>
+    <li>
+      <a href="13_manipulacion.html">Manipulación de data.frames con dplyr</a>
+    </li>
+    <li>
+      <a href="14_tidyr.html">Manipulación de data.frames con tidyr</a>
+    </li>
+    <li>
+      <a href="15_rmarkdown.html">Reportes dinámicos con knitr</a>
+    </li>
+    <li>
+      <a href="3_help.html">Ayuda en R</a>
+    </li>
+    <li>
+      <a href="4_datos.html">Estructura de Datos</a>
+    </li>
+    <li>
+      <a href="6_subsetting.html">Subconjuntos de Datos</a>
+    </li>
+    <li>
+      <a href="7_control_de_flujo.html">Control de Flujos</a>
+    </li>
+    <li>
+      <a href="9_vectorizacion.html">Vectorización</a>
+    </li>
+    <li>
+      <a href="10_funciones.html">Funciones</a>
+    </li>
+    <li>
+      <a href="11_guardando.html">Guardando datos</a>
+    </li>
+    <li>
+      <a href="12_divide_aplica_combina.html">Divide-aplica-combina</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Reportes dinámicos con knitr</h1>
+<h4 class="author"><em>Luciano Selzer</em></h4>
+<h4 class="date"><em>02 June, 2018</em></h4>
+
+</div>
+
+
+<div id="reportes-de-analisis-de-datos" class="section level2">
 <h2>Reportes de análisis de datos</h2>
 <p>Cuando analizamos los datos queremos compartir nuestros resultados con nuestros colaboradores.</p>
 <p>Resulta tedioso copiar y pegar los resultados.</p>
 <p>Y saber que figura es cual. O que resultados corresponde a que análisis</p>
-</section>
-<section id="programacion-literaria" class="slide level2">
+</div>
+<div id="programacion-literaria" class="section level2">
 <h2>Programación Literaria</h2>
 <p>Propuesta en 1970 por Donald Knuth</p>
 <p>La idea detrás de eso es poder escribir texto y mezclarlo con el resultado del código de computadora.</p>
@@ -470,14 +279,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <ul>
 <li>Para eso está R Markdown</li>
 </ul>
-</section>
-<section id="creando-un-archivo-de-r-markdown" class="slide level2">
+</div>
+<div id="creando-un-archivo-de-r-markdown" class="section level2">
 <h2>Creando un archivo de R Markdown</h2>
 <p>Dentro de RStudio, click File → New File → R Markdown y vas a ver un dialogo como este:</p>
-<p><img data-src="img/New_R_Markdown.png" /></p>
+<p><img src="img/New_R_Markdown.png" /></p>
 <p>Podemos quedarnos con la opción por defecto (<em>HTML output</em>), pero le damos un título.</p>
-</section>
-<section id="componentes-basicos-de-r-markdown" class="slide level2">
+</div>
+<div id="componentes-basicos-de-r-markdown" class="section level2">
 <h2>Componentes básicos de R Markdown</h2>
 <p>El fragmento inicial instrucciones para R: el título, autor, fecha, y que formato va a tener el documento.</p>
 <pre><code>---
@@ -487,9 +296,7 @@ date: &quot;23 de septiembre, 2015&quot;
 output: html_document
 ---</code></pre>
 <p>Se pueden borrar los campos que no querés. Las comillas dobles no son estrictamente <em>necesarias</em>. Solo si hay alguna comilla simple.</p>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>RStudio crea el documento con ejemplos para empezar. Los fragmentos de código tienen la estructura parecida a la de abajo.</p>
 <pre>
 &#96;&#96;&#96;{r}
@@ -498,48 +305,44 @@ summary(cars)
 </pre>
 <p>Estos fragmentos de código van a ser ejecutados por knitr y reemplazados por sus resultados.</p>
 <p>También hay una dirección web entre corchetes angulares (<code>&lt; &gt;</code>) como también doble asteriscos en <code>**Knit**</code>. Esto es <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
-</section>
-<section id="markdown" class="slide level2">
+</div>
+<div id="markdown" class="section level2">
 <h2>Markdown</h2>
 <p>Es un sistema para escribir páginas web en formato liviano. En vez de código html se marca el texto con marcas que luego se <em>convierten</em> en código html válido.</p>
 <p>Por ahora, borremos todos y veamos como se puede formatear el texto con markdown.</p>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Podes poner el texto en:</p>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">formato</th>
-<th style="text-align: left;">código</th>
+<th align="left">formato</th>
+<th align="left">código</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>negrita</strong></td>
-<td style="text-align: left;"><code>**negrita**</code></td>
+<td align="left"><strong>negrita</strong></td>
+<td align="left"><code>**negrita**</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>__negrita__</code></td>
+<td align="left"></td>
+<td align="left"><code>__negrita__</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><em>italica</em></td>
-<td style="text-align: left;"><code>*italica*</code></td>
+<td align="left"><em>italica</em></td>
+<td align="left"><code>*italica*</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"></td>
-<td style="text-align: left;"><code>_italica_</code></td>
+<td align="left"></td>
+<td align="left"><code>_italica_</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><del>tachado</del></td>
-<td style="text-align: left;"><code>~~tachado~~</code></td>
+<td align="left"><del>tachado</del></td>
+<td align="left"><code>~~tachado~~</code></td>
 </tr>
 </tbody>
 </table>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Podemos hacer una lista con viñetas</p>
 <pre><code>* negrita con asteriscos dobles
 * italica con guiones bajos
@@ -548,9 +351,7 @@ summary(cars)
 <pre><code>- negrita con asteriscos dobles
 - italica con guiones bajos
 - código con comillas hacia atrás (backticks)</code></pre>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>O también así:</p>
 <pre><code>+ negrita con asteriscos dobles
 + italica con guiones bajos
@@ -561,59 +362,49 @@ summary(cars)
 <li>italica con guiones bajos</li>
 <li>código con comillas hacia atrás (backticks)</li>
 </ul>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Se puede usar una lista numerada usando solo número y ni siquiera hay que poner numeros consecutivos:</p>
 <pre><code>1. negrita con asteriscos dobles
 1. italica con guiones bajos
 1. código con comillas hacia atrás (backticks)</code></pre>
 <p>Esto aparece como:</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>negrita con asteriscos dobles</li>
 <li>italica con guiones bajos</li>
 <li>código con comillas hacia atrás (backticks)</li>
 </ol>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Podes hacer titulos de sección de diferentes tamaños iniciando una linea con algún número de simbolos <code>#</code>:</p>
 <pre><code># Título
 ## Sección principal
 ### Sub-sección
 #### Sub-sub sección</code></pre>
 <p><h1>Título</h1><h2>Sección principal</h2><h3>Sub-sección</h3><h4>Sub-sub sección</h4></p>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Podés <em>compilar</em> el archivo R Markdown a una página html haciendo click en “Knit HTML” arriba a la izquierda.</p>
 <p>Hay una referencia rápida en el menú de <em>Help</em></p>
-</section>
-<section id="ejercicio-1" class="slide level2 challenge">
+</div>
+<div id="ejercicio-1" class="section level2 challenge">
 <h2>Ejercicio 1</h2>
 <p>Crea un nuevo documento de R Markdown. Borra todo su contenido y escribe algo en Markdown (alguna secciones, negrita, italicas y una lista con viñetas).</p>
 <p>Luego convierte el documento en una página web.</p>
-</section>
-<section id="un-poco-mas-de-markdown" class="slide level2">
+</div>
+<div id="un-poco-mas-de-markdown" class="section level2">
 <h2>Un poco más de markdown</h2>
 <p>Podés mostrar un hipervínculo así:</p>
 <p><code>[texto a mostar](http://el-sitio-web.com)</code>.</p>
 <p>Podés incluir una imagen así: <code>![etiqueta](http://url/al/archivo.imagen)</code></p>
 <p>Podés poner subíndices (e.g., F<sub>2</sub>) con <code>F~2~</code> y superíndices (e.g., F<sup>2</sup>) con <code>F^2^</code>.</p>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Sí sabés escribir ecuaciones con <a href="http://www.latex-project.org/">LaTeX</a>, podes usar <code>$ $</code> y <code>$$ $$</code> para insertar ecuaciones como <code>$E = mc^2$</code> <span class="math inline">\(E = mc^2\)</span> y</p>
 <pre><code>$$y = \mu + \sum_{i=1}^p \beta_i x_i + \epsilon$$</code></pre>
 <p><span class="math display">\[y = \mu + \sum_{i=1}^p \beta_i x_i + \epsilon\]</span></p>
 <p>Hay editores online <a href="https://www.codecogs.com/latex/eqneditor.php" class="uri">https://www.codecogs.com/latex/eqneditor.php</a></p>
-</section>
-<section id="fragmentos-de-codigo-de-r" class="slide level2">
+</div>
+<div id="fragmentos-de-codigo-de-r" class="section level2">
 <h2>Fragmentos de código de R</h2>
 <p>El verdadero poder viene al mezclar markdown y fragmentos de código de R. Esto es R Markdown. Cuando se compile el documento se va a ejectuar el código y luego se van a insertar los resultados del código (figuras, tablas, etc.)</p>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Un fragmento de código se ve así:</p>
 <pre>
 &#96;&#96;&#96;{r load_data}
@@ -622,8 +413,8 @@ gapminder <- read.csv("~/data/gapminder.csv")
 </pre>
 <p>Pones el código de R entre <code>```{r nombre_fragmento}</code> y <code>```</code>.</p>
 <p>Es buena idea darle un nombre a cada código, te ayudará a arreglar errores, y el nombre de los gráficos estarán basados en el nombre del fragmento que los produjo.</p>
-</section>
-<section id="ejercicio-2" class="slide level2 challenge">
+</div>
+<div id="ejercicio-2" class="section level2 challenge">
 <h2>Ejercicio 2</h2>
 <p>Añade fragmentos de código para</p>
 <ul>
@@ -631,17 +422,15 @@ gapminder <- read.csv("~/data/gapminder.csv")
 <li>leer los datos de gapminder</li>
 <li>crear un gráfico</li>
 </ul>
-</section>
-<section id="como-se-compila" class="slide level2">
+</div>
+<div id="como-se-compila" class="section level2">
 <h2>Como se compila</h2>
 <p><img src="fig/rmd-rmd_to_html_fig-1.png" width="768" style="display: block; margin: auto auto auto 0;" /></p>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Cuando presionas el botón “Knit HTML”, el doumento de R Markdown es procesado por <a href="http://yihui.name/knitr">knitr</a> y se produce un archivo de texto plano de Markdown (potencialmente también unos archivos de figuras): el código de R se ejecuta y se reemplaza tanto la entrada como la salida; si se producen figuras, se inserta el vínculo hacia ellas.</p>
 <p>El documento de Markdown y las figuras son luego procesadas por la herramienta <a href="http://pandoc.org/">pandoc</a>, que convierte el documento Markdown en HTML con las figuras incrustadas</p>
-</section>
-<section id="opciones-de-fragmentos" class="slide level2">
+</div>
+<div id="opciones-de-fragmentos" class="section level2">
 <h2>Opciones de fragmentos</h2>
 <p>Hay una gran variedad de opciones que afectan como se trata el código dentro de los fragmentos.</p>
 <ul>
@@ -651,9 +440,7 @@ gapminder <- read.csv("~/data/gapminder.csv")
 <li>Usa <code>warning=FALSE</code> y <code>message=FALSE</code> para esconder las advertencias y mensajes.</li>
 <li>Usa <code>fig.height</code> y <code>fig.width</code> para controlar el tamaño de la figuras (en pulgadas)</li>
 </ul>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Entonces podrías escribir:</p>
 <pre>
 &#96;&#96;&#96;{r cargar_paquetes, echo=FALSE, message=FALSE}
@@ -661,9 +448,7 @@ library(dplyr)
 library(ggplot2)
 &#96;&#96;&#96;
 </pre>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>Muchas veces vas a querer usar algunas opciones en todos los fragmentos. Para esto, podés configurar opciones <em>globales</em>:</p>
 <pre>
 &#96;&#96;&#96;{r global_options, echo=FALSE}
@@ -675,34 +460,30 @@ knitr::opts_chunk$set(fig.path="Figs/",
                       fig.width=11)
 &#96;&#96;&#96;
 </pre>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>La opción de <code>fig.path</code> define donde van a ser guardadas las figuras. La <code>/</code> es muy importante, sin ellas las figuras se guardarían en el lugar normal pero con el nombre que empieza con <code>Figs</code>.</p>
 <p>Si tenés muchos archivos de R Markdown, podrías usar <code>fig.path</code> para definir distintos prefijos a los nombres de las figuras, como <code>fig.path=&quot;Figs/cleaning-&quot;</code> y <code>fig.path=&quot;Figs/analysis-&quot;</code>.</p>
-</section>
-<section id="ejercicio-3" class="slide level2 challenge">
+</div>
+<div id="ejercicio-3" class="section level2 challenge">
 <h2>Ejercicio 3</h2>
 <p>Usa las opciones de fragmentos para controlar el tamaño de una figura y esconder el código que la genera.</p>
-</section>
-<section id="codigo-de-r-en-linea" class="slide level2">
+</div>
+<div id="codigo-de-r-en-linea" class="section level2">
 <h2>Código de R en linea</h2>
 <p>Podés hacer <em>cada</em> número en tu reporte reproducible.</p>
 <p>Usa:<br />
 <code>`r</code> y <code>`</code><br />
 para fragmento de código en línea, así: <code>`r round(algun_valor, 2)`</code>. El código va a ser ejectuado y reemplazado con el <em>valor</em> del resultado.</p>
 <p>No dejes que los fragmentos en línea se separen entre línas</p>
-</section>
-<section class="slide level2">
-
+<hr />
 <p>A veces podrías preceder un párrafo con un fragmento largo que haga todos los calculos y defina cosas; con <code>include=FALSE</code> para el framento mayor (que es equivalente a <code>echo=FALSE</code> y <code>results=&quot;hide&quot;</code>).</p>
 <p>Pueden usar la función <code>sprint()</code> para redonder hasta un decimal sin perder decimales (e.g. <code>sprintf(&quot;%.1f&quot;, -2.03)</code> -2.0)</p>
-</section>
-<section id="ejercicio-4" class="slide level2 challenge">
+</div>
+<div id="ejercicio-4" class="section level2 challenge">
 <h2>Ejercicio 4</h2>
 <p>Prueba agregar código de R en línea</p>
-</section>
-<section id="otras-opciones-de-salida" class="slide level2">
+</div>
+<div id="otras-opciones-de-salida" class="section level2">
 <h2>Otras opciones de salida</h2>
 <p>Podés convertir los archivos de R Markdown en:</p>
 <ul>
@@ -711,14 +492,14 @@ para fragmento de código en línea, así: <code>`r round(algun_valor, 2)`</code
 <li>Presentaciones</li>
 </ul>
 <p>Haciendo clic en la flecha hacia abajo al lado de Knit HTML. También podés cambiar el tipo de salida especificando <code>pdf_document</code> o <code>word_document</code> en el encabezado del documento.</p>
-</section>
-<section id="tip-creando-documentos-pdf" class="slide level2 tip">
+</div>
+<div id="tip-creando-documentos-pdf" class="section level2 tip">
 <h2>Tip: Creando documentos PDF</h2>
 <p>Crear documentos .pdf puede requerir la instalación de software extra. Si es requerido se detalla en un mensaje de error.</p>
 <p>Tex para Windows está disponible <a href="http://miktex.org/2.9/setup">aquí</a>.</p>
 <p>Tex para Mac está disponible <a href="http://tug.org/mactex">aquí</a>.</p>
-</section>
-<section id="recursos" class="slide level2">
+</div>
+<div id="recursos" class="section level2">
 <h2>Recursos</h2>
 <ul>
 <li><a href="http://kbroman.org/knitr_knutshell">Knitr in a knutshell tutorial</a></li>
@@ -726,112 +507,35 @@ para fragmento de código en línea, así: <code>`r round(algun_valor, 2)`</code
 <li><a href="http://rmarkdown.rstudio.com">R Markdown documentation</a></li>
 <li><a href="http://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">R Markdown cheat sheet</a></li>
 </ul>
-</section>
-    </div>
-  </div>
-
-  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
-  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
-
-  <script>
-
-      // Full list of configuration options available at:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        // Display the page number of the current slide
-        slideNumber: true,
-        // Push each slide change to the browser history
-        history: true,
-        // Vertical centering of slides
-        center: true,
-        // Opens links in an iframe preview overlay
-        previewLinks: true,
-        // Transition style
-        transition: 'default', // none/fade/slide/convex/concave/zoom
-        // Transition style for full page slide backgrounds
-        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+</div>
 
 
 
-        // Optional reveal.js plugins
-        dependencies: [
-        ]
-      });
-    </script>
-  <!-- dynamically load mathjax for compatibility with self-contained -->
-  <script>
-    (function () {
-      var script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-      document.getElementsByTagName("head")[0].appendChild(script);
-    })();
-  </script>
+
+</div>
 
 <script>
-  (function() {
-    if (window.jQuery) {
-      Reveal.addEventListener( 'slidechanged', function(event) {  
-        window.jQuery(event.previousSlide).trigger('hidden');
-        window.jQuery(event.currentSlide).trigger('shown');
-      });
-    }
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 
-<!--http://stackoverflow.com/questions/34706859/set-header-and-footer-reveal-js-presentation -->
-
-<style type="text/css">
-    /* 1. Style header/footer <div> so they are positioned as desired. */
-    #header-left {
-        position: absolute;
-        top: 2%;
-        left: 2%;
-        font-size: 12pt;
-    }
-    #header-right {
-        position: absolute;
-        top: 2%;
-        right: 2%;
-        font-size: 12pt;
-    }
-    #footer-left {
-        position: absolute;
-        bottom: 2%;
-        left: 2%;
-    }
-</style>
-
-<!-- 2. Create hidden header/footer <div> -->
-<div id="hidden" style="display:none;">
-    <div id="header">
-        <div id="header-left"><a href="index.html">Inicio</a></div>
-        <div id="header-right"><a href="" id="PDF">Descargar PDF</a></div>
-        <div id="footer-left">
-          <img src="img/logo_untdf_icpa_small.png" alt="logo untdf icpa small" />
-        </div>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript">
-    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
-    var header = $('#header').html();
-    if ( window.location.search.match( /print-pdf/gi ) ) {
-        Reveal.addEventListener( 'ready', function( event ) {
-            $('.slide-background').append(header);
-        });
-    }
-    else {
-        $('div.reveal').append(header);
-   }
-</script>
-<script type="text/javascript" charset="utf-8">
-  var a = document.getElementById("PDF");
-  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  
-  
-</script>
-
-  </body>
+</body>
 </html>

@@ -1,570 +1,306 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <title>Tutorial de instalación</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
 
 
 
-<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
 
+<title>Tutorial de instalación</title>
 
-  <!-- some tweaks to reveal css -->
-  <style type="text/css">
-    .reveal h1 { font-size: 2.0em; }
-    .reveal h2 { font-size: 1.5em;  }
-    .reveal h3 { font-size: 1.25em;	}
-    .reveal h4 { font-size: 1em;	}
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
-    .reveal .slides>section,
-    .reveal .slides>section>section {
-      padding: 0px 0px;
-    }
-
-
-
-    .reveal table {
-      border-width: 1px;
-      border-spacing: 2px;
-      border-style: dotted;
-      border-color: gray;
-      border-collapse: collapse;
-      font-size: 0.7em;
-    }
-
-    .reveal table th {
-      border-width: 1px;
-      padding-left: 10px;
-      padding-right: 25px;
-      font-weight: bold;
-      border-style: dotted;
-      border-color: gray;
-    }
-
-    .reveal table td {
-      border-width: 1px;
-      padding-left: 10px;
-      padding-right: 25px;
-      border-style: dotted;
-      border-color: gray;
-    }
-
-
-  </style>
-
-    <style type="text/css">code{white-space: pre;}</style>
-
-    <link rel="stylesheet" href="style.css"/>
-
-<!-- Printing and PDF exports -->
-<script id="paper-css" type="application/dynamic-css">
-
-/* Default Print Stylesheet Template
-   by Rob Glazebrook of CSSnewbie.com
-   Last Updated: June 4, 2008
-
-   Feel free (nay, compelled) to edit, append, and
-   manipulate this file as you see fit. */
-
-
-@media print {
-
-	/* SECTION 1: Set default width, margin, float, and
-	   background. This prevents elements from extending
-	   beyond the edge of the printed page, and prevents
-	   unnecessary background images from printing */
-	html {
-		background: #fff;
-		width: auto;
-		height: auto;
-		overflow: visible;
-	}
-	body {
-		background: #fff;
-		font-size: 20pt;
-		width: auto;
-		height: auto;
-		border: 0;
-		margin: 0 5%;
-		padding: 0;
-		overflow: visible;
-		float: none !important;
-	}
-
-	/* SECTION 2: Remove any elements not needed in print.
-	   This would include navigation, ads, sidebars, etc. */
-	.nestedarrow,
-	.controls,
-	.fork-reveal,
-	.share-reveal,
-	.state-background,
-	.reveal .progress,
-	.reveal .backgrounds {
-		display: none !important;
-	}
-
-	/* SECTION 3: Set body font face, size, and color.
-	   Consider using a serif font for readability. */
-	body, p, td, li, div {
-		font-size: 20pt!important;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
-		color: #000;
-	}
-
-	/* SECTION 4: Set heading font face, sizes, and color.
-	   Differentiate your headings from your body text.
-	   Perhaps use a large sans-serif for distinction. */
-	h1,h2,h3,h4,h5,h6 {
-		color: #000!important;
-		height: auto;
-		line-height: normal;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
-		text-shadow: 0 0 0 #000 !important;
-		text-align: left;
-		letter-spacing: normal;
-	}
-	/* Need to reduce the size of the fonts for printing */
-	h1 { font-size: 28pt !important;  }
-	h2 { font-size: 24pt !important; }
-	h3 { font-size: 22pt !important; }
-	h4 { font-size: 22pt !important; font-variant: small-caps; }
-	h5 { font-size: 21pt !important; }
-	h6 { font-size: 20pt !important; font-style: italic; }
-
-	/* SECTION 5: Make hyperlinks more usable.
-	   Ensure links are underlined, and consider appending
-	   the URL to the end of the link for usability. */
-	a:link,
-	a:visited {
-		color: #000 !important;
-		font-weight: bold;
-		text-decoration: underline;
-	}
-	/*
-	.reveal a:link:after,
-	.reveal a:visited:after {
-		content: " (" attr(href) ") ";
-		color: #222 !important;
-		font-size: 90%;
-	}
-	*/
-
-
-	/* SECTION 6: more reveal.js specific additions by @skypanther */
-	ul, ol, div, p {
-		visibility: visible;
-		position: static;
-		width: auto;
-		height: auto;
-		display: block;
-		overflow: visible;
-		margin: 0;
-		text-align: left !important;
-	}
-	.reveal pre,
-	.reveal table {
-		margin-left: 0;
-		margin-right: 0;
-	}
-	.reveal pre code {
-		padding: 20px;
-		border: 1px solid #ddd;
-	}
-	.reveal blockquote {
-		margin: 20px 0;
-	}
-	.reveal .slides {
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-
-		left: 0 !important;
-		top: 0 !important;
-		margin-left: 0 !important;
-		margin-top: 0 !important;
-		padding: 0 !important;
-		zoom: 1 !important;
-
-		overflow: visible !important;
-		display: block !important;
-
-		text-align: left !important;
-		-webkit-perspective: none;
-		   -moz-perspective: none;
-		    -ms-perspective: none;
-		        perspective: none;
-
-		-webkit-perspective-origin: 50% 50%;
-		   -moz-perspective-origin: 50% 50%;
-		    -ms-perspective-origin: 50% 50%;
-		        perspective-origin: 50% 50%;
-	}
-	.reveal .slides section {
-		visibility: visible !important;
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-		display: block !important;
-		overflow: visible !important;
-
-		left: 0 !important;
-		top: 0 !important;
-		margin-left: 0 !important;
-		margin-top: 0 !important;
-		padding: 60px 20px !important;
-		z-index: auto !important;
-
-		opacity: 1 !important;
-
-		page-break-after: always !important;
-
-		-webkit-transform-style: flat !important;
-		   -moz-transform-style: flat !important;
-		    -ms-transform-style: flat !important;
-		        transform-style: flat !important;
-
-		-webkit-transform: none !important;
-		   -moz-transform: none !important;
-		    -ms-transform: none !important;
-		        transform: none !important;
-
-		-webkit-transition: none !important;
-		   -moz-transition: none !important;
-		    -ms-transition: none !important;
-		        transition: none !important;
-	}
-	.reveal .slides section.stack {
-		padding: 0 !important;
-	}
-	.reveal section:last-of-type {
-		page-break-after: avoid !important;
-	}
-	.reveal section .fragment {
-		opacity: 1 !important;
-		visibility: visible !important;
-
-		-webkit-transform: none !important;
-		   -moz-transform: none !important;
-		    -ms-transform: none !important;
-		        transform: none !important;
-	}
-	.reveal section img {
-		display: block;
-		margin: 15px 0px;
-		background: rgba(255,255,255,1);
-		border: 1px solid #666;
-		box-shadow: none;
-	}
-
-	.reveal section small {
-		font-size: 0.8em;
-	}
-
-}  
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
 </script>
 
 
-<script id="pdf-css" type="application/dynamic-css">
-    
-/**
- * This stylesheet is used to print reveal.js
- * presentations to PDF.
- *
- * https://github.com/hakimel/reveal.js#pdf-export
- */
 
-* {
-	-webkit-print-color-adjust: exact;
+<style type="text/css">
+h1 {
+  font-size: 34px;
 }
-
-body {
-	margin: 0 auto !important;
-	border: 0;
-	padding: 0;
-	float: none !important;
-	overflow: visible;
+h1.title {
+  font-size: 38px;
 }
-
-html {
-	width: 100%;
-	height: 100%;
-	overflow: visible;
+h2 {
+  font-size: 30px;
 }
-
-/* Remove any elements not needed in print. */
-.nestedarrow,
-.reveal .controls,
-.reveal .progress,
-.reveal .playback,
-.reveal.overview,
-.fork-reveal,
-.share-reveal,
-.state-background {
-	display: none !important;
+h3 {
+  font-size: 24px;
 }
-
-h1, h2, h3, h4, h5, h6 {
-	text-shadow: 0 0 0 #000 !important;
+h4 {
+  font-size: 18px;
 }
-
-.reveal pre code {
-	overflow: hidden !important;
-	font-family: Courier, 'Courier New', monospace !important;
+h5 {
+  font-size: 16px;
 }
-
-ul, ol, div, p {
-	visibility: visible;
-	position: static;
-	width: auto;
-	height: auto;
-	display: block;
-	overflow: visible;
-	margin: auto;
+h6 {
+  font-size: 12px;
 }
-.reveal {
-	width: auto !important;
-	height: auto !important;
-	overflow: hidden !important;
+.table th:not([align]) {
+  text-align: left;
 }
-.reveal .slides {
-	position: static;
-	width: 100%;
-	height: auto;
+</style>
 
-	left: auto;
-	top: auto;
-	margin: 0 !important;
-	padding: 0 !important;
-
-	overflow: visible;
-	display: block;
-
-	-webkit-perspective: none;
-	   -moz-perspective: none;
-	    -ms-perspective: none;
-	        perspective: none;
-
-	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
-	   -moz-perspective-origin: 50% 50%;
-	    -ms-perspective-origin: 50% 50%;
-	        perspective-origin: 50% 50%;
-}
-
-.reveal .slides section {
-	page-break-after: always !important;
-
-	visibility: visible !important;
-	position: relative !important;
-	display: block !important;
-	position: relative !important;
-
-	margin: 0 !important;
-	padding: 0 !important;
-	box-sizing: border-box !important;
-	min-height: 1px;
-
-	opacity: 1 !important;
-
-	-webkit-transform-style: flat !important;
-	   -moz-transform-style: flat !important;
-	    -ms-transform-style: flat !important;
-	        transform-style: flat !important;
-
-	-webkit-transform: none !important;
-	   -moz-transform: none !important;
-	    -ms-transform: none !important;
-	        transform: none !important;
-}
-
-.reveal section.stack {
-	margin: 0 !important;
-	padding: 0 !important;
-	page-break-after: avoid !important;
-	height: auto !important;
-	min-height: auto !important;
-}
-
-.reveal img {
-	box-shadow: none;
-}
-
-.reveal .roll {
-	overflow: visible;
-	line-height: 1em;
-}
-
-/* Slide backgrounds are placed inside of their slide when exporting to PDF */
-.reveal section .slide-background {
-	display: block !important;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: -1;
-}
-
-/* All elements should be above the slide-background */
-.reveal section>* {
-	position: relative;
-	z-index: 1;
-}
-
-/* Display slide speaker notes when 'showNotes' is enabled */
-.reveal .speaker-notes-pdf {
-	display: block;
-	width: 100%;
-	max-height: none;
-	left: auto;
-	top: auto;
-	z-index: 100;
-}
-
-/* Display slide numbers when 'slideNumber' is enabled */
-.reveal .slide-number-pdf {
-	display: block;
-	position: absolute;
-	font-size: 14px;
-}
-
-</script>
-
-
-<script>
-var style = document.createElement( 'style' );
-style.type = 'text/css';
-var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
-var style_script = document.getElementById(style_script_id).text;
-style.innerHTML = style_script;
-document.getElementsByTagName('head')[0].appendChild(style);
-</script>
 
 </head>
+
 <body>
-  <div class="reveal">
-    <div class="slides">
 
-<section>
-    <h1 class="title">Tutorial de instalación</h1>
-</section>
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
 
-<section><section id="prerrequisitos" class="title-slide slide level1"><h1>Prerrequisitos</h1></section><section id="r" class="slide level2">
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Introducción a R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Inicio
+  </a>
+</li>
+<li>
+  <a href="prerequisitos.html">Prerequisitos</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-television"></span>
+     
+    Presentaciones
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1_presentacion.html">Introducción</a>
+    </li>
+    <li>
+      <a href="8_graficos.html">Gráficos con buena calidad</a>
+    </li>
+    <li>
+      <a href="2_proyectos.html">Proyectos</a>
+    </li>
+    <li>
+      <a href="5_data.frames.html">Explorando Data Frames</a>
+    </li>
+    <li>
+      <a href="13_manipulacion.html">Manipulación de data.frames con dplyr</a>
+    </li>
+    <li>
+      <a href="14_tidyr.html">Manipulación de data.frames con tidyr</a>
+    </li>
+    <li>
+      <a href="15_rmarkdown.html">Reportes dinámicos con knitr</a>
+    </li>
+    <li>
+      <a href="3_help.html">Ayuda en R</a>
+    </li>
+    <li>
+      <a href="4_datos.html">Estructura de Datos</a>
+    </li>
+    <li>
+      <a href="6_subsetting.html">Subconjuntos de Datos</a>
+    </li>
+    <li>
+      <a href="7_control_de_flujo.html">Control de Flujos</a>
+    </li>
+    <li>
+      <a href="9_vectorizacion.html">Vectorización</a>
+    </li>
+    <li>
+      <a href="10_funciones.html">Funciones</a>
+    </li>
+    <li>
+      <a href="11_guardando.html">Guardando datos</a>
+    </li>
+    <li>
+      <a href="12_divide_aplica_combina.html">Divide-aplica-combina</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Tutorial de instalación</h1>
+
+</div>
+
+
+<div id="prerrequisitos" class="section level1">
+<h1>Prerrequisitos</h1>
+<div id="r" class="section level2">
 <h2>R</h2>
 <p>Para este curso son necesarios una serie de programas. Primero, necesitamos R. Para bajarlo ir a <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a>, hay varias opciones según el sistema operativo (Linux, Mac OS X, Windows). Elegir la opción correspondiente. Si eligen Windows, a continuación deben elegir <code>base</code> y luego <em>Download R 3.5.0 for Windows</em> que es la versión actual al momento de escribir estas palabras. Luego de que termine de bajar instalarlo.</p>
-</section><section id="rstudio" class="slide level2">
+</div>
+<div id="rstudio" class="section level2">
 <h2>RStudio</h2>
 <p>A continuación debemos instalar RStudio. Para esto, debemos navegar hasta <a href="https://www.rstudio.com/products/rstudio/download2/" class="uri">https://www.rstudio.com/products/rstudio/download2/</a> y descargar el la versión gratuita de escritorio (<em>RStudio Desktop</em>). Instalarla.</p>
 <p>Con todo esto ya instalado y configurado ¡ya están listos para empezar!</p>
-</section></section>
-    </div>
-  </div>
-
-  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
-  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
-
-  <script>
-
-      // Full list of configuration options available at:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        // Display the page number of the current slide
-        slideNumber: true,
-        // Push each slide change to the browser history
-        history: true,
-        // Vertical centering of slides
-        center: true,
-        // Opens links in an iframe preview overlay
-        previewLinks: true,
-        // Transition style
-        transition: 'default', // none/fade/slide/convex/concave/zoom
-        // Transition style for full page slide backgrounds
-        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+</div>
+</div>
 
 
 
-        // Optional reveal.js plugins
-        dependencies: [
-        ]
-      });
-    </script>
-  <!-- dynamically load mathjax for compatibility with self-contained -->
-  <script>
-    (function () {
-      var script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-      document.getElementsByTagName("head")[0].appendChild(script);
-    })();
-  </script>
+
+</div>
 
 <script>
-  (function() {
-    if (window.jQuery) {
-      Reveal.addEventListener( 'slidechanged', function(event) {  
-        window.jQuery(event.previousSlide).trigger('hidden');
-        window.jQuery(event.currentSlide).trigger('shown');
-      });
-    }
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 
-<!--http://stackoverflow.com/questions/34706859/set-header-and-footer-reveal-js-presentation -->
-
-<style type="text/css">
-    /* 1. Style header/footer <div> so they are positioned as desired. */
-    #header-left {
-        position: absolute;
-        top: 2%;
-        left: 2%;
-        font-size: 12pt;
-    }
-    #header-right {
-        position: absolute;
-        top: 2%;
-        right: 2%;
-        font-size: 12pt;
-    }
-    #footer-left {
-        position: absolute;
-        bottom: 2%;
-        left: 2%;
-    }
-</style>
-
-<!-- 2. Create hidden header/footer <div> -->
-<div id="hidden" style="display:none;">
-    <div id="header">
-        <div id="header-left"><a href="index.html">Inicio</a></div>
-        <div id="header-right"><a href="" id="PDF">Descargar PDF</a></div>
-        <div id="footer-left">
-          <img src="img/logo_untdf_icpa_small.png" alt="logo untdf icpa small" />
-        </div>
-    </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-<script type="text/javascript">
-    // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
-    var header = $('#header').html();
-    if ( window.location.search.match( /print-pdf/gi ) ) {
-        Reveal.addEventListener( 'ready', function( event ) {
-            $('.slide-background').append(header);
-        });
-    }
-    else {
-        $('div.reveal').append(header);
-   }
-</script>
-<script type="text/javascript" charset="utf-8">
-  var a = document.getElementById("PDF");
-  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  
-  
-</script>
-
-  </body>
+</body>
 </html>
