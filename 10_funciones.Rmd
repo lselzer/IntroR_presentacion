@@ -48,7 +48,11 @@ Las funciones nos permiten reunir operaciones en una unidad. Nos da:
 
 Son el bloque básico de construcción. 
 
-![lego](https://media.giphy.com/media/103TZqgLqRJq0M/giphy.gif)
+```{r, fig.show='animate'}
+knitr::include_graphics(path = "https://media.giphy.com/media/103TZqgLqRJq0M/giphy.gif", 
+                        auto_pdf = TRUE)
+```
+
 
 Y si ya has creado una función podes considerarte programador.
 
