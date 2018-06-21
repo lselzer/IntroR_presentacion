@@ -48,9 +48,19 @@ Las funciones nos permiten reunir operaciones en una unidad. Nos da:
 
 Son el bloque básico de construcción. 
 
-```{r, fig.show='animate'}
-knitr::include_graphics(path = "https://media.giphy.com/media/103TZqgLqRJq0M/giphy.gif", 
+```{r echo=FALSE}
+if ("latex" %in% opts_knit$get("rmarkdown.pandoc.to")) {
+  library(magick)
+  layers <- image_read("https://media.giphy.com/media/103TZqgLqRJq0M/giphy.gif") %>% 
+    image_convert(format = "png")
+  layers[1]
+  
+  
+} else{
+  knitr::include_graphics(path = "https://media.giphy.com/media/103TZqgLqRJq0M/giphy.gif", 
                         auto_pdf = TRUE)
+}
+
 ```
 
 
@@ -112,7 +122,20 @@ Creen una función que convierta los grados Celsius a Kelvin
 
 El verdadero poder de la funciones surge cuando son combinadas.
 
-![lego machine](http://eggshell-robotics.node3000.com/pictures/hanoi_solving_lego.gif)
+```{r echo=FALSE}
+if ("latex" %in% opts_knit$get("rmarkdown.pandoc.to")) {
+  library(magick)
+  layers <- image_read("http://eggshell-robotics.node3000.com/pictures/hanoi_solving_lego.gif") %>% 
+    image_convert(format = "png")
+  layers[1]
+  
+  
+} else{
+  knitr::include_graphics(path = "http://eggshell-robotics.node3000.com/pictures/hanoi_solving_lego.gif", 
+                        auto_pdf = TRUE)
+}
+
+```
 
 ---
 
