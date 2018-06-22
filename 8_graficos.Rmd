@@ -14,6 +14,8 @@ output:
       center: true
     includes:
       after_body: doc_suffix.html
+header-includes:
+  - \usepackage{animate}
 ---
 
 ```{r setup, include=FALSE}
@@ -316,6 +318,7 @@ Hay muchas más cosas que se pueden hacer con ggplot.
 
 ```{r, echo=FALSE, fig.show='animate', message=FALSE, results='hide', fig.height=5, cache=TRUE}
   # Cargar paquetes
+
 if(!require(gganimate)) {
   if(!require(devtools)) install.packages("devtools")  
   devtools::install_github("dgrtwo/gganimate")
@@ -364,6 +367,9 @@ p <- ggplot(gapminder_tw,
 
 
 gganimate(p, title_frame = FALSE)
+
+
+
 ```
 ---
 
