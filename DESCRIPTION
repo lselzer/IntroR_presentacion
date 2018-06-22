@@ -1,5 +1,5 @@
 Package: placeholder
 Title: Does not matter.
 Version: 0.0.1
-Imports: revealjs, animation, tweenr, tidyverse
+Imports: revealjs, animation, tweenr, tidyverse, magick
 Remotes: rstudio/revealjs, dgrtwo/gganimate, thomasp85/tweenr 
