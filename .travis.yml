@@ -2,6 +2,10 @@ language: r
 cache:
   packages: true
 sudo: false
+addons:
+  apt:
+    packages:
+      - libmagick++-dev
 
 before_script:
 - chmod +x ./_texlive.sh
