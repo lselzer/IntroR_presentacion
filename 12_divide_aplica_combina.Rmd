@@ -49,7 +49,20 @@ Muchas veces queremos hacer los cálculos u operaciones por grupo.
 Arriba calculamos el PBI multiplicando dos columnas. ¿Y si quisieramos
 calcular el PBI medio por continente?
 
-![divide and conquer](https://media.giphy.com/media/GLkQ1upVWKdeo/giphy.gif)
+```{r echo=FALSE}
+if ("latex" %in% opts_knit$get("rmarkdown.pandoc.to")) {
+  library(magick)
+  layers <- image_read("https://media.giphy.com/media/GLkQ1upVWKdeo/giphy.gif") %>% 
+    image_convert(format = "png")
+  layers[1]
+  
+  
+} else{
+  knitr::include_graphics(path = "https://media.giphy.com/media/GLkQ1upVWKdeo/giphy.gif", 
+                        auto_pdf = TRUE)
+}
+
+```
 
 ---
 
