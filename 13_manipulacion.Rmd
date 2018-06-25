@@ -87,7 +87,7 @@ year_country_gdp <- select(gapminder,year,country,gdpPercap)
 ```
 
 
-```{r, out.height=400,out.width=400, echo=FALSE, fig.retina=NULL}
+```{r, out.height="90%",out.width="90%", echo=FALSE, fig.retina=NULL}
 knitr::include_graphics("img/13-dplyr-fig1.png")
 ```
 
@@ -142,7 +142,7 @@ Una `list` que contiene las filas que corresponden a un continente en particular
 
 ---
 
-```{r, echo=FALSE, fig.retina=NULL, out.height=400}
+```{r, echo=FALSE, fig.retina=NULL, out.height="90%"}
 knitr::include_graphics("img/13-dplyr-fig2.png")
 ```
 
@@ -163,7 +163,7 @@ gdp_bycontinents <- gapminder %>%
 
 ---
 
-```{r, echo=FALSE, fig.retina=NULL, out.height=700, out.width=600}
+```{r, echo=FALSE, fig.retina=NULL, out.height="90%", out.width="90%"}
 knitr::include_graphics("img/13-dplyr-fig3.png")
 ```
 
