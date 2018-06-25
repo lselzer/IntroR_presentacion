@@ -155,7 +155,7 @@ que estas salidas descartables no sean versionadas.
 ## Breve Introducción a Git
 
 ```{r, out.height= "90%", fig.retina = NULL, echo=FALSE}
-knitr::include_graphics("img/phd101212s.gif")
+knitr::include_graphics("img/phd101212s.jpg")
 ```
 
 ---
