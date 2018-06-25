@@ -120,8 +120,11 @@ Plyr tiene funciones para operar en `listas`, `data.frames` y `arreglos`
 El nombre de la funciones depende de lo que esperan como entrada, y la
 estructura de salida. 
 
-```{r, out.height= 500, fig.retina = NULL, echo=FALSE}
-knitr::include_graphics("img/full_apply_suite.png")
+```{r, fig.retina = NULL, echo=FALSE}
+library(magick)
+img <- image_read("img/full_apply_suite.png") %>% 
+  image_resize(geometry = geometry_size_pixels(width = 400, height = 500))
+img
 ```
 
 
