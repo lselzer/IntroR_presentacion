@@ -260,7 +260,7 @@ Comprobamos si los argumentos son nulos, en caso que no lo sean solo
 seleccionamos los años o países que están en esos argumentos.
 
 
-##Tip: paso por valor{.tip}
+## Tip: paso por valor{.tip}
 
 En R los argumentos de las funciones pasan como valor. R hace copias de los
 argumentos que son los que operamos dentro de la función. Cuando modificamos
@@ -270,7 +270,7 @@ dentro de la función.
 Es mucho más seguro escribir código de esta forma porque asegura que los
 objectos fuera de la función permanecen inalterados.
 
-##Tip: ámbito de la función{.tip}
+## Tip: ámbito de la función{.tip}
 
 Otro concepto importante es el ámbito (_scope_) de la función. Todas las 
 variables creadas en el cuerpo de la función solo existen dentro de su 
@@ -289,12 +289,12 @@ por las variables creadas en nuestra función.
 
 Finalmente, calculamos el PBI y lo unimos a nuestros datos.
 
-##Ejercicio 3{.challenge}
+## Ejercicio 3{.challenge}
 
 Prueba nuestra función PBI calculando el PBI de Nueva Zelanda en 1987 ¿Cómo 
 difiere del PBI de Nueva Zelanda en 1952?
 
-##Ejercicio 4{.challenge}
+## Ejercicio 4{.challenge}
 
 La función `paste()` puede ser usada para combinar texto.
 
@@ -304,7 +304,7 @@ mejores_practicas <- c("Escribe", "programas", "para", "personas",
 paste(mejores_practicas, collapse = " ")
 ```
 
-##Ejercicio 4{.challenge}
+## Ejercicio 4{.challenge}
 
 Escribe una función llamada `vallar`, con dos argumentos `texto` y  `envoltura`,
 e imprime el `texto` envuelto con la `envoltura`.
