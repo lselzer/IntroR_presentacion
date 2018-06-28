@@ -945,8 +945,8 @@ Añaden funciones que no están presentes en R.</p>
     // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
     var header = $('#header').html();
     if ( window.location.search.match( /print-pdf/gi ) ) {
-        Reveal.addEventListener( 'ready', function( event ) {
-            $('.slide-background').append(header);
+        //Reveal.addEventListener( 'ready', function( event ) {
+          //  $('.slide-background').append(header);
         });
     }
     else {
@@ -956,7 +956,7 @@ Añaden funciones que no están presentes en R.</p>
 <script type="text/javascript" charset="utf-8">
   var a = document.getElementById("PDF");
   //a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  a.href = window.location.href.replace(\.html#.+/g, ".pdf");
+  a.href = window.location.href.replace(/\.html#.+/g, "\.pdf");
   
 </script>
 
