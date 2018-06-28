@@ -187,7 +187,7 @@ de gapminder que hemos descargado previamente.
 gapminder <- read.csv("data/gapminder-FiveYearData.csv")
 ```
 
-##Tip{.tip}
+## Tip{.tip}
 
 + Se pueden leer archivos separados por tabulaciones con `read.delim`
 + También se pueden leer archivos directamente desde Internet

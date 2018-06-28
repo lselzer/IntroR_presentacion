@@ -118,7 +118,7 @@ x[0]
 
 ---
 
-##La numeración de los vectores empieza en 1
+## La numeración de los vectores empieza en 1
 > En muchos lenguajes de programación (C, Python) el primer elemento
 > del vector tiene indice 0. En R, el primer elemento es 1.
 
@@ -168,7 +168,7 @@ Dado el siguiente código:
   
 2. Compara con tu compañero ¿Usaron estrategias diferentes?
  
-##Subconjuntos por nombre
+## Subconjuntos por nombre
 
 Podemos extrar los elementos usando su nombre, en vez de un índice:
 
