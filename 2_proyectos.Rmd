@@ -166,7 +166,7 @@ knitr::include_graphics("img/phd101212s.jpg")
 ## Git es un sistema de control de versión
 
 
-![](img/play-changes.svg)
+![](img/play-changes.png)
 
 Cada vez que confimamos un archivo a git este le saca una "instatanea"
 
@@ -174,10 +174,10 @@ Cada vez que confimamos un archivo a git este le saca una "instatanea"
 
 ## Colaborando
 
-![](img/versions.svg)
+![](img/versions.png)
 
 ## Fusionando
-![](img/merge.svg)
+![](img/merge.png)
 
 ## Tracked vs Untracked
 
@@ -190,7 +190,7 @@ Los archivos pueden tener dos estados básicos:
  + `git add` 
  + `git comit`
  
-![](img/git-staging-area.svg)
+![](img/git-staging-area.png)
 
 
 ## Repositorios Remotos
@@ -219,4 +219,4 @@ git remote
 El comando `git push` nos permite subir los cambios al
 servidor.
 
-![](img/github-repo-after-first-push.svg)
+![](img/github-repo-after-first-push.png)
