@@ -517,7 +517,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">Creando Selecciones de Datos</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">02 June, 2018</h3>
+    <h3 class="date">28 June, 2018</h3>
 </section>
 
 <section id="subconjuntos" class="slide level2">
@@ -590,9 +590,11 @@ Para matrices y vectores, significa “dame el elemento n°”</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">x[<span class="dv">0</span>]</a></code></pre></div>
 <pre><code>named numeric(0)</code></pre>
 </section>
-<section class="slide level2">
-
-<p>##La numeración de los vectores empieza en 1 &gt; En muchos lenguajes de programación (C, Python) el primer elemento &gt; del vector tiene indice 0. En R, el primer elemento es 1.</p>
+<section id="la-numeracion-de-los-vectores-empieza-en-1" class="slide level2">
+<h2>La numeración de los vectores empieza en 1</h2>
+<blockquote>
+<p>En muchos lenguajes de programación (C, Python) el primer elemento del vector tiene indice 0. En R, el primer elemento es 1.</p>
+</blockquote>
 </section>
 <section id="eliminando-elementos" class="slide level2">
 <h2>Eliminando elementos</h2>
@@ -629,7 +631,9 @@ Para matrices y vectores, significa “dame el elemento n°”</p>
 <ol start="2" type="1">
 <li>Compara con tu compañero ¿Usaron estrategias diferentes?</li>
 </ol>
-<p>##Subconjuntos por nombre</p>
+</section>
+<section id="subconjuntos-por-nombre" class="slide level2">
+<h2>Subconjuntos por nombre</h2>
 <p>Podemos extrar los elementos usando su nombre, en vez de un índice:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">x[<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>)]</a></code></pre></div>
 <pre><code>  a   c 
@@ -1125,8 +1129,8 @@ $b
 </script>
 <script type="text/javascript" charset="utf-8">
   var a = document.getElementById("PDF");
-  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  
+  //a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  a.href = window.location.href.replace(\.html#.+/g, ".pdf");
   
 </script>
 

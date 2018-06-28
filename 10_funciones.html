@@ -517,7 +517,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">Funciones</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">02 June, 2018</h3>
+    <h3 class="date">28 June, 2018</h3>
 </section>
 
 <section id="por-que-hacer-funciones" class="slide level2">
@@ -544,7 +544,7 @@ Pero en general no suele ser así:</p>
 <section class="slide level2">
 
 <p>Son el bloque básico de construcción.</p>
-<p><img data-src="https://media.giphy.com/media/103TZqgLqRJq0M/giphy.gif" alt="lego" /></p>
+<p><img src="https://media.giphy.com/media/103TZqgLqRJq0M/giphy.gif" style="display: block; margin: auto;" /></p>
 <p>Y si ya has creado una función podes considerarte programador.</p>
 </section>
 <section id="como-definimos-una-funcion-en-r" class="slide level2">
@@ -592,7 +592,7 @@ Automáticamente devuelve el último comando ejecutado. Solo puede devolver <str
 <section id="combinando-funciones" class="slide level2">
 <h2>Combinando funciones</h2>
 <p>El verdadero poder de la funciones surge cuando son combinadas.</p>
-<p><img data-src="http://eggshell-robotics.node3000.com/pictures/hanoi_solving_lego.gif" alt="lego machine" /></p>
+<p><img src="http://eggshell-robotics.node3000.com/pictures/hanoi_solving_lego.gif" style="display: block; margin: auto;" /></p>
 </section>
 <section class="slide level2">
 
@@ -699,10 +699,14 @@ Y tiene tres argumentos:</p>
 <a class="sourceLine" id="cb19-5" data-line-number="5">    dat &lt;-<span class="st"> </span>dat[dat<span class="op">$</span>country <span class="op">%in%</span><span class="st"> </span>country,]</a>
 <a class="sourceLine" id="cb19-6" data-line-number="6">  }</a></code></pre></div>
 <p>Comprobamos si los argumentos son nulos, en caso que no lo sean solo seleccionamos los años o países que están en esos argumentos.</p>
-<p>##Tip: paso por valor{.tip}</p>
+</section>
+<section id="tip-paso-por-valor" class="slide level2 tip">
+<h2>Tip: paso por valor</h2>
 <p>En R los argumentos de las funciones pasan como valor. R hace copias de los argumentos que son los que operamos dentro de la función. Cuando modificamos gapminder dentro de nuestra función modificamos una copia que solo existe dentro de la función.</p>
 <p>Es mucho más seguro escribir código de esta forma porque asegura que los objectos fuera de la función permanecen inalterados.</p>
-<p>##Tip: ámbito de la función{.tip}</p>
+</section>
+<section id="tip-ambito-de-la-funcion" class="slide level2 tip">
+<h2>Tip: ámbito de la función</h2>
 <p>Otro concepto importante es el ámbito (<em>scope</em>) de la función. Todas las variables creadas en el cuerpo de la función solo existen dentro de su ámbito. Incluso si tenemos objetos con el mismo nombre en nuestro espacio de trabajo, estos no van a entrar en conflicto ni van a ser modificados por las variables creadas en nuestra función.</p>
 </section>
 <section class="slide level2">
@@ -712,15 +716,21 @@ Y tiene tres argumentos:</p>
 <a class="sourceLine" id="cb20-3" data-line-number="3">  <span class="kw">return</span>(new)</a>
 <a class="sourceLine" id="cb20-4" data-line-number="4"><span class="er">}</span></a></code></pre></div>
 <p>Finalmente, calculamos el PBI y lo unimos a nuestros datos.</p>
-<p>##Ejercicio 3{.challenge}</p>
+</section>
+<section id="ejercicio-3" class="slide level2 challenge">
+<h2>Ejercicio 3</h2>
 <p>Prueba nuestra función PBI calculando el PBI de Nueva Zelanda en 1987 ¿Cómo difiere del PBI de Nueva Zelanda en 1952?</p>
-<p>##Ejercicio 4{.challenge}</p>
+</section>
+<section id="ejercicio-4" class="slide level2 challenge">
+<h2>Ejercicio 4</h2>
 <p>La función <code>paste()</code> puede ser usada para combinar texto.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">mejores_practicas &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Escribe&quot;</span>, <span class="st">&quot;programas&quot;</span>, <span class="st">&quot;para&quot;</span>, <span class="st">&quot;personas&quot;</span>, </a>
 <a class="sourceLine" id="cb21-2" data-line-number="2">                       <span class="st">&quot;no&quot;</span>, <span class="st">&quot;para&quot;</span>, <span class="st">&quot;computadoras&quot;</span>)</a>
 <a class="sourceLine" id="cb21-3" data-line-number="3"><span class="kw">paste</span>(mejores_practicas, <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;Escribe programas para personas no para computadoras&quot;</code></pre>
-<p>##Ejercicio 4{.challenge}</p>
+</section>
+<section id="ejercicio-4-1" class="slide level2 challenge">
+<h2>Ejercicio 4</h2>
 <p>Escribe una función llamada <code>vallar</code>, con dos argumentos <code>texto</code> y <code>envoltura</code>, e imprime el <code>texto</code> envuelto con la <code>envoltura</code>.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">vallar</span>(<span class="dt">texto =</span> mejores_practicas, <span class="dt">envoltura =</span> <span class="st">&quot;***&quot;</span>)</a></code></pre></div>
 <p>Nota: la función <code>paste</code> tiene un argumento <code>sep</code>, que especifica el separador de texto, con valor por defecto <code>&quot; &quot;</code>. <code>paste0</code> no tiene espacios por defecto.</p>
@@ -847,8 +857,8 @@ Y tiene tres argumentos:</p>
 </script>
 <script type="text/javascript" charset="utf-8">
   var a = document.getElementById("PDF");
-  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  
+  //a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  a.href = window.location.href.replace(\.html#.+/g, ".pdf");
   
 </script>
 

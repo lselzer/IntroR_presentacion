@@ -517,7 +517,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">Control de Flujo</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">02 June, 2018</h3>
+    <h3 class="date">28 June, 2018</h3>
 </section>
 
 <section id="que-es-el-control-de-flujo" class="slide level2">
@@ -833,8 +833,8 @@ En vez de eso es mejor determinar el tamaño que tendrá la salida, y crear un o
 </script>
 <script type="text/javascript" charset="utf-8">
   var a = document.getElementById("PDF");
-  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  
+  //a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  a.href = window.location.href.replace(\.html#.+/g, ".pdf");
   
 </script>
 

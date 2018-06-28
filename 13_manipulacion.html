@@ -517,7 +517,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">Manipulación de data.frame con dplyr</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">02 June, 2018</h3>
+    <h3 class="date">28 June, 2018</h3>
 </section>
 
 <section class="slide level2">
@@ -573,7 +573,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Usando select()</h2>
 <p>Seleccionar variables</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">year_country_gdp &lt;-<span class="st"> </span><span class="kw">select</span>(gapminder,year,country,gdpPercap)</a></code></pre></div>
-<p><img src="img/13-dplyr-fig1.png" width="400" height="400" style="display: block; margin: auto;" /></p>
+<p><img src="img/13-dplyr-fig1.png" width="90%" height="90%" style="display: block; margin: auto;" /></p>
 </section>
 <section class="slide level2">
 
@@ -634,7 +634,7 @@ Una <code>list</code> que contiene las filas que corresponden a un continente en
 </section>
 <section class="slide level2">
 
-<p><img src="img/13-dplyr-fig2.png" height="400" style="display: block; margin: auto;" /></p>
+<p><img src="img/13-dplyr-fig2.png" height="90%" style="display: block; margin: auto;" /></p>
 </section>
 <section id="usando-summarize" class="slide level2">
 <h2>Usando summarize()</h2>
@@ -645,7 +645,7 @@ Una <code>list</code> que contiene las filas que corresponden a un continente en
 </section>
 <section class="slide level2">
 
-<p><img src="img/13-dplyr-fig3.png" width="600" height="700" style="display: block; margin: auto;" /></p>
+<p><img src="img/13-dplyr-fig3.png" width="90%" height="90%" style="display: block; margin: auto;" /></p>
 </section>
 <section id="ejercicio-2" class="slide level2 challenge">
 <h2>Ejercicio 2</h2>
@@ -794,8 +794,8 @@ Una <code>list</code> que contiene las filas que corresponden a un continente en
 </script>
 <script type="text/javascript" charset="utf-8">
   var a = document.getElementById("PDF");
-  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  
+  //a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  a.href = window.location.href.replace(\.html#.+/g, ".pdf");
   
 </script>
 

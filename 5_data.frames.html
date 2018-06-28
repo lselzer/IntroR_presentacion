@@ -517,7 +517,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">Explorando Data Frames</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">02 June, 2018</h3>
+    <h3 class="date">28 June, 2018</h3>
 </section>
 
 <section id="como-manipular-data.frames" class="slide level2">
@@ -678,7 +678,9 @@ factor level, NA generated</code></pre>
 <p>Hasta ahora hemos visto lo más básico para manipular data.frames.</p>
 <p>Ahora vamos a ver un dataset más realista. Vamos a leer los datos de gapminder que hemos descargado previamente.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/gapminder-FiveYearData.csv&quot;</span>)</a></code></pre></div>
-<p>##Tip{.tip}</p>
+</section>
+<section id="tip" class="slide level2 tip">
+<h2>Tip</h2>
 <ul>
 <li>Se pueden leer archivos separados por tabulaciones con <code>read.delim</code></li>
 <li>También se pueden leer archivos directamente desde Internet</li>
@@ -872,8 +874,8 @@ Si hay partes que no compredes discútelo con tus compañeros.</p>
 </script>
 <script type="text/javascript" charset="utf-8">
   var a = document.getElementById("PDF");
-  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  
+  //a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  a.href = window.location.href.replace(\.html#.+/g, ".pdf");
   
 </script>
 

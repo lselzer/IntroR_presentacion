@@ -517,7 +517,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">Divide-Aplica-Combina</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">02 June, 2018</h3>
+    <h3 class="date">28 June, 2018</h3>
 </section>
 
 <section class="slide level2">
@@ -543,7 +543,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <h2>Divide y vencerás</h2>
 <p>Muchas veces queremos hacer los cálculos u operaciones por grupo.<br />
 Arriba calculamos el PBI multiplicando dos columnas. ¿Y si quisieramos calcular el PBI medio por continente?</p>
-<p><img data-src="https://media.giphy.com/media/GLkQ1upVWKdeo/giphy.gif" alt="divide and conquer" /></p>
+<p><img src="https://media.giphy.com/media/GLkQ1upVWKdeo/giphy.gif" style="display: block; margin: auto;" /></p>
 </section>
 <section class="slide level2">
 
@@ -585,7 +585,7 @@ Pero hay mucha repetición: lleva tiempo, ahora y más adelante, y puede introdu
 <section class="slide level2">
 
 <p>El nombre de la funciones depende de lo que esperan como entrada, y la estructura de salida.</p>
-<p><img src="img/full_apply_suite.png" height="500" style="display: block; margin: auto;" /></p>
+<p><img src="fig/rmd-unnamed-chunk-5-1.png" style="display: block; margin: auto;" /></p>
 </section>
 <section class="slide level2">
 
@@ -886,8 +886,8 @@ continent          1992         1997         2002         2007
 </script>
 <script type="text/javascript" charset="utf-8">
   var a = document.getElementById("PDF");
-  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  
+  //a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  a.href = window.location.href.replace(\.html#.+/g, ".pdf");
   
 </script>
 

@@ -517,7 +517,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <section>
     <h1 class="title">Proyectos</h1>
     <h2 class="author">Luciano Selzer</h2>
-    <h3 class="date">02 June, 2018</h3>
+    <h3 class="date">28 June, 2018</h3>
 </section>
 
 <section><section id="manejo-de-proyectos-con-rstudio" class="title-slide slide level1"><h1>Manejo de Proyectos con RStudio</h1></section><section id="introduccion" class="slide level2">
@@ -611,17 +611,17 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </ol>
 </section><section id="breve-introduccion-a-git" class="slide level2">
 <h2>Breve Introducción a Git</h2>
-<p><img src="img/phd101212s.gif" height="400" style="display: block; margin: auto;" /></p>
+<p><img src="img/phd101212s.jpg" height="90%" style="display: block; margin: auto;" /></p>
 </section><section id="git-es-un-sistema-de-control-de-version" class="slide level2">
 <h2>Git es un sistema de control de versión</h2>
-<p><img data-src="img/play-changes.svg" /></p>
+<p><img data-src="img/play-changes.png" /></p>
 <p>Cada vez que confimamos un archivo a git este le saca una “instatanea”</p>
 </section><section id="colaborando" class="slide level2">
 <h2>Colaborando</h2>
-<p><img data-src="img/versions.svg" /></p>
+<p><img data-src="img/versions.png" /></p>
 </section><section id="fusionando" class="slide level2">
 <h2>Fusionando</h2>
-<p><img data-src="img/merge.svg" /></p>
+<p><img data-src="img/merge.png" /></p>
 </section><section id="tracked-vs-untracked" class="slide level2">
 <h2>Tracked vs Untracked</h2>
 <p>Los archivos pueden tener dos estados básicos:</p>
@@ -631,7 +631,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <li><code>git add</code></li>
 <li><p><code>git comit</code></p></li>
 </ul>
-<p><img data-src="img/git-staging-area.svg" /></p>
+<p><img data-src="img/git-staging-area.png" /></p>
 </section><section id="repositorios-remotos" class="slide level2">
 <h2>Repositorios Remotos</h2>
 <p>Permite que otros colaboradores tengan copias de nuestro trabajo.</p>
@@ -642,7 +642,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section><section id="subiendo-los-cambios" class="slide level2">
 <h2>Subiendo los cambios</h2>
 <p>El comando <code>git push</code> nos permite subir los cambios al servidor.</p>
-<p><img data-src="img/github-repo-after-first-push.svg" /></p>
+<p><img data-src="img/github-repo-after-first-push.png" /></p>
 </section></section>
     </div>
   </div>
@@ -745,8 +745,8 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 <script type="text/javascript" charset="utf-8">
   var a = document.getElementById("PDF");
-  a.href = window.location.href.replace(/#.+/g, "?print-pdf");
-  
+  //a.href = window.location.href.replace(/#.+/g, "?print-pdf");
+  a.href = window.location.href.replace(\.html#.+/g, ".pdf");
   
 </script>
 
